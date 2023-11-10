@@ -30,21 +30,21 @@ function App() {
 			),
 		];
 
-		const [boycott, nonboycott] = await Promise.all(requests);
+		const [boycottResponse, nonBoycottResponse] = await Promise.all(requests);
 
-		const boycotttext = await boycott.text();
-		const nonboycotttext = await nonboycott.text();
+		const boycottText = await boycottResponse.text();
+		const nonBoycottText = await nonBoycottResponse.text();
 
-		const boycottparsed = csvParse(boycotttext) as unknown as Product[];
-		const nonboycottparsed = csvParse(nonboycotttext) as unknown as Product[];
+		const boycottParsed = csvParse(boycottText) as unknown as Product[];
+		const nonBoycottParsed = csvParse(nonBoycottText) as unknown as Product[];
 
-		const data = boycottparsed
+		const data = boycottParsed
 			.map((product) => ({
 				...product,
 				boycott: true,
 			}))
 			.concat(
-				nonboycottparsed.map((product) => ({
+				nonBoycottParsed.map((product) => ({
 					...product,
 					boycott: false,
 				}))
@@ -55,7 +55,6 @@ function App() {
 			includeScore: true,
 			findAllMatches: false,
 		});
-		// window.parser = productFuse;
 	});
 
 	const handleInput = (ev: InputEvent) => {
@@ -134,7 +133,8 @@ function App() {
 					<div
 						class="fixed w-full h-full top-0 left-0 proof-container"
 						role="alert"
-						onClick={closeProof}>
+						onClick={closeProof}
+					>
 						<div class="w-2/5 h-fit p-4 proof">
 							<button class="order-2" onClick={closeProof}>
 								Close
@@ -169,7 +169,8 @@ function App() {
 										<td class="td">
 											<Show
 												when={result.item.boycott}
-												fallback={"ليس ضمن المقاطعة"}>
+												fallback={"ليس ضمن المقاطعة"}
+											>
 												<button onClick={[showProof, result.item]}>
 													الدليل
 												</button>
