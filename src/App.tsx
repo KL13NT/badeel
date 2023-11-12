@@ -10,7 +10,7 @@ interface View {
 }
 
 let productFuse: null | Fuse<Product> = null;
-let searchThrottleTimeout: number = 0;
+let searchThrottleTimeout: NodeJS.Timeout | number = 0;
 
 function App() {
 	const [results, setResults] = createSignal<FuseResult<BaseProduct>[]>([]);
@@ -65,12 +65,7 @@ function App() {
 		searchThrottleTimeout = setTimeout(() => {
 			if (!productFuse) return;
 
-			const t0 = performance.now();
-
 			const result = productFuse.search(value).slice(0, 10);
-
-			const t1 = performance.now();
-			console.log(`Searching took ${t1 - t0} milliseconds.`);
 
 			batch(() => {
 				setResults(result);

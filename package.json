@@ -4,10 +4,10 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite --port 3000",
+		"dev": "vite --host",
 		"prebuild": "run-p lint check tsc",
 		"build": "tsc && vite build",
-		"preview": "vite preview",
+		"preview": "vite preview --host",
 		"lint": "eslint --ext .js,.ts src",
 		"check": "prettier src/**/*.{css,ts} --check",
 		"tsc": "tsc --noEmit"
@@ -19,16 +19,19 @@
 		"autoprefixer": "^10.4.16",
 		"eslint": "^8.52.0",
 		"eslint-plugin-solid": "^0.13.0",
+		"run-p": "^0.0.0",
 		"tailwindcss": "^3.3.5",
 		"typescript": "^5.2.2",
-		"run-p": "^0.0.0",
 		"vite": "^4.5.0",
+		"vite-plugin-mkcert": "^1.16.0",
+		"vite-plugin-pwa": "^0.16.7",
 		"vite-plugin-solid": "^2.7.2"
 	},
 	"dependencies": {
 		"d3-dsv": "^3.0.1",
 		"fuse.js": "^7.0.0",
 		"prettier": "^3.0.3",
-		"solid-js": "^1.8.5"
+		"solid-js": "^1.8.5",
+		"workbox-window": "^7.0.0"
 	}
 }
