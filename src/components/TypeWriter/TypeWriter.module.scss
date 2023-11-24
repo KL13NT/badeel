@@ -1,0 +1,18 @@
+.typewriter {
+	&::after {
+		content: "|";
+		display: inline-block;
+		margin-inline-start: 1px;
+		animation: blink-caret 1s step-end infinite;
+	}
+}
+
+@keyframes blink-caret {
+	from,
+	to {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+}
