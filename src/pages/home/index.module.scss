@@ -1,0 +1,58 @@
+.container {
+	text-align: center;
+	margin-top: var(--s-7);
+}
+
+.intro {
+	margin: auto;
+	width: fit-content;
+	position: relative;
+	padding-top: var(--s-7);
+
+	> p {
+		margin-top: var(--s-3);
+	}
+
+	> form {
+		margin-top: var(--s-5);
+		margin-inline: auto;
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 330px;
+		background: url("../../assets/icons/palestine.svg") no-repeat;
+		background-position: center top;
+		background-size: auto 100%;
+		z-index: -1;
+		opacity: 0;
+
+		animation-name: slide-up;
+		animation-duration: 0.3s;
+		animation-delay: 1s;
+		animation-timing-function: ease-out;
+		animation-fill-mode: forwards;
+		animation-play-state: running;
+		animation-iteration-count: 1;
+	}
+
+	&:focus-within::before {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slide-up {
+	from {
+		transform: translateY(20px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
