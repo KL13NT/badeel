@@ -1,0 +1,50 @@
+.dialog {
+	width: 500px;
+	position: fixed;
+	background: #00000040;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.body {
+	width: 500px;
+	border-radius: 24px;
+	box-shadow: 0px 4px 64px -32px rgba(0, 0, 0, 0.25);
+	background: var(--c-bg);
+	padding: var(--s-5);
+	text-align: right;
+}
+
+.header {
+	padding-bottom: var(--s-4);
+	border-bottom: 1px solid var(--c-stroke-gray, #403f36);
+}
+
+.name {
+	color: var(--c-white, #edebd7);
+	font-size: 1.5rem;
+}
+
+.content {
+	margin-top: var(--s-5);
+}
+
+.proof {
+	margin-top: var(--s-3);
+
+	> p:nth-of-type(2) {
+		color: var(--c-white-accent);
+	}
+}
+
+.footer {
+	margin-top: var(--s-7);
+	display: flex;
+	align-items: center;
+	gap: var(--s-3);
+}
