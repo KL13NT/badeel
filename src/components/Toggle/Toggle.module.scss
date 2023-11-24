@@ -1,0 +1,10 @@
+.toggle {
+	transition:
+		background-color 0.3s ease-in-out,
+		color 0.3s ease-in-out;
+}
+
+.toggle[aria-pressed="true"] {
+	background-color: var(--c-white);
+	color: var(--c-button-floating-bg);
+}

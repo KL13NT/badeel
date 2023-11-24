@@ -1,0 +1,28 @@
+.button {
+	border: none;
+	border: 1px solid var(--c-stroke-gray, #403f36);
+	border-radius: var(--r-5xl);
+	background-color: var(--c-bg);
+	color: var(--c-white);
+	padding: 12px 16px;
+	cursor: pointer;
+	text-decoration: none;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: fit-content;
+}
+
+.danger {
+	border-color: var(--c-action);
+}
+
+.action {
+	background: linear-gradient(244deg, #ec543f 0%, #b75328 100%);
+	border: none;
+}
+
+.action-invert {
+	border: 1px solid var(--c-action);
+}

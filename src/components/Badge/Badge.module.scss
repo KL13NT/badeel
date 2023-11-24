@@ -1,0 +1,17 @@
+.badge {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--s-1);
+}
+
+.alternative {
+	color: var(--c-green);
+}
+
+.boycott {
+	color: var(--c-danger);
+}
+
+.unsure {
+	color: var(--c-white);
+}
