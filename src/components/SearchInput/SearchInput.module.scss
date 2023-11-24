@@ -39,20 +39,30 @@
 	background: var(--c-white);
 	width: 100%;
 	height: 100%;
-	padding: 4px 16px 4px 4px;
 	border-radius: var(--r-5xl);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	gap: var(--s-3);
+	position: relative;
+
+	> svg {
+		position: absolute;
+		pointer-events: none;
+		right: 16px;
+		height: 24px;
+		width: 24px;
+	}
 }
 
 .input {
 	background: transparent;
 	border: none;
-	width: 90%;
-	height: 100%;
+	width: 100%;
+	height: 56px;
 	color: var(--c-bg);
+	padding-inline-start: calc(16px + 24px + 4px);
+	padding-inline-end: 70px;
 
 	&::placeholder {
 		color: var(--c-stroke-gray);
@@ -61,4 +71,6 @@
 
 .submit {
 	height: 48px;
+	position: absolute;
+	left: 4px;
 }
