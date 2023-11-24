@@ -1,0 +1,61 @@
+.navigationFilter {
+	display: flex;
+	align-items: center;
+	gap: var(--s-3);
+
+	> p {
+		color: var(--c-white-accent);
+	}
+}
+
+.options {
+	display: flex;
+	align-items: center;
+	gap: var(--s-2);
+
+	max-width: 0;
+	transition: max-width 0.3s ease-in-out;
+	white-space: nowrap;
+	overflow: hidden;
+	transition-delay: 0.05s;
+
+	> button {
+		opacity: 0;
+		transform: translateX(80px);
+		transition:
+			transform 0.25s,
+			opacity 0.2s;
+	}
+
+	@for $i from 1 through 4 {
+		button:nth-child(#{$i}) {
+			transition-duration: $i * 0.2s;
+		}
+	}
+}
+
+.options[aria-expanded="true"] {
+	max-width: 800px;
+	transition-delay: 0s;
+	overflow: show;
+
+	> button {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.toggle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--s-2);
+
+	svg {
+		transition: transform 0.25s ease-out;
+	}
+
+	&[aria-pressed="true"] svg {
+		transform: rotate(90deg);
+	}
+}

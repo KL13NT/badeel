@@ -1,0 +1,28 @@
+.navbar {
+	display: flex;
+	padding: 12px 24px;
+	justify-content: space-between;
+	align-items: center;
+
+	border-bottom: 1px solid var(--c-stroke-gray, #403f36);
+
+	img {
+		height: 50px;
+	}
+}
+
+.right {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: var(--s-5);
+}
+
+.add {
+	gap: var(--s-2);
+
+	svg {
+		height: 20px;
+		width: 20px;
+	}
+}
