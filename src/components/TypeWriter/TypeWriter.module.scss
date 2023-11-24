@@ -3,6 +3,9 @@
 		content: "|";
 		display: inline-block;
 		margin-inline-start: 1px;
+	}
+
+	&[data-writing="false"]::after {
 		animation: blink-caret 1s step-end infinite;
 	}
 }

@@ -61,5 +61,12 @@ export default function TypeWriter() {
 		start();
 	});
 
-	return <p class={clsx(styles.typewriter, "title")}> {message()}</p>;
+	return (
+		<p
+			data-writing={message().length < messages[messageIndex()].length}
+			class={clsx(styles.typewriter, "title")}
+		>
+			{message()}
+		</p>
+	);
 }
