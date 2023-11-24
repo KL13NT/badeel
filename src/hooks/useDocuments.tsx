@@ -74,7 +74,7 @@ export const useDocuments = () => {
 	});
 
 	createEffect(() => {
-		if (query && fuseRef() && filters) {
+		if (query && fuseRef() && filters.selected) {
 			search(query);
 		}
 	});
