@@ -19,7 +19,20 @@
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true
+		"noFallthroughCasesInSwitch": true,
+
+		"baseUrl": ".",
+		"paths": {
+			"~components/*": ["./src/components/*"],
+			"~constants/*": ["./src/constants/*"],
+			"~assets/*": ["./src/assets/*"],
+			"~utils/*": ["./src/utils/*"],
+			"~styles/*": ["./src/styles/*"],
+			"~stores/*": ["./src/stores/*"],
+			"~hooks/*": ["./src/hooks/*"],
+			"~*": ["./src/*"]
+		},
+		"types": ["vite-plugin-solid-svg/types"]
 	},
 	"include": ["src"],
 	"references": [{ "path": "./tsconfig.node.json" }]

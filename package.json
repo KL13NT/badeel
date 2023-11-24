@@ -4,7 +4,7 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite --host",
+		"dev": "vite --host --port 3000",
 		"prebuild": "run-p lint check tsc",
 		"build": "tsc && vite build",
 		"preview": "vite preview --host",
@@ -20,18 +20,25 @@
 		"eslint": "^8.52.0",
 		"eslint-plugin-solid": "^0.13.0",
 		"run-p": "^0.0.0",
+		"sass": "^1.69.5",
+		"solid-devtools": "^0.29.2",
 		"tailwindcss": "^3.3.5",
 		"typescript": "^5.2.2",
 		"vite": "^4.5.0",
 		"vite-plugin-mkcert": "^1.16.0",
 		"vite-plugin-pwa": "^0.16.7",
-		"vite-plugin-solid": "^2.7.2"
+		"vite-plugin-solid": "^2.7.2",
+		"vite-plugin-solid-svg": "^0.7.0",
+		"vite-tsconfig-paths": "^4.2.1"
 	},
 	"dependencies": {
+		"@solidjs/router": "^0.9.1",
+		"clsx": "^2.0.0",
 		"d3-dsv": "^3.0.1",
 		"fuse.js": "^7.0.0",
 		"prettier": "^3.0.3",
 		"solid-js": "^1.8.5",
+		"solid-transition-group": "^0.2.3",
 		"workbox-window": "^7.0.0"
 	}
 }
