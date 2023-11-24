@@ -1,0 +1,21 @@
+@font-face {
+	font-family: "29LT Ada Flat";
+	src:
+		local("29LT Ada Flat Black"),
+		local("29LTAdaFlat-Black"),
+		url("/29LTAdaFlat-Black.ttf") format("truetype");
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "29LT Ada Flat";
+	src:
+		local("29LT Ada Flat Bold"),
+		local("29LTAdaFlat-Bold"),
+		url("/29LTAdaFlat-Bold.ttf") format("truetype");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}

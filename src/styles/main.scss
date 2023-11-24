@@ -1,0 +1,39 @@
+@import url("./ada.scss");
+@import url("./tokens.scss");
+@import url("./typography.scss");
+@import url("./transitions.scss");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+	direction: rtl;
+
+	color-scheme: light dark;
+	color: rgba(255, 255, 255);
+	background-color: #242424;
+	font-family: Rubik;
+	background-color: var(--c-bg);
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.title {
+	font-family: "29LT Ada Flat", system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	font-size: 4rem;
+}
