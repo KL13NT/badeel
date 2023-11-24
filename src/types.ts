@@ -1,5 +1,8 @@
 export type ID = string;
 
+export type Status = "boycott" | "unsure" | "alternative";
+export type Filter = Status | "all";
+
 export interface Organization {
 	name: string;
 	country: string;
@@ -11,7 +14,7 @@ export interface BaseProduct {
 	"English Name": string;
 	Manufacturer: string;
 	Proof: string;
-	boycott: boolean;
+	status: Status;
 }
 
 export type Product = BaseProduct;

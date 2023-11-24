@@ -2,8 +2,11 @@
 import { render } from "solid-js/web";
 import { registerSW } from "virtual:pwa-register";
 
-import "./style.css";
-import App from "./App";
+import "solid-devtools";
+
+import Router from "./Router";
+
+import "./styles/main.scss";
 
 const root = document.getElementById("root");
 
@@ -13,4 +16,4 @@ registerSW({
 	},
 });
 
-render(() => <App />, root!);
+render(() => <Router />, root!);
