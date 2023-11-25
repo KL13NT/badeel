@@ -17,7 +17,7 @@ let typeInterval: number | null = null;
 
 export default function TypeWriter() {
 	const [messageIndex, setMessageIndex] = createSignal<number>(0);
-	const [message, setMessage] = createSignal<string>("");
+	const [writtenMessage, setWrittenMessage] = createSignal<string>("");
 
 	const delay = (time: number, cb: () => void) => {
 		setTimeout(() => {
@@ -27,21 +27,22 @@ export default function TypeWriter() {
 
 	const start = () => {
 		typeInterval = setInterval(() => {
-			if (message().length === messages[messageIndex()].length) {
+			const activeMessage = messages[messageIndex()];
+			if (writtenMessage().length === activeMessage.length) {
 				batch(() => {
 					const newIndex =
 						(((messageIndex() + 1) % messages.length) + messages.length) %
 						messages.length;
 
 					const delayTime = Math.max(
-						Math.min(8000, message().length * 100),
+						Math.min(8000, writtenMessage().length * 100),
 						3000
 					);
 
 					clearInterval(typeInterval!);
 					delay(delayTime, () => {
 						setMessageIndex(newIndex);
-						setMessage("");
+						setWrittenMessage("");
 						start();
 					});
 				});
@@ -49,11 +50,7 @@ export default function TypeWriter() {
 				return;
 			}
 
-			if (message().length === 0) {
-				setMessage(messages[messageIndex()][0]);
-			} else {
-				setMessage(message() + messages[messageIndex()][message().length]);
-			}
+			setWrittenMessage(activeMessage.slice(0, writtenMessage().length + 1));
 		}, 50);
 	};
 
@@ -63,10 +60,10 @@ export default function TypeWriter() {
 
 	return (
 		<p
-			data-writing={message().length < messages[messageIndex()].length}
+			data-writing={writtenMessage().length < messages[messageIndex()].length}
 			class={clsx(styles.typewriter, "title")}
 		>
-			{message()}
+			{writtenMessage()}
 		</p>
 	);
 }
