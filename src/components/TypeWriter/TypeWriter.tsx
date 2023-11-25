@@ -2,6 +2,7 @@ import { batch, createSignal, onMount } from "solid-js";
 
 import styles from "./TypeWriter.module.scss";
 import clsx from "clsx";
+import { delay } from "~utils/common";
 
 const messages = [
 	"بِدِّي شَعْرَةً مِنُّه",
@@ -18,12 +19,6 @@ let typeInterval: number | null = null;
 export default function TypeWriter() {
 	const [messageIndex, setMessageIndex] = createSignal<number>(0);
 	const [writtenMessage, setWrittenMessage] = createSignal<string>("");
-
-	const delay = (time: number, cb: () => void) => {
-		setTimeout(() => {
-			cb();
-		}, time);
-	};
 
 	const start = () => {
 		typeInterval = setInterval(() => {
