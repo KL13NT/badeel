@@ -1,7 +1,8 @@
 .navigationFilter {
+	--navigation-filters-gap: var(--s-3);
 	display: flex;
 	align-items: center;
-	gap: var(--s-3);
+	gap: var(--navigation-filters-gap);
 
 	> p {
 		color: var(--c-white-accent);
@@ -11,8 +12,11 @@
 .options {
 	display: flex;
 	align-items: center;
+	margin-inline-start: calc(-1 * var(--navigation-filters-gap));
+	padding-inline-start: var(--navigation-filters-gap);
 	gap: var(--s-2);
 
+	pointer-events: none;
 	max-width: 0;
 	transition: max-width 0.3s ease-in-out;
 	white-space: nowrap;
@@ -27,21 +31,22 @@
 			opacity 0.2s;
 	}
 
+	&[aria-expanded="true"] {
+		max-width: 800px;
+		transition-delay: 0s;
+		overflow: visible;
+		pointer-events: auto;
+
+		> button {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+
 	@for $i from 1 through 4 {
 		button:nth-child(#{$i}) {
 			transition-duration: $i * 0.2s;
 		}
-	}
-}
-
-.options[aria-expanded="true"] {
-	max-width: 800px;
-	transition-delay: 0s;
-	overflow: show;
-
-	> button {
-		opacity: 1;
-		transform: translateX(0);
 	}
 }
 
@@ -50,6 +55,8 @@
 	justify-content: center;
 	align-items: center;
 	gap: var(--s-2);
+	position: relative;
+	z-index: 1;
 
 	svg {
 		transition: transform 0.25s ease-out;
