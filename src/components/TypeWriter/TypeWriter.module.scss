@@ -1,8 +1,11 @@
 .typewriter {
+	position: relative;
+
 	&::after {
 		content: "|";
 		display: inline-block;
 		margin-inline-start: 1px;
+		position: absolute;
 	}
 
 	&[data-writing="false"]::after {

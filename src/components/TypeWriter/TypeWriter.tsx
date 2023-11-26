@@ -20,44 +20,46 @@ const messages = [
 	"ماما أنا تِعِبْت من هذا الصوت, ماما بيكفي بدي انام",
 ];
 
-let typeInterval: number | null = null;
 let textRef: HTMLParagraphElement | undefined;
 let messageIndex = 0;
+let prevCharacterTimestamp = 0;
 
 export default function TypeWriter() {
 	const start = () => {
-		typeInterval = setInterval(() => {
-			if (!textRef) return;
+		if (!textRef) return requestAnimationFrame(start);
 
-			const activeMessage = messages[messageIndex];
-			const writtenMessage = textRef.textContent!;
+		const now = Date.now();
+		if (now - prevCharacterTimestamp < 50) return requestAnimationFrame(start);
 
-			if (writtenMessage.length === activeMessage.length) {
-				textRef.setAttribute("data-writing", "false");
+		const activeMessage = messages[messageIndex];
+		const writtenMessage = textRef.textContent!;
 
-				const newIndex =
-					(((messageIndex + 1) % messages.length) + messages.length) %
-					messages.length;
+		if (writtenMessage.length === activeMessage.length) {
+			textRef.setAttribute("data-writing", "false");
 
-				const delayTime = Math.max(
-					Math.min(8000, activeMessage.length * 100),
-					3000
-				);
+			const newIndex =
+				(((messageIndex + 1) % messages.length) + messages.length) %
+				messages.length;
 
-				clearInterval(typeInterval!);
-				delay(delayTime, () => {
-					messageIndex = newIndex;
-					textRef!.textContent = "";
-					textRef!.setAttribute("data-writing", "true");
+			const delayTime = Math.max(
+				Math.min(8000, activeMessage.length * 100),
+				3000
+			);
 
-					start();
-				});
+			delay(delayTime, () => {
+				messageIndex = newIndex;
+				textRef!.textContent = "";
+				textRef!.setAttribute("data-writing", "true");
+				start();
+			});
 
-				return;
-			}
+			return;
+		}
 
-			textRef.textContent = activeMessage.slice(0, writtenMessage.length + 1);
-		}, 50);
+		textRef.textContent = activeMessage.slice(0, writtenMessage.length + 1);
+		prevCharacterTimestamp = Date.now();
+
+		requestAnimationFrame(start);
 	};
 
 	onMount(() => {
