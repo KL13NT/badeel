@@ -1,4 +1,4 @@
-import { batch, createSignal, onMount } from "solid-js";
+import { onMount } from "solid-js";
 
 import styles from "./TypeWriter.module.scss";
 import clsx from "clsx";
@@ -15,37 +15,42 @@ const messages = [
 ];
 
 let typeInterval: number | null = null;
+let textRef: HTMLParagraphElement | undefined;
+let messageIndex = 0;
 
 export default function TypeWriter() {
-	const [messageIndex, setMessageIndex] = createSignal<number>(0);
-	const [writtenMessage, setWrittenMessage] = createSignal<string>("");
-
 	const start = () => {
 		typeInterval = setInterval(() => {
-			const activeMessage = messages[messageIndex()];
-			if (writtenMessage().length === activeMessage.length) {
-				batch(() => {
-					const newIndex =
-						(((messageIndex() + 1) % messages.length) + messages.length) %
-						messages.length;
+			if (!textRef) return;
 
-					const delayTime = Math.max(
-						Math.min(8000, writtenMessage().length * 100),
-						3000
-					);
+			const activeMessage = messages[messageIndex];
+			const writtenMessage = textRef.textContent!;
 
-					clearInterval(typeInterval!);
-					delay(delayTime, () => {
-						setMessageIndex(newIndex);
-						setWrittenMessage("");
-						start();
-					});
+			if (writtenMessage.length === activeMessage.length) {
+				textRef.setAttribute("data-writing", "false");
+
+				const newIndex =
+					(((messageIndex + 1) % messages.length) + messages.length) %
+					messages.length;
+
+				const delayTime = Math.max(
+					Math.min(8000, activeMessage.length * 100),
+					3000
+				);
+
+				clearInterval(typeInterval!);
+				delay(delayTime, () => {
+					messageIndex = newIndex;
+					textRef!.textContent = "";
+					textRef!.setAttribute("data-writing", "true");
+
+					start();
 				});
 
 				return;
 			}
 
-			setWrittenMessage(activeMessage.slice(0, writtenMessage().length + 1));
+			textRef.textContent = activeMessage.slice(0, writtenMessage.length + 1);
 		}, 50);
 	};
 
@@ -53,12 +58,5 @@ export default function TypeWriter() {
 		start();
 	});
 
-	return (
-		<p
-			data-writing={writtenMessage().length < messages[messageIndex()].length}
-			class={clsx(styles.typewriter, "title")}
-		>
-			{writtenMessage()}
-		</p>
-	);
+	return <p class={clsx(styles.typewriter, "title")} ref={textRef} />;
 }
