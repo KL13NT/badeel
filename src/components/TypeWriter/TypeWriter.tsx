@@ -1,7 +1,8 @@
-import { batch, createSignal, onMount } from "solid-js";
+import { onMount } from "solid-js";
 
 import styles from "./TypeWriter.module.scss";
 import clsx from "clsx";
+import { delay } from "~utils/common";
 
 const messages = [
 	"بِدِّي شَعْرَةً مِنُّه",
@@ -14,46 +15,42 @@ const messages = [
 ];
 
 let typeInterval: number | null = null;
+let textRef: HTMLParagraphElement | undefined;
+let messageIndex = 0;
 
 export default function TypeWriter() {
-	const [messageIndex, setMessageIndex] = createSignal<number>(0);
-	const [message, setMessage] = createSignal<string>("");
-
-	const delay = (time: number, cb: () => void) => {
-		setTimeout(() => {
-			cb();
-		}, time);
-	};
-
 	const start = () => {
 		typeInterval = setInterval(() => {
-			if (message().length === messages[messageIndex()].length) {
-				batch(() => {
-					const newIndex =
-						(((messageIndex() + 1) % messages.length) + messages.length) %
-						messages.length;
+			if (!textRef) return;
 
-					const delayTime = Math.max(
-						Math.min(8000, message().length * 100),
-						3000
-					);
+			const activeMessage = messages[messageIndex];
+			const writtenMessage = textRef.textContent!;
 
-					clearInterval(typeInterval!);
-					delay(delayTime, () => {
-						setMessageIndex(newIndex);
-						setMessage("");
-						start();
-					});
+			if (writtenMessage.length === activeMessage.length) {
+				textRef.setAttribute("data-writing", "false");
+
+				const newIndex =
+					(((messageIndex + 1) % messages.length) + messages.length) %
+					messages.length;
+
+				const delayTime = Math.max(
+					Math.min(8000, activeMessage.length * 100),
+					3000
+				);
+
+				clearInterval(typeInterval!);
+				delay(delayTime, () => {
+					messageIndex = newIndex;
+					textRef!.textContent = "";
+					textRef!.setAttribute("data-writing", "true");
+
+					start();
 				});
 
 				return;
 			}
 
-			if (message().length === 0) {
-				setMessage(messages[messageIndex()][0]);
-			} else {
-				setMessage(message() + messages[messageIndex()][message().length]);
-			}
+			textRef.textContent = activeMessage.slice(0, writtenMessage.length + 1);
 		}, 50);
 	};
 
@@ -61,12 +58,5 @@ export default function TypeWriter() {
 		start();
 	});
 
-	return (
-		<p
-			data-writing={message().length < messages[messageIndex()].length}
-			class={clsx(styles.typewriter, "title")}
-		>
-			{message()}
-		</p>
-	);
+	return <p class={clsx(styles.typewriter, "title")} ref={textRef} />;
 }
