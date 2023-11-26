@@ -1,6 +1,5 @@
 import { defineConfig } from "vite";
 import solid from "vite-plugin-solid";
-import dsv from "@rollup/plugin-dsv";
 import { VitePWA as vitePWA } from "vite-plugin-pwa";
 import mkcert from "vite-plugin-mkcert";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -18,7 +17,6 @@ export default defineConfig({
 			defaultAsComponent: false,
 		}),
 		devtools(),
-		dsv(),
 		mkcert(),
 		vitePWA({
 			registerType: "autoUpdate",
@@ -33,10 +31,10 @@ export default defineConfig({
 							url.origin.includes("docs.google.com"),
 						handler: "CacheFirst",
 						options: {
-							cacheName: "google-fonts-cache",
+							cacheName: "google-documents-cache",
 							expiration: {
 								maxEntries: 2,
-								maxAgeSeconds: 60 * 60 * 2 /* 2 day */,
+								maxAgeSeconds: 60 * 60 * 24 /* 1 day */,
 							},
 						},
 					},
