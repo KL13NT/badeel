@@ -1,4 +1,4 @@
-import { batch, createSignal, onMount } from "solid-js";
+import { batch, createMemo, createSignal, onMount } from "solid-js";
 import {
 	ALTERNATIVES_URL,
 	BOYCOTT_URL,
@@ -10,7 +10,7 @@ import { mapRequestToParsedCSV } from "~utils/responses";
 import Fuse, { FuseResult } from "fuse.js";
 import { useSearchQuery } from "./useSearchQuery";
 import { generateCategoryMap } from "~utils/categories";
-import { filterResults } from "~utils/filters";
+import { filterProducts, filterResults } from "~utils/filters";
 
 let productFuse: null | Fuse<Product> = null;
 
@@ -75,6 +75,7 @@ export const useDocuments = () => {
 		generateCategoryMap(categories);
 		batch(() => {
 			setCategories(categories);
+			window.fuse = productFuse;
 			setFuseRef(productFuse);
 		});
 
@@ -83,16 +84,19 @@ export const useDocuments = () => {
 		}
 	});
 
-	const filteredProducts = () =>
-		results() && params.query
-			? filterResults(results()!, params.status)
-					.map((product) => product.item)
-					.slice(0, 10)
-			: fuseRef()?.getIndex().docs;
+	const filtered = createMemo(() => {
+		if (results() && params.query && params.query !== "") {
+			return filterResults(results()!, params.status).map(
+				(product) => product.item
+			);
+		}
+
+		return filterProducts(fuseRef()?.getIndex()?.docs ?? [], params.status);
+	});
 
 	return {
 		fuse: fuseRef,
-		results: filteredProducts,
+		results: filtered,
 		search,
 		categories,
 	};
