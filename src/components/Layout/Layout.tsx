@@ -1,12 +1,15 @@
 import { JSX } from "solid-js/jsx-runtime";
+import { A } from "@solidjs/router";
 
-import logo from "~assets/icons/logo.svg";
-import styles from "./Layout.module.scss";
 import NavigationFilter from "~components/NavigationFilter/NavigationFilter";
 import Button from "~components/Button/Button";
 import { SUBMIT_PRODUCT_FORM } from "~constants/documents";
+
 import HandshakeIcon from "~assets/icons/handshake.svg?component-solid";
-import { A } from "@solidjs/router";
+
+import styles from "./Layout.module.scss";
+
+import logo from "~assets/icons/logo.svg";
 
 interface Props {
 	children: JSX.Element;
@@ -35,7 +38,7 @@ export default function Layout(props: Props) {
 				</div>
 			</nav>
 
-			{props.children}
+			<main class={styles.main}>{props.children}</main>
 
 			<footer>
 				<p>جميع الحقوق محفوظة.</p>
