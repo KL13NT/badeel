@@ -35,10 +35,11 @@ export default function NavigationFilter() {
 		setExpanded(updated);
 	};
 
+	const status = () => params.status ?? "all";
 	const rest = () =>
-		STATUS_FILTER_OPTIONS.filter((option) => option.key !== params.status);
+		STATUS_FILTER_OPTIONS.filter((option) => option.key !== status());
 	const selected = () =>
-		STATUS_FILTER_OPTIONS.find((option) => option.key === params.status)!;
+		STATUS_FILTER_OPTIONS.find((option) => option.key === status())!;
 
 	return (
 		<div class={styles.navigationFilter}>

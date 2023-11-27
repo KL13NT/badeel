@@ -1,4 +1,4 @@
-import { batch, createEffect, createSignal, onMount } from "solid-js";
+import { batch, createSignal, onMount } from "solid-js";
 import {
 	ALTERNATIVES_URL,
 	BOYCOTT_URL,
@@ -16,7 +16,8 @@ let productFuse: null | Fuse<Product> = null;
 
 export const useDocuments = () => {
 	const { params, updateQuery } = useSearchQuery();
-	const [results, setResults] = createSignal<FuseResult<Product>[]>();
+	const [results, setResults] = createSignal<FuseResult<Product>[]>([]);
+	const [fuseRef, setFuseRef] = createSignal<Fuse<Product> | null>(null);
 	const [categories, setCategories] = createSignal<Category[]>([]);
 
 	const search = (query?: string) => {
@@ -72,7 +73,10 @@ export const useDocuments = () => {
 		});
 
 		generateCategoryMap(categories);
-		setCategories(categories);
+		batch(() => {
+			setCategories(categories);
+			setFuseRef(productFuse);
+		});
 
 		if (params.query) {
 			search(params.query);
@@ -84,16 +88,10 @@ export const useDocuments = () => {
 			? filterResults(results()!, params.status)
 					.map((product) => product.item)
 					.slice(0, 10)
-			: productFuse?.getIndex().docs;
-
-	createEffect(() => {
-		if (params) {
-			console.log("a");
-		}
-	});
+			: fuseRef()?.getIndex().docs;
 
 	return {
-		fuse: productFuse,
+		fuse: fuseRef,
 		results: filteredProducts,
 		search,
 		categories,
