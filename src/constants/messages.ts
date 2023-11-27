@@ -20,4 +20,15 @@ export const MESSAGES = {
 	"proof.title.boycott": "سبب المقاطعة",
 	"proof.title.support": "الدليل",
 	"proof.title.context": "الحالة",
+
+	contact: "تواصَل",
+	source: "تصفح المصدر",
+	product: "مُنتَج",
+	show: "تُظهر",
+	manufacturer: "المُنتِج",
+
+	"table.name": "اسم المنتج أو الشركة",
+	"table.englishName": "الإسم بالإنجليزية",
+	"table.category": "التصنيف",
+	"table.status": "الحالة",
 } as const;
