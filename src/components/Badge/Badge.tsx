@@ -1,9 +1,20 @@
 import clsx from "clsx";
 import { Component, JSX, mergeProps } from "solid-js";
+import { Dynamic } from "solid-js/web";
 
 import { Status } from "~types";
 
 import styles from "./Badge.module.scss";
+
+import ForbiddenIcon from "~assets/icons/forbidden.svg?component-solid";
+import OliveIcon from "~assets/icons/olive.svg?component-solid";
+import IncognitoIcon from "~assets/icons/incognito.svg?component-solid";
+
+const statusIconMapping: Record<Status, Component> = {
+	alternative: OliveIcon,
+	boycott: ForbiddenIcon,
+	unsure: IncognitoIcon,
+};
 
 interface Props {
 	/**
@@ -15,15 +26,15 @@ interface Props {
 	 */
 	icon?: Component;
 
-	variant?: Status;
+	variant: Status;
 }
 
 export default function Badge(_props: Props) {
-	const props = mergeProps({ variant: "boycott" }, _props);
+	const props = mergeProps({ variant: "boycott" } as Props, _props);
 
 	return (
 		<span class={clsx("t-button", styles.badge, styles[props.variant])}>
-			{props.icon && <props.icon />}
+			<Dynamic component={statusIconMapping[props.variant]} />
 			{props.children}
 		</span>
 	);
