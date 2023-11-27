@@ -10,15 +10,37 @@ export interface Organization {
 }
 
 export interface BaseProduct {
+	status: Status;
 	Name: string;
 	"English Name": string;
 	Manufacturer: string;
-	Proof: string;
-	status: Status;
+	Category: string;
 }
 
-export type Product = BaseProduct;
+export interface BoycottProduct extends BaseProduct {
+	status: "boycott";
+	Proof: string;
+	Link?: string;
+}
+
+export interface UnsureProduct extends BaseProduct {
+	status: "unsure";
+	ref: number;
+}
+
+export interface SupportProduct extends BaseProduct {
+	status: "alternative";
+	Contact?: string;
+}
+
+export type Product = BoycottProduct | UnsureProduct | SupportProduct;
 
 export interface Data {
 	products: Record<ID, Product>;
+}
+
+export interface Category {
+	english: string;
+	arabic: string;
+	major?: string;
 }

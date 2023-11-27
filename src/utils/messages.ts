@@ -1,5 +1,7 @@
 import { MESSAGES } from "~constants/messages";
 
-export default function t(key: keyof typeof MESSAGES) {
+type MessageKey = keyof typeof MESSAGES;
+
+export default function t(key: MessageKey) {
 	return MESSAGES[key];
 }
