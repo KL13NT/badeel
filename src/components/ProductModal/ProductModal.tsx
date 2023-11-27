@@ -1,5 +1,5 @@
 import { useProductModal } from "~stores/product-modal";
-import { Component, Show, createEffect } from "solid-js";
+import { Show, createEffect } from "solid-js";
 import Button from "~components/Button/Button";
 import t from "~utils/messages";
 import { Transition } from "solid-transition-group";
@@ -8,10 +8,6 @@ import styles from "./ProductModal.module.scss";
 import clsx from "clsx";
 import Badge from "~components/Badge/Badge";
 import { Product, Status } from "~types";
-
-import ForbiddenIcon from "~assets/icons/forbidden.svg?component-solid";
-import OliveIcon from "~assets/icons/olive.svg?component-solid";
-import IncognitoIcon from "~assets/icons/incognito.svg?component-solid";
 import { UNSURE_SOURCE_URL } from "~constants/documents";
 
 const getCellURL = (ref: number) => `${UNSURE_SOURCE_URL}&range=A${ref}`;
@@ -26,12 +22,6 @@ const statusMapping: Record<Status, string> = {
 	alternative: t("status.alternative"),
 	boycott: t("status.boycott"),
 	unsure: t("status.unsure"),
-};
-
-const statusIconMapping: Record<Status, Component> = {
-	alternative: OliveIcon,
-	boycott: ForbiddenIcon,
-	unsure: IncognitoIcon,
 };
 
 type proofMappingKey = keyof typeof proofMapping;
@@ -91,7 +81,7 @@ const FooterActions = (props: Props) => {
 					href={props.product.Contact}
 					variant="action"
 				>
-					تواصل
+					{t("contact")}
 				</Button>
 			) : null}
 
@@ -102,7 +92,7 @@ const FooterActions = (props: Props) => {
 					href={getCellURL(props.product.ref)}
 					variant="action"
 				>
-					تصفح المصدر
+					{t("source")}
 				</Button>
 			) : null}
 		</>
@@ -155,12 +145,18 @@ export default function ProductModal() {
 
 						<div class={styles.content}>
 							<div class={styles.meta}>
-								<Badge
-									variant={product().status}
-									icon={statusIconMapping[product().status]}
-								>
+								<Badge variant={product().status}>
 									{statusMapping[product().status]}
 								</Badge>
+							</div>
+
+							<div class={styles.proof}>
+								<p class={clsx("t-button")}>{t("manufacturer")}</p>
+								<p class={clsx("t-body")}>
+									{product().Manufacturer.length > 0
+										? product().Manufacturer
+										: "غير متوفر"}
+								</p>
 							</div>
 
 							<Proof product={product()} />
