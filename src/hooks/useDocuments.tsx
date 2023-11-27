@@ -1,48 +1,49 @@
-import { createEffect, createSignal, onMount } from "solid-js";
+import { batch, createEffect, createSignal, onMount } from "solid-js";
 import {
 	ALTERNATIVES_URL,
 	BOYCOTT_URL,
+	CATEGORIES_URL,
 	UNSURE_URL,
 } from "~constants/documents";
-import { BaseProduct, Product, Status } from "~types";
+import { BaseProduct, Category, Product, Status } from "~types";
 import { mapRequestToParsedCSV } from "~utils/responses";
 import Fuse, { FuseResult } from "fuse.js";
-import { useFilterStore } from "~stores/filter";
 import { useSearchQuery } from "./useSearchQuery";
+import { generateCategoryMap } from "~utils/categories";
+import { filterResults } from "~utils/filters";
 
 let productFuse: null | Fuse<Product> = null;
 
 export const useDocuments = () => {
-	const { query } = useSearchQuery();
-	const [fuseRef, setFuseRef] = createSignal<null | Fuse<Product>>(productFuse);
-	const [filters] = useFilterStore;
-	const [results, setResults] = createSignal<FuseResult<Product>[]>([]);
+	const { params, updateQuery } = useSearchQuery();
+	const [results, setResults] = createSignal<FuseResult<Product>[]>();
+	const [categories, setCategories] = createSignal<Category[]>([]);
 
-	const search = (query: string) => {
+	const search = (query?: string) => {
+		const actual = query ?? params.query;
+
 		if (!productFuse) {
-			setResults([]);
+			batch(() => {
+				setResults([]);
+				updateQuery(actual);
+			});
 			return;
 		}
 
-		const found = productFuse.search(query);
+		const found = productFuse.search(actual);
 
-		if (filters.selected.key !== "all") {
-			const filtered = found
-				.filter((result) => result.item.status === filters.selected.key)
-				.slice(0, 10);
-
-			setResults(filtered);
-			return;
-		}
-
-		setResults(found.slice(0, 10));
+		batch(() => {
+			updateQuery(actual);
+			setResults(found);
+		});
 	};
 
 	onMount(async () => {
-		const [boycotted, alternatives, unsure] = await Promise.all([
+		const [boycotted, alternatives, unsure, categories] = await Promise.all([
 			mapRequestToParsedCSV<BaseProduct[]>(fetch(BOYCOTT_URL)),
 			mapRequestToParsedCSV<BaseProduct[]>(fetch(ALTERNATIVES_URL)),
 			mapRequestToParsedCSV<BaseProduct[]>(fetch(UNSURE_URL)),
+			mapRequestToParsedCSV<Category[]>(fetch(CATEGORIES_URL)),
 		]);
 
 		const data = boycotted
@@ -70,18 +71,31 @@ export const useDocuments = () => {
 			findAllMatches: false,
 		});
 
-		setFuseRef(productFuse);
+		generateCategoryMap(categories);
+		setCategories(categories);
+
+		if (params.query) {
+			search(params.query);
+		}
 	});
 
+	const filteredProducts = () =>
+		results() && params.query
+			? filterResults(results()!, params.status)
+					.map((product) => product.item)
+					.slice(0, 10)
+			: productFuse?.getIndex().docs;
+
 	createEffect(() => {
-		if (query && fuseRef() && filters.selected) {
-			search(query);
+		if (params) {
+			console.log("a");
 		}
 	});
 
 	return {
 		fuse: productFuse,
-		results,
+		results: filteredProducts,
 		search,
+		categories,
 	};
 };

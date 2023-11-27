@@ -1,22 +1,42 @@
 import { useSearchParams } from "@solidjs/router";
+import { Filter } from "~types";
 
 interface Params {
 	[key: string]: string;
-	q: string;
+	query: string;
+	status: Filter;
 }
 
 export const useSearchQuery = () => {
 	const [params, setParams] = useSearchParams<Params>();
 
 	const updateQuery = (query: string) => {
-		setParams({
-			...params,
-			q: query,
-		});
+		setParams(
+			{
+				...params,
+				query: query,
+			},
+			{
+				replace: true,
+			}
+		);
+	};
+
+	const updateFilter = (status: Filter) => {
+		setParams(
+			{
+				...params,
+				status,
+			},
+			{
+				replace: true,
+			}
+		);
 	};
 
 	return {
-		query: params.q,
+		params,
 		updateQuery,
+		updateFilter,
 	};
 };
