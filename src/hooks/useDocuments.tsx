@@ -75,7 +75,6 @@ export const useDocuments = () => {
 		generateCategoryMap(categories);
 		batch(() => {
 			setCategories(categories);
-			window.fuse = productFuse;
 			setFuseRef(productFuse);
 		});
 
@@ -86,12 +85,20 @@ export const useDocuments = () => {
 
 	const filtered = createMemo(() => {
 		if (results() && params.query && params.query !== "") {
-			return filterResults(results()!, params.status).map(
-				(product) => product.item
-			);
+			return filterResults(
+				results()!,
+				params.status,
+				params.major,
+				params.sub
+			).map((product) => product.item);
 		}
 
-		return filterProducts(fuseRef()?.getIndex()?.docs ?? [], params.status);
+		return filterProducts(
+			fuseRef()?.getIndex()?.docs ?? [],
+			params.status,
+			params.major,
+			params.sub
+		);
 	});
 
 	return {

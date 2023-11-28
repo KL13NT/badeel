@@ -31,4 +31,7 @@ export const MESSAGES = {
 	"table.englishName": "الإسم بالإنجليزية",
 	"table.category": "التصنيف",
 	"table.status": "الحالة",
+
+	"categories.title": "التصفية حسب التصنيف",
+	"categories.all": "جميع الأقسام",
 } as const;

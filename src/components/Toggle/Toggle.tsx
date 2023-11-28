@@ -1,4 +1,4 @@
-import { JSX, createEffect, createSignal } from "solid-js";
+import { JSX, createEffect, createSignal, splitProps } from "solid-js";
 import clsx from "clsx";
 
 import Button from "~components/Button/Button";
@@ -14,18 +14,26 @@ interface Props extends ButtonProps {
 	children: JSX.Element;
 	label: string;
 	class?: string;
-	onChange: (updated: boolean) => unknown;
+	onChange: (updated: boolean, event: MouseEvent) => unknown;
 	pressed?: boolean;
 }
 
-export default function Toggle(props: Props) {
+export default function Toggle(_props: Props) {
+	const [props, rest] = splitProps(_props, [
+		"children",
+		"class",
+		"pressed",
+		"class",
+		"label",
+		"onChange",
+	]);
 	const [pressed, setPressed] = createSignal(false);
 
-	const toggle = () => {
+	const toggle = (ev: MouseEvent) => {
 		const updated = !pressed();
 
 		setPressed(updated);
-		props.onChange(updated);
+		props.onChange(updated, ev);
 	};
 
 	createEffect(() => {
@@ -40,6 +48,7 @@ export default function Toggle(props: Props) {
 			onClick={toggle}
 			aria-pressed={pressed()}
 			aria-label={`Toggle ${props.label}`}
+			{...rest}
 		>
 			{props.children}
 		</Button>

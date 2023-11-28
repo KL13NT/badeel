@@ -11,6 +11,7 @@ import { Product } from "~types";
 import styles from "./index.module.scss";
 import ProductModal from "~components/ProductModal/ProductModal";
 import Table from "~components/Table/Table";
+import Filters from "~components/Filters/Filters";
 
 let searchThrottleTimeout: number | number = 0;
 
@@ -41,7 +42,9 @@ function App() {
 				<SearchInput onSubmit={handleSubmit} value={params.query} />
 			</div>
 			<section>
-				<ProductModal />
+				{categories() && categories().length > 0 ? (
+					<Filters categories={categories()} />
+				) : null}
 
 				{results() ? (
 					<Table
@@ -52,6 +55,8 @@ function App() {
 				) : (
 					<p>Loading</p>
 				)}
+
+				<ProductModal />
 			</section>
 		</main>
 	);

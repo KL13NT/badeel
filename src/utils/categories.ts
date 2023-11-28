@@ -23,3 +23,13 @@ export const getParentCategory = (product: Product) => {
 
 	return major;
 };
+
+export const getCategoryMajor = (categoryKey: string) => {
+	return categoryMap[categoryKey];
+};
+
+export const getSubCategories = (categoryKey: string) => {
+	return Object.values(categoryMap).filter(
+		(category) => category.major && category.major === categoryKey
+	);
+};
