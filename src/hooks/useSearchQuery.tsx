@@ -52,11 +52,13 @@ export const useSearchQuery = () => {
 		);
 	};
 
-	const updateSubCategory = (categoryKey: string) => {
+	const updateSubCategory = (categoryKey: string, major?: string) => {
 		setParams(
 			{
 				...params,
+				query: null,
 				sub: categoryKey,
+				major: major ?? params.major,
 			},
 			{
 				replace: true,

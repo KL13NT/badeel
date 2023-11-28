@@ -14,6 +14,8 @@ import styles from "./Table.module.scss";
 interface Props {
 	products: Product[];
 	categories: Category[];
+	handleSubCategoryChange: (enabled: boolean, ev: MouseEvent) => unknown;
+	handleMajorCategoryChange: (enabled: boolean, ev: MouseEvent) => unknown;
 	showProof: (product: Product) => void;
 }
 
@@ -48,8 +50,18 @@ export default function Table(props: Props) {
 									<td dir="auto">{result["English Name"]}</td>
 									<td class={styles.category}>
 										<div>
-											<Button>{getProductCategory(result).arabic}</Button>
-											<Button>{getParentCategory(result).arabic}</Button>
+											<Button
+												data-category={result.Category}
+												onClick={[props.handleSubCategoryChange, true]}
+											>
+												{getProductCategory(result).arabic}
+											</Button>
+											<Button
+												data-category={getParentCategory(result).english}
+												onClick={[props.handleMajorCategoryChange, true]}
+											>
+												{getParentCategory(result).arabic}
+											</Button>
 										</div>
 									</td>
 									<td dir="auto">

@@ -1,6 +1,7 @@
 import TypeWriter from "~components/TypeWriter/TypeWriter";
 import SearchInput from "~components/SearchInput/SearchInput";
 
+import { getCategoryMajor } from "~utils/categories";
 import { useDocuments } from "~hooks/useDocuments";
 import { useSearchQuery } from "~hooks/useSearchQuery";
 
@@ -16,7 +17,7 @@ import Filters from "~components/Filters/Filters";
 let searchThrottleTimeout: number | number = 0;
 
 function App() {
-	const { params } = useSearchQuery();
+	const { params, updateMajorCategory, updateSubCategory } = useSearchQuery();
 	const { search, results, categories } = useDocuments();
 	const [, setProductModal] = useProductModal();
 
@@ -34,6 +35,26 @@ function App() {
 		});
 	};
 
+	const handleMajorCategoryChange = (enabled: boolean, ev: MouseEvent) => {
+		const target = ev.target as HTMLButtonElement;
+		const category = target.dataset.category!;
+
+		if (enabled) {
+			updateMajorCategory(category);
+		}
+	};
+
+	const handleSubCategoryChange = (enabled: boolean, ev: MouseEvent) => {
+		const target = ev.target as HTMLButtonElement;
+		const category = target.dataset.category!;
+
+		if (enabled) {
+			const major = category === "all" ? undefined : getCategoryMajor(category);
+
+			updateSubCategory(category, major?.english);
+		}
+	};
+
 	return (
 		<main class={styles.container}>
 			<div class={styles.intro}>
@@ -43,7 +64,11 @@ function App() {
 			</div>
 			<section>
 				{categories() && categories().length > 0 ? (
-					<Filters categories={categories()} />
+					<Filters
+						categories={categories()}
+						handleMajorCategoryChange={handleMajorCategoryChange}
+						handleSubCategoryChange={handleSubCategoryChange}
+					/>
 				) : null}
 
 				{results() ? (
@@ -51,6 +76,8 @@ function App() {
 						products={results()}
 						categories={categories()}
 						showProof={showProof}
+						handleMajorCategoryChange={handleMajorCategoryChange}
+						handleSubCategoryChange={handleSubCategoryChange}
 					/>
 				) : (
 					<p>Loading</p>

@@ -12,12 +12,14 @@ import clsx from "clsx";
 
 interface Props {
 	categories: Category[];
+	handleSubCategoryChange: (enabled: boolean, ev: MouseEvent) => unknown;
+	handleMajorCategoryChange: (enabled: boolean, ev: MouseEvent) => unknown;
 }
 
 let sliderRef: HTMLDivElement;
 
 export default function Filters(props: Props) {
-	const { params, updateMajorCategory, updateSubCategory } = useSearchQuery();
+	const { params } = useSearchQuery();
 
 	const majorCategories = createMemo(() =>
 		props.categories.filter(
@@ -36,24 +38,6 @@ export default function Filters(props: Props) {
 
 	const selectedMajor = () => params.major ?? "all";
 	const selectedSub = () => params.sub ?? "all";
-
-	const handleMajorCategoryChange = (enabled: boolean, ev: MouseEvent) => {
-		const target = ev.target as HTMLButtonElement;
-		const category = target.dataset.category!;
-
-		if (enabled) {
-			updateMajorCategory(category);
-		}
-	};
-
-	const handleSubCategoryChange = (enabled: boolean, ev: MouseEvent) => {
-		const target = ev.target as HTMLButtonElement;
-		const category = target.dataset.category!;
-
-		if (enabled) {
-			updateSubCategory(category);
-		}
-	};
 
 	const handleScroll = (ev: MouseEvent) => {
 		if (!sliderRef) return;
@@ -77,7 +61,7 @@ export default function Filters(props: Props) {
 					label={t("categories.all")}
 					data-category="all"
 					pressed={selectedMajor() === "all"}
-					onChange={handleMajorCategoryChange}
+					onChange={props.handleMajorCategoryChange}
 				>
 					{t("categories.all")}
 				</Toggle>
@@ -85,7 +69,7 @@ export default function Filters(props: Props) {
 				<For each={majorCategories()}>
 					{(category) => (
 						<Toggle
-							onChange={handleMajorCategoryChange}
+							onChange={props.handleMajorCategoryChange}
 							label={category.arabic}
 							data-category={category.english}
 							pressed={selectedMajor() === category.english}
@@ -104,7 +88,7 @@ export default function Filters(props: Props) {
 								label={t("categories.all")}
 								data-category="all"
 								pressed={selectedSub() === "all"}
-								onChange={handleSubCategoryChange}
+								onChange={props.handleSubCategoryChange}
 								class={styles.subcategory}
 							>
 								{t("categories.all")}
@@ -113,7 +97,7 @@ export default function Filters(props: Props) {
 							<For each={subCategories()}>
 								{(category) => (
 									<Toggle
-										onChange={handleSubCategoryChange}
+										onChange={props.handleSubCategoryChange}
 										label={category.arabic}
 										data-category={category.english}
 										pressed={selectedSub() === category.english}

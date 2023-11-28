@@ -25,7 +25,7 @@ export const getParentCategory = (product: Product) => {
 };
 
 export const getCategoryMajor = (categoryKey: string) => {
-	return categoryMap[categoryKey];
+	return categoryMap[categoryMap[categoryKey].major!];
 };
 
 export const getSubCategories = (categoryKey: string) => {
