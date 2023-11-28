@@ -7,7 +7,7 @@
 		"dev": "vite --host --port 3000",
 		"prebuild": "run-p lint check",
 		"build": "vite build",
-		"preview": "vite preview --host",
+		"preview": "vite preview --host --port 3000",
 		"lint": "eslint --ext .js,.ts src",
 		"check": "prettier src/**/*.{css,ts} --check",
 		"tsc": "tsc --noEmit"

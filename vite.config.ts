@@ -26,21 +26,31 @@ export default defineConfig({
 			workbox: {
 				runtimeCaching: [
 					{
-						urlPattern: ({ url }) =>
-							url.origin.includes("googleusercontent.com") ||
-							url.origin.includes("docs.google.com"),
+						urlPattern: /google/gi,
 						handler: "CacheFirst",
 						options: {
 							cacheName: "google-documents-cache",
 							expiration: {
-								maxEntries: 2,
+								maxEntries: 10,
 								maxAgeSeconds: 60 * 60 * 24 /* 1 day */,
+							},
+							matchOptions: {
+								ignoreVary: true,
+								ignoreSearch: true,
+							},
+							cacheableResponse: {
+								statuses: [0, 200, 302],
 							},
 						},
 					},
 				],
 			},
-			includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
+			includeAssets: [
+				"favicon.ico",
+				"apple-touch-icon.png",
+				"mask-icon.svg",
+				"manifest.webmanifest",
+			],
 			manifest: {
 				name: "بديل | Badeel",
 				short_name: "بديل",
@@ -51,42 +61,42 @@ export default defineConfig({
 				orientation: "portrait",
 				icons: [
 					{
-						src: "/icons/icon-72x72.png",
+						src: "/icons/android-36x36.png",
+						sizes: "36x36",
+						type: "image/png",
+					},
+					{
+						src: "/icons/android-48x48.png",
+						sizes: "48x48",
+						type: "image/png",
+					},
+					{
+						src: "/icons/android-72x72.png",
 						sizes: "72x72",
 						type: "image/png",
 					},
 					{
-						src: "/icons/icon-96x96.png",
+						src: "/icons/android-96x96.png",
 						sizes: "96x96",
 						type: "image/png",
 					},
 					{
-						src: "/icons/icon-128x128.png",
-						sizes: "128x128",
-						type: "image/png",
-					},
-					{
-						src: "/icons/icon-144x144.png",
+						src: "/icons/android-144x144.png",
 						sizes: "144x144",
 						type: "image/png",
 					},
 					{
-						src: "/icons/icon-152x152.png",
-						sizes: "152x152",
-						type: "image/png",
-					},
-					{
-						src: "/icons/icon-192x192.png",
+						src: "/icons/android-chrome-192x192.png",
 						sizes: "192x192",
 						type: "image/png",
 					},
 					{
-						src: "/icons/icon-384x384.png",
+						src: "/icons/android-384x384.png",
 						sizes: "384x384",
 						type: "image/png",
 					},
 					{
-						src: "/icons/icon-512x512.png",
+						src: "/icons/android-chrome-512x512.png",
 						sizes: "512x512",
 						type: "image/png",
 					},
