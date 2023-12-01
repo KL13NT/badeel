@@ -107,7 +107,10 @@ export default function Layout(props: Props) {
 			<main class={styles.main}>{props.children}</main>
 
 			<footer class={styles.footer}>
-				<p>جميع الحقوق محفوظة.</p>
+				<p>
+					جميع الحقوق محفوظة. مفتوح المصدر على{" "}
+					<a href="https://github.com/KL13NT/badeel">GitHub</a>.
+				</p>
 			</footer>
 		</>
 	);
