@@ -33,7 +33,7 @@ export const filterProducts = (
 
 /**
  * The reason there are two methods to filter here is because we can have
- * hundreds of 
+ * hundreds of
  */
 export const filterResults = (
 	results: FuseResult<Product>[],
