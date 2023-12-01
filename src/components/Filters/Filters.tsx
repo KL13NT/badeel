@@ -16,7 +16,8 @@ interface Props {
 	handleMajorCategoryChange: (enabled: boolean, ev: MouseEvent) => unknown;
 }
 
-let sliderRef: HTMLDivElement;
+let majorSliderRef: HTMLDivElement;
+let subSliderRef: HTMLDivElement;
 
 export default function Filters(props: Props) {
 	const { params } = useSearchQuery();
@@ -39,16 +40,16 @@ export default function Filters(props: Props) {
 	const selectedMajor = () => params.major ?? "all";
 	const selectedSub = () => params.sub ?? "all";
 
-	const handleScroll = (ev: MouseEvent) => {
-		if (!sliderRef) return;
+	const handleScroll = (slider: HTMLDivElement, ev: MouseEvent) => {
+		if (!slider) return;
 
 		const target = ev.target as HTMLDivElement;
 		const direction = target.closest("button")!.dataset.direction!;
 
 		if (direction === "left") {
-			sliderRef!.scrollBy(200, 0);
+			slider!.scrollBy(200, 0);
 		} else {
-			sliderRef!.scrollBy(-200, 0);
+			slider!.scrollBy(-200, 0);
 		}
 	};
 
@@ -56,33 +57,57 @@ export default function Filters(props: Props) {
 		<div class={styles.categories}>
 			<p>{t("categories.title")}</p>
 
-			<div class={styles.majorCategories}>
-				<Toggle
-					label={t("categories.all")}
-					data-category="all"
-					pressed={selectedMajor() === "all"}
-					onChange={props.handleMajorCategoryChange}
-				>
-					{t("categories.all")}
-				</Toggle>
-
-				<For each={majorCategories()}>
-					{(category) => (
+			<div class={styles.subcategoriesScrollContainer}>
+				<div class={styles.majorCategoriesContainer} ref={majorSliderRef}>
+					<div class={styles.majorCategories}>
 						<Toggle
+							label={t("categories.all")}
+							data-category="all"
+							pressed={selectedMajor() === "all"}
 							onChange={props.handleMajorCategoryChange}
-							label={category.arabic}
-							data-category={category.english}
-							pressed={selectedMajor() === category.english}
 						>
-							{category.arabic}
+							{t("categories.all")}
 						</Toggle>
-					)}
-				</For>
+
+						<For each={majorCategories()}>
+							{(category) => (
+								<Toggle
+									onChange={props.handleMajorCategoryChange}
+									label={category.arabic}
+									data-category={category.english}
+									pressed={selectedMajor() === category.english}
+								>
+									{category.arabic}
+								</Toggle>
+							)}
+						</For>
+					</div>
+					<div
+						class={clsx(styles.sliderArrowContainer, styles.firstSliderArrow)}
+					>
+						<Button
+							class={styles.sliderArrow}
+							data-direction="left"
+							onClick={[handleScroll, majorSliderRef]}
+						>
+							<ArrowIcon />
+						</Button>
+					</div>
+					<div class={styles.sliderArrowContainer}>
+						<Button
+							class={styles.sliderArrow}
+							data-direction="right"
+							onClick={[handleScroll, majorSliderRef]}
+						>
+							<ArrowIcon />
+						</Button>
+					</div>
+				</div>
 			</div>
 
 			{subCategories().length > 0 && selectedMajor() !== "all" ? (
 				<div class={styles.subcategoriesScrollContainer}>
-					<div class={styles.subCategoriesContainer} ref={sliderRef}>
+					<div class={styles.subCategoriesContainer} ref={subSliderRef}>
 						<div class={styles.subCategories}>
 							<Toggle
 								label={t("categories.all")}
@@ -115,7 +140,7 @@ export default function Filters(props: Props) {
 						<Button
 							class={styles.sliderArrow}
 							data-direction="left"
-							onClick={handleScroll}
+							onClick={[handleScroll, subSliderRef]}
 						>
 							<ArrowIcon />
 						</Button>
@@ -124,7 +149,7 @@ export default function Filters(props: Props) {
 						<Button
 							class={styles.sliderArrow}
 							data-direction="right"
-							onClick={handleScroll}
+							onClick={[handleScroll, subSliderRef]}
 						>
 							<ArrowIcon />
 						</Button>
