@@ -27,7 +27,8 @@ export default function Table(props: Props) {
 				<p>
 					{t("show")}{" "}
 					<span class="t-body">{localizeNumber(props.products.length)}</span>{" "}
-					{t("product")} {t("of")} <span class="t-body">{props.total}</span>{" "}
+					{t("product")} {t("of")}{" "}
+					<span class="t-body">{localizeNumber(props.total)}</span>{" "}
 					{t("product")}
 				</p>
 				<div />
