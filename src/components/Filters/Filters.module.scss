@@ -7,16 +7,22 @@
 }
 
 .majorCategoriesContainer {
+	margin-top: var(--s-2);
+
 	overflow-x: auto;
 	scroll-behavior: smooth;
 	scrollbar-width: none;
+	-ms-overflow-style: none; /* IE and Edge */
+
 	padding-inline-end: 100px;
 	padding-inline-start: 40px;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .majorCategories {
-	margin-top: var(--s-2);
-
 	display: flex;
 	gap: 12px;
 	flex-wrap: nowrap;
