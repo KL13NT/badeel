@@ -2,16 +2,7 @@
 
 | An Egyptian boycott listing project with UX in mind.
 
-Available at [badeel-misr](https://badeel-misr.vercel.app).
-
-## Acknowledgements (In no particular order)
-
-- Mostafa Esmail (Data Collection & UI Development)
-- Nabil Tharwat (Data Collection & Project Lead)
-- Roupen Jamgotchian (UI/UX Design)
-- Karim Shalaby (Ideation)
-- Mona Ibrahim (Ideation)
-- Muhammad Shaarawy (Ideation)
+Available at [badeel-misr](https://badeel-masr.netlify.app).
 
 ## Contributing
 
