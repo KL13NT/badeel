@@ -31,6 +31,8 @@ export const useDocuments = () => {
 				setResults([]);
 				updateParams({
 					query: actual,
+					major: undefined,
+					sub: undefined,
 				});
 			});
 			return;
@@ -41,6 +43,8 @@ export const useDocuments = () => {
 		batch(() => {
 			updateParams({
 				query: actual,
+				major: undefined,
+				sub: undefined,
 			});
 			setResults(found);
 		});
