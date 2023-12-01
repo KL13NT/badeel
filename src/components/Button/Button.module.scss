@@ -26,3 +26,9 @@
 .action-invert {
 	border: 1px solid var(--c-action);
 }
+
+@media screen and (max-width: 700px) {
+	.button {
+		padding: 8px 16px;
+	}
+}
