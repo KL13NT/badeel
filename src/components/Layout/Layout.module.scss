@@ -56,6 +56,7 @@
 	.main {
 		max-width: 100%;
 		width: 100%;
+		margin-top: 160px;
 	}
 
 	.mobileFilter {
@@ -72,6 +73,13 @@
 		flex-direction: column;
 		align-items: flex-start;
 		padding: 0;
+
+		position: fixed;
+		width: 100%;
+		top: 0;
+		left: 0;
+		z-index: 4;
+		background: var(--c-bg);
 
 		> div:first-of-type {
 			padding: 16px;
