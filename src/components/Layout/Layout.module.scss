@@ -47,6 +47,11 @@
 	display: none;
 }
 
+.footer {
+	margin: var(--s-7) auto;
+	width: fit-content;
+}
+
 @media screen and (max-width: 700px) {
 	.main {
 		max-width: 100%;

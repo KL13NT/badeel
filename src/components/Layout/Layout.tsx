@@ -1,5 +1,4 @@
 import { JSX } from "solid-js/jsx-runtime";
-import { A } from "@solidjs/router";
 
 import NavigationFilter from "~components/NavigationFilter/NavigationFilter";
 import Button from "~components/Button/Button";
@@ -49,9 +48,8 @@ export default function Layout(props: Props) {
 
 			<main class={styles.main}>{props.children}</main>
 
-			<footer>
+			<footer class={styles.footer}>
 				<p>جميع الحقوق محفوظة.</p>
-				<A href="/acknowledgments">شكر وتقدير لكل من ساهم في هذا المشروع.</A>
 			</footer>
 		</>
 	);
