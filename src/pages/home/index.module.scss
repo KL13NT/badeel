@@ -50,6 +50,12 @@
 	margin-top: var(--s-7);
 }
 
+.footer {
+	margin-inline: auto;
+	width: fit-content;
+	margin-top: var(--s-5);
+}
+
 @keyframes slide-up {
 	from {
 		transform: translateY(20px);

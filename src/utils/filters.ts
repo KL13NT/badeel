@@ -4,7 +4,7 @@ import { getSubCategories } from "./categories";
 
 export const filterProducts = (
 	products: Product[],
-	filter: Filter,
+	filter?: Filter,
 	major?: string,
 	sub?: string
 ) => {
@@ -31,9 +31,13 @@ export const filterProducts = (
 	return final;
 };
 
+/**
+ * The reason there are two methods to filter here is because we can have
+ * hundreds of 
+ */
 export const filterResults = (
 	results: FuseResult<Product>[],
-	filter: Filter,
+	filter?: Filter,
 	major?: string,
 	sub?: string
 ) => {

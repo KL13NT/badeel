@@ -19,7 +19,7 @@ interface Option {
 
 export default function NavigationFilter() {
 	const [expanded, setExpanded] = createSignal(false);
-	const { params, updateFilter } = useSearchQuery();
+	const { params, updateParams } = useSearchQuery();
 
 	const activate = (optionKey: Option["key"]) => {
 		const selected = STATUS_FILTER_OPTIONS.find(
@@ -28,7 +28,9 @@ export default function NavigationFilter() {
 
 		batch(() => {
 			setExpanded(false);
-			updateFilter(selected.key);
+			updateParams({
+				status: selected.key,
+			});
 		});
 	};
 

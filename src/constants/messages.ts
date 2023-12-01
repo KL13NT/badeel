@@ -36,4 +36,8 @@ export const MESSAGES = {
 	"categories.all": "جميع الأقسام",
 
 	"navbar.add": "أضف مُنتّج أو شركة",
+
+	"table.showMore": "تحميل المزيد من المنتجات",
+	"table.end": "لقد وصلت إلى نهاية القائمة.",
+	"footer.ack": "شكر وتقدير لكل من ساهم في هذا المشروع.",
 } as const;

@@ -14,12 +14,15 @@ import ProductModal from "~components/ProductModal/ProductModal";
 import Table from "~components/Table/Table";
 import Filters from "~components/Filters/Filters";
 import { A } from "@solidjs/router";
+import Button from "~components/Button/Button";
+import t from "~utils/messages";
 
 let searchThrottleTimeout: number | number = 0;
 
 function App() {
-	const { params, updateMajorCategory, updateSubCategory } = useSearchQuery();
-	const { search, results, categories } = useDocuments();
+	const { params, updateParams } = useSearchQuery();
+	const { search, results, categories, error, hasMore, showMore } =
+		useDocuments();
 	const [, setProductModal] = useProductModal();
 
 	const handleSubmit = (query: string) => {
@@ -41,7 +44,11 @@ function App() {
 		const category = target.dataset.category!;
 
 		if (enabled) {
-			updateMajorCategory(category);
+			updateParams({
+				query: undefined,
+				major: category,
+				sub: undefined,
+			});
 		}
 	};
 
@@ -52,7 +59,11 @@ function App() {
 		if (enabled) {
 			const major = category === "all" ? undefined : getCategoryMajor(category);
 
-			updateSubCategory(category, major?.english);
+			updateParams({
+				query: undefined,
+				major: (major ?? params.major) as string,
+				sub: category,
+			});
 		}
 	};
 
@@ -62,6 +73,13 @@ function App() {
 				<TypeWriter />
 				<p>قائمة بشركات والمنتجات المطلوب مقاطعتها لدعم القضية الفلسطينية.</p>
 				<SearchInput onSubmit={handleSubmit} value={params.query} />
+
+				{error() && (
+					<p class="error">
+						حدث خطأ في تحميل البيانات. تأكد من اتصالك بالإنترنت وأن المتصفح
+						الخاص بك لا يمنع الإتصال بمواقع جووجل.
+					</p>
+				)}
 			</div>
 			<section>
 				{categories() && categories().length > 0 ? (
@@ -84,11 +102,21 @@ function App() {
 					<p>Loading</p>
 				)}
 
+				<div class={styles.footer}>
+					{hasMore() ? (
+						<Button onClick={showMore} class={styles.showMore}>
+							{t("table.showMore")}
+						</Button>
+					) : (
+						<p>{t("table.end")}</p>
+					)}
+				</div>
+
 				<ProductModal />
 			</section>
 
 			<section class={styles.ack}>
-				<A href="/acknowledgments">شكر وتقدير لكل من ساهم في هذا المشروع.</A>
+				<A href="/acknowledgments">{t("footer.ack")}</A>
 			</section>
 		</main>
 	);

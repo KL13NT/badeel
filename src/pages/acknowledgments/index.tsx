@@ -36,6 +36,8 @@ export default function Acknowledgments() {
 						</li>
 					</ul>
 
+					<p>وجميع من ساهموا عن طريق ملء الإستبيان أعلى الموقع.</p>
+
 					<p>
 						وشُكر خاص للمُصَمِّم{" "}
 						<a href="https://roupenjam.webflow.io/">روبين جامجوتشيان</a> على
