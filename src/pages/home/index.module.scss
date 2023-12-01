@@ -46,6 +46,10 @@
 	}
 }
 
+.ack {
+	margin-top: var(--s-7);
+}
+
 @keyframes slide-up {
 	from {
 		transform: translateY(20px);

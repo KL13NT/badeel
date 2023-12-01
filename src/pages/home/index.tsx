@@ -13,6 +13,7 @@ import styles from "./index.module.scss";
 import ProductModal from "~components/ProductModal/ProductModal";
 import Table from "~components/Table/Table";
 import Filters from "~components/Filters/Filters";
+import { A } from "@solidjs/router";
 
 let searchThrottleTimeout: number | number = 0;
 
@@ -84,6 +85,10 @@ function App() {
 				)}
 
 				<ProductModal />
+			</section>
+
+			<section class={styles.ack}>
+				<A href="/acknowledgments">شكر وتقدير لكل من ساهم في هذا المشروع.</A>
 			</section>
 		</main>
 	);

@@ -61,11 +61,51 @@
 	> div {
 		display: flex;
 		gap: var(--s-1);
+		flex-wrap: wrap;
 
 		> button {
 			display: block;
 			font-size: 1rem;
 			padding: 8px 16px;
 		}
+	}
+}
+
+.footer {
+	margin-top: var(--s-2);
+	color: var(--c-white-accent, #b8b7ad);
+}
+
+@media screen and (max-width: 700px) {
+	.table tr td {
+		display: block;
+	}
+
+	.table > thead:nth-child(1) {
+		display: none;
+	}
+
+	.table tr {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-2);
+		height: fit-content;
+		padding: var(--s-2) 0;
+	}
+
+	.table tr td:last-of-type {
+		text-align: right;
+	}
+
+	tr td:nth-of-type(1) {
+		font-size: 24px;
+		max-width: 76%;
+	}
+
+	tr td:nth-of-type(4) {
+		position: absolute;
+		left: 0;
+		top: var(--s-2);
 	}
 }

@@ -83,6 +83,8 @@ export default function Table(props: Props) {
 					</For>
 				</tbody>
 			</table>
+
+			<p class={styles.footer}>لقد وصلت إلى نهاية القائمة</p>
 		</div>
 	);
 }
