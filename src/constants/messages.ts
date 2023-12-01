@@ -35,5 +35,5 @@ export const MESSAGES = {
 	"categories.title": "التصفية حسب التصنيف",
 	"categories.all": "جميع الأقسام",
 
-	"navbar.add": "أضف مُنتّج أو شركة"
+	"navbar.add": "أضف مُنتّج أو شركة",
 } as const;

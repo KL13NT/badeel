@@ -8,7 +8,7 @@
 		"prebuild": "run-p lint check",
 		"build": "vite build",
 		"preview": "vite preview --host --port 3000",
-		"lint": "eslint --ext .js,.ts src",
+		"lint": "eslint --ext .tsx,.ts src",
 		"check": "prettier src/**/*.{css,ts} --check",
 		"tsc": "tsc --noEmit"
 	},
