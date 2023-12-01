@@ -30,6 +30,16 @@ export default function Acknowledgments() {
 							</a>
 						</li>
 						<li>
+							<a href="https://www.facebook.com/youssef.sayed.9887117">
+								يوسف سيد (تجميع البيانات)
+							</a>
+						</li>
+						<li>
+							<a href="https://www.facebook.com/N1ffler">
+								محمد شعراوي (تجميع البيانات)
+							</a>
+						</li>
+						<li>
 							<a href="https://www.facebook.com/hagar.abduzaher">
 								هاجر عبدالظاهر (تجميع البيانات)
 							</a>
