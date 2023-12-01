@@ -61,7 +61,7 @@ function App() {
 
 			updateParams({
 				query: undefined,
-				major: (major ?? params.major) as string,
+				major: (major?.english ?? params.major) as string,
 				sub: category,
 			});
 		}
