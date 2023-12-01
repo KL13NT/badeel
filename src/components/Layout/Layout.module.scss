@@ -73,6 +73,7 @@
 		flex-direction: column;
 		align-items: flex-start;
 		padding: 0;
+		transition: transform 0.2s ease-out;
 
 		position: fixed;
 		width: 100%;
