@@ -23,3 +23,9 @@
 		opacity: 1;
 	}
 }
+
+@media screen and (max-width: 700px) {
+	.typewriter {
+		max-width: auto;
+	}
+}

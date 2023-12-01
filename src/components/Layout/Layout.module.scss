@@ -6,9 +6,20 @@
 
 	border-bottom: 1px solid var(--c-stroke-gray, #403f36);
 
-	img {
-		height: 50px;
+	> div:first-of-type {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
 	}
+}
+
+.upper {
+	display: flex;
+	align-items: center;
+}
+
+.logo {
+	height: 50px;
 }
 
 .right {
@@ -30,4 +41,43 @@
 .main {
 	max-width: 1920px;
 	margin-inline: auto;
+}
+
+.mobileFilter {
+	display: none;
+}
+
+@media screen and (max-width: 700px) {
+	.main {
+		max-width: 100%;
+		width: 100%;
+	}
+
+	.mobileFilter {
+		display: block;
+		border-top: 1px solid var(--c-stroke-gray, #403f36);
+		width: 100%;
+	}
+
+	.desktopFilter {
+		display: none;
+	}
+
+	.navbar {
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 0;
+
+		> div:first-of-type {
+			padding: 16px;
+		}
+	}
+
+	.add {
+		padding: 8px 16px;
+	}
+
+	.logo {
+		height: 40px;
+	}
 }

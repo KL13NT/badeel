@@ -10,6 +10,7 @@ import HandshakeIcon from "~assets/icons/handshake.svg?component-solid";
 import styles from "./Layout.module.scss";
 
 import logo from "~assets/icons/logo.svg";
+import t from "~utils/messages";
 
 interface Props {
 	children: JSX.Element;
@@ -19,22 +20,30 @@ export default function Layout(props: Props) {
 	return (
 		<>
 			<nav class={styles.navbar}>
-				<div class={styles.right}>
-					<img src={logo} alt="" role="presentation" />
+				<div class={styles.upper}>
+					<div class={styles.right}>
+						<img src={logo} class={styles.logo} alt="" role="presentation" />
 
-					<NavigationFilter />
+						<div class={styles.desktopFilter}>
+							<NavigationFilter />
+						</div>
+					</div>
+
+					<div class={styles.left}>
+						<Button
+							as="a"
+							href={SUBMIT_PRODUCT_FORM}
+							class={styles.add}
+							variant="danger"
+						>
+							<HandshakeIcon />
+							{t("navbar.add")}
+						</Button>
+					</div>
 				</div>
 
-				<div class={styles.left}>
-					<Button
-						as="a"
-						href={SUBMIT_PRODUCT_FORM}
-						class={styles.add}
-						variant="danger"
-					>
-						<HandshakeIcon />
-						أضف منتج أو شركة
-					</Button>
+				<div class={styles.mobileFilter}>
+					<NavigationFilter />
 				</div>
 			</nav>
 

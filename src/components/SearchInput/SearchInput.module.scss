@@ -74,3 +74,9 @@
 	position: absolute;
 	left: 4px;
 }
+
+@media screen and (max-width: 700px) {
+	.search {
+		width: 100%;
+	}
+}

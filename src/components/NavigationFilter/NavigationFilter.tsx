@@ -52,9 +52,12 @@ export default function NavigationFilter() {
 				pressed={expanded()}
 				class={styles.toggle}
 			>
-				{selected().title}
+				<span class="t-body">انت الآن تُظهر</span>
 
-				<ArrowIcon stroke="currentColor" />
+				<div class={styles.filterText}>
+					{selected().title}
+					<ArrowIcon stroke="currentColor" />
+				</div>
 			</Toggle>
 
 			<div

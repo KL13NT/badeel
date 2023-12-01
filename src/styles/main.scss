@@ -14,7 +14,7 @@
 	direction: rtl;
 
 	color-scheme: light dark;
-	color: rgba(255, 255, 255);
+	color: var(--c-white);
 	background-color: #242424;
 	font-family: Rubik;
 	background-color: var(--c-bg);
@@ -36,4 +36,10 @@
 	font-family: "29LT Ada Flat", system-ui, Avenir, Helvetica, Arial, sans-serif;
 	font-weight: bold;
 	font-size: 4rem;
+}
+
+@media screen and (max-width: 700px) {
+	.title {
+		font-size: 2.5rem;
+	}
 }
