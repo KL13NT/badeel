@@ -4,7 +4,11 @@ import { delay } from "~utils/common";
 
 import styles from "./TypeWriter.module.scss";
 
+/**
+ * Maximum character length should be 54 (calculated without Tashkeel).
+ */
 const messages = [
+	"قَاوِمْ.. قَاطِعْ.. قَاتِل.",
 	"بِدِّي شَعْرَةً مِنُّه",
 	"روح الروح, هذى روح الروح",
 	"هَي أِمَّي.. بَعْرِفْها مِن شَعْرَهَا",
@@ -68,7 +72,7 @@ export default function TypeWriter() {
 
 	return (
 		<div class={styles.typewriter}>
-			<p class={"title"} ref={textRef} />
+			<p class="title" ref={textRef} />
 		</div>
 	);
 }
