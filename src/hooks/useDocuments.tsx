@@ -115,6 +115,7 @@ export const useDocuments = () => {
 
 	const hasMore = () => filtered().length > page() * itemsPerPage;
 	const paginated = () => filtered().slice(0, page() * itemsPerPage);
+	const total = () => filtered().length;
 
 	return {
 		fuse: fuseRef,
@@ -124,5 +125,6 @@ export const useDocuments = () => {
 		error,
 		showMore,
 		hasMore,
+		total,
 	};
 };

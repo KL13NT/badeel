@@ -40,4 +40,6 @@ export const MESSAGES = {
 	"table.showMore": "تحميل المزيد من المنتجات",
 	"table.end": "لقد وصلت إلى نهاية القائمة.",
 	"footer.ack": "شكر وتقدير لكل من ساهم في هذا المشروع.",
+
+	of: "من أصل",
 } as const;

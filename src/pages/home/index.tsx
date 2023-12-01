@@ -21,7 +21,7 @@ let searchThrottleTimeout: number | number = 0;
 
 function App() {
 	const { params, updateParams } = useSearchQuery();
-	const { search, results, categories, error, hasMore, showMore } =
+	const { search, results, categories, error, total, hasMore, showMore } =
 		useDocuments();
 	const [, setProductModal] = useProductModal();
 
@@ -94,6 +94,7 @@ function App() {
 					<Table
 						products={results()}
 						categories={categories()}
+						total={total()}
 						showProof={showProof}
 						handleMajorCategoryChange={handleMajorCategoryChange}
 						handleSubCategoryChange={handleSubCategoryChange}

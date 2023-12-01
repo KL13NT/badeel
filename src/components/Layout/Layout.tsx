@@ -33,6 +33,7 @@ export default function Layout(props: Props) {
 							as="a"
 							href={SUBMIT_PRODUCT_FORM}
 							class={styles.add}
+							target="_blank"
 							variant="danger"
 						>
 							<HandshakeIcon />
