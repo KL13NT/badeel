@@ -39,7 +39,7 @@ export default defineConfig({
 								ignoreSearch: true,
 							},
 							cacheableResponse: {
-								statuses: [0, 200, 302],
+								statuses: [0, 200, 302, 307],
 							},
 						},
 					},
