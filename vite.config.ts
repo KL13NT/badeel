@@ -41,10 +41,6 @@ export default defineConfig({
 						handler: "StaleWhileRevalidate",
 						options: {
 							cacheName: "static-font-assets",
-							expiration: {
-								maxEntries: 4,
-								maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
-							},
 						},
 					},
 					{
@@ -105,18 +101,6 @@ export default defineConfig({
 						},
 					},
 					{
-						urlPattern: /.*/i,
-						handler: "NetworkFirst",
-						options: {
-							cacheName: "others",
-							expiration: {
-								maxEntries: 32,
-								maxAgeSeconds: 24 * 60 * 60, // 24 hours
-							},
-							networkTimeoutSeconds: 10,
-						},
-					},
-					{
 						urlPattern: /(google)|(gstatic)/gi,
 						handler: "StaleWhileRevalidate",
 						options: {
@@ -132,6 +116,18 @@ export default defineConfig({
 							cacheableResponse: {
 								statuses: [0, 200, 302, 307],
 							},
+						},
+					},
+					{
+						urlPattern: /.*/i,
+						handler: "NetworkFirst",
+						options: {
+							cacheName: "others",
+							expiration: {
+								maxEntries: 32,
+								maxAgeSeconds: 24 * 60 * 60, // 24 hours
+							},
+							networkTimeoutSeconds: 10,
 						},
 					},
 				],
