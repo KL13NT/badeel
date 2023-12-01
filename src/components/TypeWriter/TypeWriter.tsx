@@ -1,8 +1,8 @@
 import { onMount } from "solid-js";
 
-import styles from "./TypeWriter.module.scss";
-import clsx from "clsx";
 import { delay } from "~utils/common";
+
+import styles from "./TypeWriter.module.scss";
 
 const messages = [
 	"بِدِّي شَعْرَةً مِنُّه",
@@ -66,5 +66,9 @@ export default function TypeWriter() {
 		start();
 	});
 
-	return <p class={clsx(styles.typewriter, "title")} ref={textRef} />;
+	return (
+		<div class={styles.typewriter}>
+			<p class={"title"} ref={textRef} />
+		</div>
+	);
 }
