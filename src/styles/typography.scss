@@ -11,3 +11,15 @@
 	font-weight: 400;
 	font-style: normal;
 }
+
+.title {
+	font-family: "29LT Ada Flat", system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	font-size: 4rem;
+}
+
+@media screen and (max-width: 700px) {
+	.title {
+		font-size: 2rem;
+	}
+}
