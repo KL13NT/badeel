@@ -69,7 +69,7 @@
 	}
 
 	&[aria-pressed="true"] > span {
-		color: var(--c-stroke-gray, #b8b7ad);
+		color: var(--c-white-accent, #b8b7ad);
 	}
 
 	&[aria-pressed="true"] .filterText {
@@ -87,22 +87,11 @@
 	align-items: center;
 	gap: var(--s-1);
 	color: var(--c-white);
-	font-size: 16px;
+	font-size: 1rem;
 	font-weight: 500;
 }
 
 @media screen and (max-width: 700px) {
-	.navigationFilter {
-		padding: 12px 16px;
-		background: #222;
-		flex-direction: column;
-		gap: 0;
-
-		> p {
-			display: none;
-		}
-	}
-
 	.toggle {
 		border: none;
 		width: 100%;
@@ -114,6 +103,33 @@
 
 		&[aria-pressed="true"] svg {
 			transform: rotate(180deg);
+		}
+	}
+
+	.navigationFilter {
+		padding: 12px 16px;
+		background: transparent;
+		flex-direction: column;
+		gap: 0;
+		background: #222;
+
+		> p {
+			display: none;
+		}
+
+		> .activator {
+			width: 100%;
+			justify-content: space-between;
+			border: 1px solid var(--c-stroke-gray, #403f36);
+			background: transparent;
+
+			&[aria-pressed="true"] {
+				background: var(--c-white);
+
+				> span {
+					color: var(--c-dark-gray, #1f1f1f);
+				}
+			}
 		}
 	}
 

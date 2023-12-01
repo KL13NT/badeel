@@ -10,6 +10,7 @@ import styles from "./NavigationFilter.module.scss";
 import ArrowIcon from "~assets/icons/arrow-down.svg?component-solid";
 import { STATUS_FILTER_OPTIONS } from "~constants/filters";
 import { useSearchQuery } from "~hooks/useSearchQuery";
+import clsx from "clsx";
 
 interface Option {
 	key: Filter;
@@ -50,7 +51,7 @@ export default function NavigationFilter() {
 				onChange={toggleMenu}
 				aria-haspopup="menu"
 				pressed={expanded()}
-				class={styles.toggle}
+				class={clsx(styles.toggle, styles.activator)}
 			>
 				<span class="t-body">انت الآن تُظهر</span>
 
