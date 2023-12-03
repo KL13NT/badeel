@@ -11,7 +11,7 @@ import { Product } from "~types";
 
 import styles from "./index.module.scss";
 import ProductModal from "~components/ProductModal/ProductModal";
-import Table from "~components/Table/Table";
+import Table, { TableSkeleton } from "~components/Table/Table";
 import Filters from "~components/Filters/Filters";
 import { A } from "@solidjs/router";
 import Button from "~components/Button/Button";
@@ -21,8 +21,16 @@ let searchThrottleTimeout: number | number = 0;
 
 function App() {
 	const { params, updateParams } = useSearchQuery();
-	const { search, results, categories, error, total, hasMore, showMore } =
-		useDocuments();
+	const {
+		search,
+		results,
+		categories,
+		error,
+		loading,
+		total,
+		hasMore,
+		showMore,
+	} = useDocuments();
 	const [, setProductModal] = useProductModal();
 
 	const handleSubmit = (query: string) => {
@@ -90,7 +98,7 @@ function App() {
 					/>
 				) : null}
 
-				{results() ? (
+				{results() && !loading() ? (
 					<Table
 						products={results()}
 						categories={categories()}
@@ -100,7 +108,7 @@ function App() {
 						handleSubCategoryChange={handleSubCategoryChange}
 					/>
 				) : (
-					<p>Loading</p>
+					<TableSkeleton />
 				)}
 
 				<div class={styles.footer}>

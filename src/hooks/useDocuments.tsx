@@ -22,6 +22,7 @@ export const useDocuments = () => {
 	const [fuseRef, setFuseRef] = createSignal<Fuse<Product> | null>(null);
 	const [categories, setCategories] = createSignal<Category[]>([]);
 	const [error, setError] = createSignal(false);
+	const [loading, setLoading] = createSignal(true);
 
 	const search = (query?: string) => {
 		const actual = query ?? params.query ?? "";
@@ -88,13 +89,17 @@ export const useDocuments = () => {
 			batch(() => {
 				setCategories(categories);
 				setFuseRef(productFuse);
+				setLoading(false);
 			});
 
 			if (params.query) {
 				search(params.query);
 			}
 		} catch (error) {
-			setError(true);
+			batch(() => {
+				setError(true);
+				setLoading(false);
+			});
 		}
 	});
 
@@ -130,5 +135,6 @@ export const useDocuments = () => {
 		showMore,
 		hasMore,
 		total,
+		loading,
 	};
 };
