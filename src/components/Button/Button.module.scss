@@ -14,6 +14,10 @@
 	align-items: center;
 	width: fit-content;
 
+	transition:
+		background-color 0.2s ease-in-out,
+		color 0.2s ease-in-out;
+
 	&:hover {
 		background-color: var(--c-white-translucent);
 	}
@@ -21,6 +25,9 @@
 
 .danger {
 	border-color: var(--c-action);
+	&:hover {
+		background-color: var(--c-action-translucent);
+	}
 }
 
 .action {
