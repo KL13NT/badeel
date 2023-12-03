@@ -26,12 +26,14 @@
 		z-index: 1;
 
 		&:hover {
-			--indent-size: 1rem;
-			td:first-child {
-				padding-inline-start: var(--indent-size);
-			}
-			td:last-child {
-				padding-inline-end: var(--indent-size);
+			@media screen and (min-width: 1280px) {
+				--indent-size: 1rem;
+				td:first-child {
+					padding-inline-start: var(--indent-size);
+				}
+				td:last-child {
+					padding-inline-end: var(--indent-size);
+				}
 			}
 		}
 
@@ -50,6 +52,10 @@
 			transition:
 				transform 0.3s ease-out,
 				opacity 0.2s linear;
+
+			@media screen and (max-width: 1090px) {
+				display: none;
+			}
 
 			@media (prefers-reduced-motion) {
 				transition:
