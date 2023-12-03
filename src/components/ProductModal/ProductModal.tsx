@@ -1,5 +1,5 @@
 import { useProductModal } from "~stores/product-modal";
-import { Show, createEffect } from "solid-js";
+import { Show, batch, createEffect } from "solid-js";
 import Button from "~components/Button/Button";
 import t from "~utils/messages";
 import { Transition } from "solid-transition-group";
@@ -9,6 +9,8 @@ import clsx from "clsx";
 import Badge from "~components/Badge/Badge";
 import { Product, Status } from "~types";
 import { UNSURE_SOURCE_URL } from "~constants/documents";
+import { useSearchQuery } from "~hooks/useSearchQuery";
+import { getCategoryMajor } from "~utils/categories";
 
 const getCellURL = (ref: number) => `${UNSURE_SOURCE_URL}&range=A${ref}`;
 
@@ -60,15 +62,26 @@ const Proof = (props: Props) => {
 	);
 };
 
-const FooterActions = (props: Props) => {
+interface FooterActionsProps {
+	product: Product;
+	showAlternatives: () => void;
+}
+
+const FooterActions = (props: FooterActionsProps) => {
 	return (
 		<>
+			{props.product.status === "boycott" ? (
+				<Button variant="action" onClick={props.showAlternatives}>
+					عرض البدائل
+				</Button>
+			) : null}
+
 			{props.product.status === "boycott" && props.product.Link ? (
 				<Button
 					as="a"
 					target="_blank"
 					href={props.product.Link}
-					variant="action"
+					variant="action-invert"
 				>
 					عرض الدليل
 				</Button>
@@ -102,6 +115,7 @@ const FooterActions = (props: Props) => {
 let ref: HTMLDivElement | undefined;
 export default function ProductModal() {
 	const [productModal, setProductModal] = useProductModal();
+	const { params, updateParams } = useSearchQuery();
 
 	const close = () => {
 		setProductModal({
@@ -113,6 +127,26 @@ export default function ProductModal() {
 		if (ev.key.toLowerCase() === "escape") {
 			close();
 		}
+	};
+
+	const showAlternatives = () => {
+		if (!productModal.product) return;
+
+		const major = getCategoryMajor(productModal.product?.Category);
+
+		batch(() => {
+			setProductModal({
+				product: null,
+			});
+
+			updateParams({
+				...params,
+				query: undefined,
+				sub: productModal.product?.Category,
+				major: major.english,
+				status: "alternative",
+			});
+		});
 	};
 
 	const product = () => productModal.product!;
@@ -162,7 +196,10 @@ export default function ProductModal() {
 							<Proof product={product()} />
 
 							<div class={styles.footer}>
-								<FooterActions product={product()} />
+								<FooterActions
+									product={product()}
+									showAlternatives={showAlternatives}
+								/>
 								<Button
 									id="close"
 									aria-label="close dialog"

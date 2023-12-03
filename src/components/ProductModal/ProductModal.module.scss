@@ -47,4 +47,15 @@
 	display: flex;
 	align-items: center;
 	gap: var(--s-3);
+	flex-wrap: wrap;
+}
+
+@media screen and (max-width: 700px) {
+	.body {
+		padding: var(--s-3);
+	}
+
+	.dialog {
+		padding-inline: var(--s-1);
+	}
 }
