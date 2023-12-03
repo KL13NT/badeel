@@ -13,6 +13,10 @@
 	justify-content: center;
 	align-items: center;
 	width: fit-content;
+
+	&:hover {
+		background-color: var(--c-white-translucent);
+	}
 }
 
 .danger {
@@ -26,6 +30,9 @@
 
 .action-invert {
 	border: 1px solid var(--c-action);
+	&:hover {
+		background-color: var(--c-action-translucent);
+	}
 }
 
 @media screen and (max-width: 700px) {
