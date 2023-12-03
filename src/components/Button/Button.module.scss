@@ -13,6 +13,10 @@
 	justify-content: center;
 	align-items: center;
 	width: fit-content;
+
+	&:hover {
+		background-color: var(--c-white-translucent);
+	}
 }
 
 .danger {
@@ -20,12 +24,29 @@
 }
 
 .action {
-	background: linear-gradient(244deg, #ec543f 0%, #b75328 100%);
+	--from: #ec543f;
+	--to: #b75328;
+	background: linear-gradient(
+		244deg,
+		var(--from) 0%,
+		var(--to) 50%,
+		var(--from) 100%
+	);
+	background-size: 200% 100%;
+	background-position: 100%;
 	border: none;
+	transition: background-position 0.4s ease-out;
+
+	&:hover {
+		background-position: 0%;
+	}
 }
 
 .action-invert {
 	border: 1px solid var(--c-action);
+	&:hover {
+		background-color: var(--c-action-translucent);
+	}
 }
 
 @media screen and (max-width: 700px) {
