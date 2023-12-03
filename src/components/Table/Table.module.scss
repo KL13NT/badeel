@@ -26,12 +26,14 @@
 		z-index: 1;
 
 		&:hover {
-			--indent-size: 1rem;
-			td:first-child {
-				padding-inline-start: var(--indent-size);
-			}
-			td:last-child {
-				padding-inline-end: var(--indent-size);
+			@media screen and (min-width: 1280px) {
+				--indent-size: 1rem;
+				td:first-child {
+					padding-inline-start: var(--indent-size);
+				}
+				td:last-child {
+					padding-inline-end: var(--indent-size);
+				}
 			}
 		}
 
@@ -48,13 +50,17 @@
 			opacity: var(--opacity);
 			pointer-events: none;
 			transition:
-				transform 0.3s ease-out,
+				transform 0.4s cubic-bezier(0.4, -0.01, 0.18, 0.99),
 				opacity 0.2s linear;
+
+			@media screen and (max-width: 1090px) {
+				display: none;
+			}
 
 			@media (prefers-reduced-motion) {
 				transition:
-					transform 0 ease-out,
-					opacity 0 linear;
+					transform 0s,
+					opacity 0s;
 			}
 		}
 	}
@@ -63,7 +69,7 @@
 		vertical-align: middle;
 		transition: padding 0.3s ease-out;
 		@media (prefers-reduced-motion) {
-			transition: padding 0 ease-out;
+			transition: padding 0s;
 		}
 	}
 
