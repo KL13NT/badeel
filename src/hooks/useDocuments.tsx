@@ -46,6 +46,7 @@ export const useDocuments = () => {
 				query: actual,
 				major: undefined,
 				sub: undefined,
+				status: "all",
 			});
 			setResults(found);
 		});
@@ -60,15 +61,15 @@ export const useDocuments = () => {
 				mapRequestToParsedCSV<Category[]>(fetch(CATEGORIES_URL)),
 			]);
 
-			const data = boycotted
+			const data = alternatives
 				.map((product) => ({
 					...product,
-					status: "boycott" as Status,
+					status: "alternative" as Status,
 				}))
 				.concat(
-					alternatives.map((product) => ({
+					boycotted.map((product) => ({
 						...product,
-						status: "alternative" as Status,
+						status: "boycott" as Status,
 					}))
 				)
 				.concat(
