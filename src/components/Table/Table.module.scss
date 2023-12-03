@@ -109,3 +109,16 @@
 		top: var(--s-2);
 	}
 }
+
+.rowSkeleton {
+	overflow: hidden;
+
+	> td {
+		border-radius: 40px;
+	}
+}
+
+.tableSkeleton {
+	border-collapse: separate;
+	border-spacing: 10px;
+}

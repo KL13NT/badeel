@@ -11,6 +11,7 @@ import Badge from "~components/Badge/Badge";
 import { TransitionGroup } from "solid-transition-group";
 
 import styles from "./Table.module.scss";
+import Skeleton from "~components/Skeleton/Skeleton";
 
 interface Props {
 	products: Product[];
@@ -82,6 +83,46 @@ export default function Table(props: Props) {
 												<span>عرض المزيد</span>
 											</Button>
 										</td>
+									</tr>
+								);
+							}}
+						</For>
+					</TransitionGroup>
+				</tbody>
+			</table>
+		</div>
+	);
+}
+
+export function TableSkeleton() {
+	return (
+		<div class={styles.container}>
+			<div class={clsx("t-button", styles.intro)}>
+				<p>
+					{t("show")} <span class="t-body">{localizeNumber(20)}</span>{" "}
+					{t("product")} {t("of")}{" "}
+					<span class="t-body">{localizeNumber(20)}</span> {t("product")}
+				</p>
+				<div />
+			</div>
+			<table class={clsx(styles.table, styles.tableSkeleton)}>
+				<thead>
+					<tr>
+						<th>{t("table.name")}</th>
+						<th>{t("table.englishName")}</th>
+						<th>{t("table.category")}</th>
+						<th>{t("table.status")}</th>
+						<th />
+					</tr>
+				</thead>
+
+				<tbody>
+					<TransitionGroup name="slide-fade-table">
+						<For each={new Array(20).fill(null)}>
+							{() => {
+								return (
+									<tr>
+										<Skeleton as="td" colspan="10" class={styles.rowSkeleton} />
 									</tr>
 								);
 							}}
