@@ -10,6 +10,7 @@ import { getParentCategory, getProductCategory } from "~utils/categories";
 import Badge from "~components/Badge/Badge";
 
 import styles from "./Table.module.scss";
+import { Transition, TransitionGroup } from "solid-transition-group";
 
 interface Props {
 	products: Product[];
@@ -45,45 +46,47 @@ export default function Table(props: Props) {
 				</thead>
 
 				<tbody>
-					<For each={props.products}>
-						{(result) => {
-							return (
-								<tr>
-									<td dir="auto">{result.Name}</td>
-									<td dir="auto">{result["English Name"]}</td>
-									<td class={styles.category}>
-										<div>
+					<TransitionGroup name="slide-fade-table">
+						<For each={props.products}>
+							{(result) => {
+								return (
+									<tr>
+										<td dir="auto">{result.Name}</td>
+										<td dir="auto">{result["English Name"]}</td>
+										<td class={styles.category}>
+											<div>
+												<Button
+													data-category={result.Category}
+													onClick={[props.handleSubCategoryChange, true]}
+												>
+													{getProductCategory(result).arabic}
+												</Button>
+												<Button
+													data-category={getParentCategory(result).english}
+													onClick={[props.handleMajorCategoryChange, true]}
+												>
+													{getParentCategory(result).arabic}
+												</Button>
+											</div>
+										</td>
+										<td dir="auto">
+											<Badge variant={result.status}>
+												{STATUS_TITLE_MAPPING[result.status]}
+											</Badge>
+										</td>
+										<td>
 											<Button
-												data-category={result.Category}
-												onClick={[props.handleSubCategoryChange, true]}
+												onClick={[props.showProof, result]}
+												class={styles.details}
 											>
-												{getProductCategory(result).arabic}
+												<span>عرض المزيد</span>
 											</Button>
-											<Button
-												data-category={getParentCategory(result).english}
-												onClick={[props.handleMajorCategoryChange, true]}
-											>
-												{getParentCategory(result).arabic}
-											</Button>
-										</div>
-									</td>
-									<td dir="auto">
-										<Badge variant={result.status}>
-											{STATUS_TITLE_MAPPING[result.status]}
-										</Badge>
-									</td>
-									<td>
-										<Button
-											onClick={[props.showProof, result]}
-											class={styles.details}
-										>
-											<span>عرض المزيد</span>
-										</Button>
-									</td>
-								</tr>
-							);
-						}}
-					</For>
+										</td>
+									</tr>
+								);
+							}}
+						</For>
+					</TransitionGroup>
 				</tbody>
 			</table>
 		</div>

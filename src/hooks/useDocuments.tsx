@@ -13,7 +13,7 @@ import { generateCategoryMap } from "~utils/categories";
 import { filterProducts, filterResults } from "~utils/filters";
 
 let productFuse: null | Fuse<Product> = null;
-const itemsPerPage = 50;
+const itemsPerPage = 20;
 
 export const useDocuments = () => {
 	const { params, updateParams } = useSearchQuery();
