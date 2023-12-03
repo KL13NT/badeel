@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { For } from "solid-js";
+import { For, createSignal } from "solid-js";
 
 import { Category, Product } from "~types";
 import { STATUS_TITLE_MAPPING } from "~constants/filters";
@@ -23,6 +23,25 @@ interface Props {
 }
 
 export default function Table(props: Props) {
+	const [indicatorOpacity, setIndicatorOpacity] = createSignal(0);
+	const [activeRowIndex, setActiveRowIndex] = createSignal(0);
+
+	const mouseMoveHandler = (e: MouseEvent) => {
+		const target = e.target as HTMLElement;
+		const row = target.closest("tr");
+		const rowIndex = row?.dataset.rowIndex && Number(row.dataset.rowIndex);
+		if (typeof rowIndex !== "number" || Number.isNaN(rowIndex)) return;
+		setActiveRowIndex(rowIndex);
+	};
+
+	const mouseEnterHandler = () => {
+		setIndicatorOpacity(1);
+	};
+
+	const mouseLeaveHandler = () => {
+		setIndicatorOpacity(0);
+	};
+
 	return (
 		<div class={styles.container}>
 			<div class={clsx("t-button", styles.intro)}>
@@ -46,12 +65,24 @@ export default function Table(props: Props) {
 					</tr>
 				</thead>
 
-				<tbody>
+				<tbody
+					onMouseMove={mouseMoveHandler}
+					onMouseEnter={mouseEnterHandler}
+					onMouseLeave={mouseLeaveHandler}
+				>
+					<tr
+						class={styles.hoverIndicator}
+						style={{
+							"--opacity": indicatorOpacity(),
+							"--active-row-index": activeRowIndex() + 1,
+						}}
+						aria-hidden
+					/>
 					<TransitionGroup name="slide-fade-table">
 						<For each={props.products}>
-							{(result) => {
+							{(result, index) => {
 								return (
-									<tr>
+									<tr data-row-index={index()}>
 										<td dir="auto">{result.Name}</td>
 										<td dir="auto">{result["English Name"]}</td>
 										<td class={styles.category}>

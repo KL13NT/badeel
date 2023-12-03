@@ -1,8 +1,10 @@
 .table {
+	--row-height: 64px;
 	width: 100%;
 	table-layout: fixed;
 	text-align: right;
 	border-collapse: collapse;
+	position: relative;
 
 	th {
 		width: 20%;
@@ -19,11 +21,50 @@
 
 	tr {
 		border-bottom: 1px solid var(--c-stroke-gray, #403f36);
-		height: 64px;
+		height: var(--row-height);
+		position: relative;
+		z-index: 1;
+
+		&:hover {
+			--indent-size: 1rem;
+			td:first-child {
+				padding-inline-start: var(--indent-size);
+			}
+			td:last-child {
+				padding-inline-end: var(--indent-size);
+			}
+		}
+
+		&.hoverIndicator {
+			--active-row-index: 1;
+			--opacity: 1;
+			border-color: transparent;
+			position: absolute;
+			background-color: #00000033;
+			top: 0;
+			left: 0;
+			right: 0;
+			transform: translateY(calc(var(--active-row-index) * 100%));
+			opacity: var(--opacity);
+			pointer-events: none;
+			transition:
+				transform 0.3s ease-out,
+				opacity 0.2s linear;
+
+			@media (prefers-reduced-motion) {
+				transition:
+					transform 0 ease-out,
+					opacity 0 linear;
+			}
+		}
 	}
 
 	td {
 		vertical-align: middle;
+		transition: padding 0.3s ease-out;
+		@media (prefers-reduced-motion) {
+			transition: padding 0 ease-out;
+		}
 	}
 
 	tr td:last-of-type {
