@@ -6,7 +6,7 @@ import { STATUS_TITLE_MAPPING } from "~constants/filters";
 import Button from "~components/Button/Button";
 import { localizeNumber } from "~utils/common";
 import t from "~utils/messages";
-import { getParentCategory, getProductCategory } from "~utils/categories";
+import { getProductCategory } from "~utils/categories";
 import Badge from "~components/Badge/Badge";
 import { TransitionGroup } from "solid-transition-group";
 
@@ -92,12 +92,6 @@ export default function Table(props: Props) {
 													onClick={[props.handleSubCategoryChange, true]}
 												>
 													{getProductCategory(result).arabic}
-												</Button>
-												<Button
-													data-category={getParentCategory(result).english}
-													onClick={[props.handleMajorCategoryChange, true]}
-												>
-													{getParentCategory(result).arabic}
 												</Button>
 											</div>
 										</td>
