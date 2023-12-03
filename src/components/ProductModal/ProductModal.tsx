@@ -16,6 +16,10 @@ const getCellURL = (ref: number) => `${UNSURE_SOURCE_URL}&range=A${ref}`;
 
 const proofMapping = {
 	Arab: t("proof.content.arab"),
+	Israeli: t("proof.content.israeli"),
+	Emirati: t("proof.content.emirati"),
+	Saudi: t("proof.content.saudi"),
+	Kuwaiti: t("proof.content.kuwaiti"),
 	Supporter: t("proof.content.supporter"),
 	Foreign: t("proof.content.foreign"),
 };
@@ -135,16 +139,16 @@ export default function ProductModal() {
 		const major = getCategoryMajor(productModal.product?.Category);
 
 		batch(() => {
-			setProductModal({
-				product: null,
-			});
-
 			updateParams({
 				...params,
 				query: undefined,
 				sub: productModal.product?.Category,
 				major: major.english,
 				status: "alternative",
+			});
+
+			setProductModal({
+				product: null,
 			});
 		});
 	};
