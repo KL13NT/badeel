@@ -57,20 +57,30 @@ function App() {
 				major: category,
 				sub: undefined,
 			});
+		} else {
+			updateParams({
+				query: undefined,
+				major: undefined,
+				sub: undefined,
+			});
 		}
 	};
 
 	const handleSubCategoryChange = (enabled: boolean, ev: MouseEvent) => {
 		const target = ev.target as HTMLButtonElement;
 		const category = target.dataset.category!;
-
+		const major = category === "all" ? undefined : getCategoryMajor(category);
 		if (enabled) {
-			const major = category === "all" ? undefined : getCategoryMajor(category);
-
 			updateParams({
 				query: undefined,
 				major: (major?.english ?? params.major) as string,
 				sub: category,
+			});
+		} else {
+			updateParams({
+				query: undefined,
+				major: (major?.english ?? params.major) as string,
+				sub: undefined,
 			});
 		}
 	};
