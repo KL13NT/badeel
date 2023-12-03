@@ -8,9 +8,9 @@ import { localizeNumber } from "~utils/common";
 import t from "~utils/messages";
 import { getParentCategory, getProductCategory } from "~utils/categories";
 import Badge from "~components/Badge/Badge";
+import { TransitionGroup } from "solid-transition-group";
 
 import styles from "./Table.module.scss";
-import { Transition, TransitionGroup } from "solid-transition-group";
 
 interface Props {
 	products: Product[];
