@@ -11,6 +11,7 @@ import styles from "./Layout.module.scss";
 import logo from "~assets/icons/logo.svg";
 import t from "~utils/messages";
 import { onMount } from "solid-js";
+import { A } from "@solidjs/router";
 
 interface Props {
 	children: JSX.Element;
@@ -78,7 +79,9 @@ export default function Layout(props: Props) {
 			<nav class={styles.navbar} ref={headerRef}>
 				<div class={styles.upper}>
 					<div class={styles.right}>
-						<img src={logo} class={styles.logo} alt="" role="presentation" />
+						<A href="/">
+							<img src={logo} class={styles.logo} alt="" role="presentation" />
+						</A>
 
 						<div class={styles.desktopFilter}>
 							<NavigationFilter />

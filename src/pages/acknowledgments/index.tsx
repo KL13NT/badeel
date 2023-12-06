@@ -13,20 +13,25 @@ export default function Acknowledgments() {
 					<ul>
 						<li>
 							<a href="https://github.com/nightmodd">
-								مصطفى إسماعيل (الفكرة, تجميع البيانات)
+								مصطفى إسماعيل (الفكرة، تجميع البيانات)
 							</a>
 						</li>
 						<li>
 							<a>بسمله إسماعيل (تجميع البيانات)</a>
 						</li>
 						<li>
+							<a href="https://iamnabil.netlify.app/">
+								نبيل ثروت (إدارة المشروع)
+							</a>
+						</li>
+						<li>
 							<a href="https://karimshalapy.github.io/">
-								كريم شلبي (الفكرة, البرمجة)
+								كريم شلبي (الفكرة، البرمجة)
 							</a>
 						</li>
 						<li>
 							<a href="https://github.com/omarabdelaz1z">
-								عمر عبدالعزيز (الفكرة, تجهيز البيانات)
+								عمر عبدالعزيز (الفكرة، تجهيز البيانات)
 							</a>
 						</li>
 						<li>
