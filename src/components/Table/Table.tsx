@@ -1,9 +1,10 @@
 import clsx from "clsx";
-import { For, createSignal } from "solid-js";
+import { For, Show, createSignal } from "solid-js";
 
 import { Category, Product } from "~types";
 import { STATUS_TITLE_MAPPING } from "~constants/filters";
 import Button from "~components/Button/Button";
+import EmptySearchResult from "~components/EmptySearchResult/EmptySearchResult";
 import { localizeNumber } from "~utils/common";
 import t from "~utils/messages";
 import { getProductCategory } from "~utils/categories";
@@ -43,79 +44,84 @@ export default function Table(props: Props) {
 	};
 
 	return (
-		<div class={styles.container}>
-			<div class={clsx("t-button", styles.intro)}>
-				<p>
-					{t("show")}{" "}
-					<span class="t-body">{localizeNumber(props.products.length)}</span>{" "}
-					{t("product")} {t("of")}{" "}
-					<span class="t-body">{localizeNumber(props.total)}</span>{" "}
-					{t("product")}
-				</p>
-				<div />
-			</div>
-			<table class={styles.table}>
-				<thead>
-					<tr>
-						<th>{t("table.name")}</th>
-						<th>{t("table.englishName")}</th>
-						<th>{t("table.category")}</th>
-						<th>{t("table.status")}</th>
-						<th />
-					</tr>
-				</thead>
+		<Show
+			when={props.products.length!!}
+			fallback={<EmptySearchResult></EmptySearchResult>}
+		>
+			<div class={styles.container}>
+				<div class={clsx("t-button", styles.intro)}>
+					<p>
+						{t("show")}{" "}
+						<span class="t-body">{localizeNumber(props.products.length)}</span>{" "}
+						{t("product")} {t("of")}{" "}
+						<span class="t-body">{localizeNumber(props.total)}</span>{" "}
+						{t("product")}
+					</p>
+					<div />
+				</div>
+				<table class={styles.table}>
+					<thead>
+						<tr>
+							<th>{t("table.name")}</th>
+							<th>{t("table.englishName")}</th>
+							<th>{t("table.category")}</th>
+							<th>{t("table.status")}</th>
+							<th />
+						</tr>
+					</thead>
 
-				<tbody
-					onMouseMove={mouseMoveHandler}
-					onMouseEnter={mouseEnterHandler}
-					onMouseLeave={mouseLeaveHandler}
-				>
-					<tr
-						class={styles.hoverIndicator}
-						style={{
-							"--opacity": indicatorOpacity(),
-							"--active-row-index": activeRowIndex() + 1,
-						}}
-						aria-hidden
-					/>
-					<TransitionGroup name="slide-fade-table">
-						<For each={props.products}>
-							{(result, index) => {
-								return (
-									<tr data-row-index={index()}>
-										<td dir="auto">{result.Name}</td>
-										<td dir="auto">{result["English Name"]}</td>
-										<td class={styles.category}>
-											<div>
-												<Button
-													data-category={result.Category}
-													onClick={[props.handleSubCategoryChange, true]}
-												>
-													{getProductCategory(result).arabic}
-												</Button>
-											</div>
-										</td>
-										<td dir="auto">
-											<Badge variant={result.status}>
-												{STATUS_TITLE_MAPPING[result.status]}
-											</Badge>
-										</td>
-										<td>
-											<Button
-												onClick={[props.showProof, result]}
-												class={styles.details}
-											>
-												<span>عرض المزيد</span>
-											</Button>
-										</td>
-									</tr>
-								);
+					<tbody
+						onMouseMove={mouseMoveHandler}
+						onMouseEnter={mouseEnterHandler}
+						onMouseLeave={mouseLeaveHandler}
+					>
+						<tr
+							class={styles.hoverIndicator}
+							style={{
+								"--opacity": indicatorOpacity(),
+								"--active-row-index": activeRowIndex() + 1,
 							}}
-						</For>
-					</TransitionGroup>
-				</tbody>
-			</table>
-		</div>
+							aria-hidden
+						/>
+						<TransitionGroup name="slide-fade-table">
+							<For each={props.products}>
+								{(result, index) => {
+									return (
+										<tr data-row-index={index()}>
+											<td dir="auto">{result.Name}</td>
+											<td dir="auto">{result["English Name"]}</td>
+											<td class={styles.category}>
+												<div>
+													<Button
+														data-category={result.Category}
+														onClick={[props.handleSubCategoryChange, true]}
+													>
+														{getProductCategory(result).arabic}
+													</Button>
+												</div>
+											</td>
+											<td dir="auto">
+												<Badge variant={result.status}>
+													{STATUS_TITLE_MAPPING[result.status]}
+												</Badge>
+											</td>
+											<td>
+												<Button
+													onClick={[props.showProof, result]}
+													class={styles.details}
+												>
+													<span>عرض المزيد</span>
+												</Button>
+											</td>
+										</tr>
+									);
+								}}
+							</For>
+						</TransitionGroup>
+					</tbody>
+				</table>
+			</div>
+		</Show>
 	);
 }
 

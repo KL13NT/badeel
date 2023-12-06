@@ -1,0 +1,15 @@
+.emptyMessage {
+	font-family: "29LT Ada Flat", system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-weight:lighter ;
+	font-size:3rem;
+	margin: 60px 0;
+}
+
+
+@media screen and (max-width: 700px) {
+
+	.emptyMessage {
+		font-size: 2rem;
+		margin: 40px 0;
+	}
+}
