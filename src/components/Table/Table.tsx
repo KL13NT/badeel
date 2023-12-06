@@ -45,8 +45,8 @@ export default function Table(props: Props) {
 
 	return (
 		<Show
-			when={props.products.length!!}
-			fallback={<EmptySearchResult></EmptySearchResult>}
+			when={props.products.length!}
+			fallback={<EmptySearchResult />}
 		>
 			<div class={styles.container}>
 				<div class={clsx("t-button", styles.intro)}>
