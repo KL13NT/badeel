@@ -124,6 +124,7 @@ export default defineConfig({
 				"apple-touch-icon.png",
 				"mask-icon.svg",
 				"manifest.webmanifest",
+				"og.png",
 			],
 			manifest: {
 				name: "بديل | Badeel",
