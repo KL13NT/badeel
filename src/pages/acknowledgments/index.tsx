@@ -21,7 +21,7 @@ export default function Acknowledgments() {
 						</li>
 						<li>
 							<a href="https://iamnabil.netlify.app/">
-								نبيل ثروت (الفكرة، البرمجة، تجهيز البيانات)
+								نبيل ثروت (إدارة المشروع)
 							</a>
 						</li>
 						<li>
