@@ -4,7 +4,6 @@ import { For, createSignal } from "solid-js";
 import { Category, Product } from "~types";
 import { STATUS_TITLE_MAPPING } from "~constants/filters";
 import Button from "~components/Button/Button";
-import { localizeNumber } from "~utils/common";
 import t from "~utils/messages";
 import { getProductCategory } from "~utils/categories";
 import Badge from "~components/Badge/Badge";
@@ -112,14 +111,6 @@ export default function Table(props: Props) {
 export function TableSkeleton() {
 	return (
 		<div class={styles.container}>
-			<div class={clsx("t-button", styles.intro)}>
-				<p>
-					{t("show")} <span class="t-body">{localizeNumber(20)}</span>{" "}
-					{t("product")} {t("of")}{" "}
-					<span class="t-body">{localizeNumber(20)}</span> {t("product")}
-				</p>
-				<div />
-			</div>
 			<table class={clsx(styles.table, styles.tableSkeleton)}>
 				<thead>
 					<tr>
