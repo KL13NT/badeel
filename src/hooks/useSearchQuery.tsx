@@ -29,10 +29,19 @@ export const useSearchQuery = () => {
 	const status = () =>
 		params.status ? (parse(params.status) as Filter[]) : [];
 
+	const major = () =>
+		(params.major && params.major === "all") || !params.major
+			? undefined
+			: params.major;
+
+	const query = () => params.query;
+
 	return {
 		params,
+		major,
 		sub,
 		status,
+		query,
 		updateParams,
 	};
 };

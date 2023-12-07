@@ -26,7 +26,7 @@ import FilterIcon from "~assets/icons/filter.svg?component-solid";
 let searchThrottleTimeout: number | number = 0;
 
 function App() {
-	const { params, sub, status, updateParams } = useSearchQuery();
+	const { major, sub, status, query, updateParams } = useSearchQuery();
 	const {
 		search,
 		results,
@@ -84,18 +84,18 @@ function App() {
 	const handleSubCategoryChange = (enabled: boolean, ev: MouseEvent) => {
 		const target = ev.target as HTMLButtonElement;
 		const category = target.dataset.category!;
-		const major = category === "all" ? undefined : getCategoryMajor(category);
+		const parent = category === "all" ? undefined : getCategoryMajor(category);
 
 		if (enabled) {
 			updateParams({
 				query: undefined,
-				major: (major?.english ?? params.major) as string,
+				major: (parent?.english ?? major()) as string,
 				sub: JSON.stringify([category]),
 			});
 		} else {
 			updateParams({
 				query: undefined,
-				major: (major?.english ?? params.major) as string,
+				major: (parent?.english ?? major()) as string,
 				sub: undefined,
 			});
 		}
@@ -104,7 +104,7 @@ function App() {
 	const filtersCount = () => {
 		const total = sub().length + status().length;
 
-		if (params.major) return total + 1;
+		if (major()) return total + 1;
 
 		return total;
 	};
@@ -114,7 +114,7 @@ function App() {
 			<div class={styles.intro}>
 				<TypeWriter />
 				<p>قائمة بشركات والمنتجات المطلوب مقاطعتها لدعم القضية الفلسطينية.</p>
-				<SearchInput onSubmit={handleSubmit} value={params.query} />
+				<SearchInput onSubmit={handleSubmit} value={query()} />
 
 				{error() && (
 					<p class="error">
@@ -123,13 +123,13 @@ function App() {
 					</p>
 				)}
 
-				{total() === 0 && params.query && (
+				{total() === 0 && query() && (
 					<p class="error">لم نعثُر على هذا المنتج.</p>
 				)}
 			</div>
 
 			<Transition name="slide-right">
-				<Show when={filtersOpen()}>
+				<Show when={filtersOpen() && !loading()}>
 					<FiltersModal categories={categories()} close={closeFilters} />
 				</Show>
 			</Transition>
@@ -138,9 +138,7 @@ function App() {
 				<Button
 					variant="action-invert"
 					onClick={openFilters}
-					data-active={
-						arrayExists(sub()) || arrayExists(status()) || params.major
-					}
+					data-active={arrayExists(sub()) || arrayExists(status()) || major}
 				>
 					<FilterIcon />
 					{t("filters.activator")}
@@ -150,12 +148,14 @@ function App() {
 				</Button>
 			</div>
 
-			<ActiveFilters
-				categories={categories()}
-				openFilters={openFilters}
-				total={total()}
-				current={results().length}
-			/>
+			<Show when={!loading() && !error()}>
+				<ActiveFilters
+					categories={categories()}
+					openFilters={openFilters}
+					total={total()}
+					current={results().length}
+				/>
+			</Show>
 
 			<section>
 				{results() && !loading() ? (
