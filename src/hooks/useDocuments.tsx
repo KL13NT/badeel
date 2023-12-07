@@ -5,7 +5,7 @@ import {
 	CATEGORIES_URL,
 	UNSURE_URL,
 } from "~constants/documents";
-import { BaseProduct, Category, Product, Status } from "~types";
+import { BaseProduct, Category, FuseIndex, Product, Status } from "~types";
 import { mapRequestToParsedCSV } from "~utils/responses";
 import Fuse, { FuseResult } from "fuse.js";
 import { useSearchQuery } from "./useSearchQuery";
@@ -16,7 +16,7 @@ let productFuse: null | Fuse<Product> = null;
 const itemsPerPage = 20;
 
 export const useDocuments = () => {
-	const { params, status, sub, updateParams } = useSearchQuery();
+	const { params, major, status, sub, updateParams } = useSearchQuery();
 	const [page, setPage] = createSignal(1);
 	const [results, setResults] = createSignal<FuseResult<Product>[]>([]);
 	const [fuseRef, setFuseRef] = createSignal<Fuse<Product> | null>(null);
@@ -106,14 +106,15 @@ export const useDocuments = () => {
 
 	const filtered = createMemo(() => {
 		if (results() && params.query && params.query !== "") {
-			return filterResults(results()!, status(), params.major, sub()).map(
+			return filterResults(results()!, status(), major(), sub()).map(
 				(product) => product.item
 			);
 		}
 
-		const docs = fuseRef()?.getIndex()?.docs ?? [];
+		const index = fuseRef()?.getIndex() as unknown as FuseIndex;
+		const docs = index?.docs ?? [];
 
-		return filterProducts(docs, status(), params.major, sub());
+		return filterProducts(docs, status(), major(), sub());
 	});
 
 	const showMore = () => {

@@ -44,3 +44,7 @@ export interface Category {
 	arabic: string;
 	major?: string;
 }
+
+export interface FuseIndex {
+	docs: Product[];
+}

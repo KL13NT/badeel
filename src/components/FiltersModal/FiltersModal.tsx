@@ -23,9 +23,9 @@ interface Props {
 
 let ref: HTMLDivElement | undefined;
 export default function FiltersModal(props: Props) {
-	const { params, sub, status, updateParams } = useSearchQuery();
+	const { major, sub, status, updateParams } = useSearchQuery();
 	const [state, setState] = createStore({
-		major: params.major,
+		major: major(),
 		sub: sub(),
 		status: status(),
 	});

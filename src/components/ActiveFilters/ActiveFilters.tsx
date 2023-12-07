@@ -21,7 +21,7 @@ interface ActiveFiltersProps {
 }
 
 export default function ActiveFilters(props: ActiveFiltersProps) {
-	const { sub, status, params, updateParams } = useSearchQuery();
+	const { sub, status, query, major, updateParams } = useSearchQuery();
 
 	const handleClearFilter = (filter: string[]) => {
 		const update: Record<string, undefined> = {};
@@ -41,7 +41,7 @@ export default function ActiveFilters(props: ActiveFiltersProps) {
 				<span class="t-body">{localizeNumber(props.total)}</span> {t("product")}
 			</p>
 
-			<Show when={params.query}>
+			<Show when={query()}>
 				<Button
 					variant="default"
 					class={styles.filter}
@@ -49,7 +49,7 @@ export default function ActiveFilters(props: ActiveFiltersProps) {
 					onClick={[handleClearFilter, ["query"]]}
 				>
 					<span>{t("filters.search")}: </span>
-					{params.query}
+					{query()}
 					<CloseIcon />
 				</Button>
 			</Show>
@@ -69,14 +69,14 @@ export default function ActiveFilters(props: ActiveFiltersProps) {
 				</Button>
 			</Show>
 
-			<Show when={params.major && props.categories.length > 0}>
+			<Show when={major() && props.categories.length > 0}>
 				<Button
 					variant="default"
 					class={styles.filter}
 					data-filter="major"
 					onClick={[handleClearFilter, ["major", "sub"]]}
 				>
-					{getCategoryByKey(params.major).arabic}
+					{getCategoryByKey(major() as string).arabic}
 					<CloseIcon />
 				</Button>
 			</Show>
