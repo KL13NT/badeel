@@ -85,6 +85,16 @@ export default function Layout(props: Props) {
 					</div>
 
 					<div class={styles.left}>
+						<a
+							class={styles.feedback}
+							href="https://forms.gle/ELeQ5rtuEVVLipwV9"
+							target="_blank"
+						>
+							{t("navbar.feedback")}
+						</a>
+
+						<div class={styles.separator} />
+
 						<Button
 							as="a"
 							href={SUBMIT_PRODUCT_FORM}
