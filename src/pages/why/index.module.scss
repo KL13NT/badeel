@@ -6,6 +6,7 @@
 	padding-bottom: 150px;
 	font-size: 1.125rem;
 	padding-inline: var(--s-3);
+	max-width: 800px;
 
 	a {
 		text-decoration: none;
@@ -23,6 +24,10 @@
 
 	p {
 		margin-top: var(--s-4);
+	}
+
+	h2 {
+		margin-top: var(--s-7);
 	}
 }
 

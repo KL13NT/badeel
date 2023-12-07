@@ -185,6 +185,7 @@ function App() {
 
 			<section class={styles.ack}>
 				<A href="/acknowledgments">{t("footer.ack")}</A>
+				<A href="/why">{t("footer.why")}</A>
 			</section>
 
 			<Show when={productModal.product || filtersOpen()}>

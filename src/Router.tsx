@@ -3,6 +3,7 @@ import { lazy } from "solid-js";
 import Layout from "~components/Layout/Layout";
 
 const Acknowledgments = lazy(() => import("./pages/acknowledgments"));
+const Why = lazy(() => import("./pages/why"));
 const Home = lazy(() => import("./pages/home/index"));
 
 export default function AppRouter() {
@@ -11,6 +12,7 @@ export default function AppRouter() {
 			<Layout>
 				<Routes>
 					<Route path="/acknowledgments" component={Acknowledgments} />
+					<Route path="/why" component={Why} />
 					<Route path="*" component={Home} />
 				</Routes>
 			</Layout>
