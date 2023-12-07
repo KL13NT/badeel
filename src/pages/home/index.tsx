@@ -85,11 +85,12 @@ function App() {
 		const target = ev.target as HTMLButtonElement;
 		const category = target.dataset.category!;
 		const major = category === "all" ? undefined : getCategoryMajor(category);
+
 		if (enabled) {
 			updateParams({
 				query: undefined,
 				major: (major?.english ?? params.major) as string,
-				sub: category,
+				sub: JSON.stringify([category]),
 			});
 		} else {
 			updateParams({
