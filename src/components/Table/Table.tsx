@@ -44,16 +44,6 @@ export default function Table(props: Props) {
 
 	return (
 		<div class={styles.container}>
-			<div class={clsx("t-button", styles.intro)}>
-				<p>
-					{t("show")}{" "}
-					<span class="t-body">{localizeNumber(props.products.length)}</span>{" "}
-					{t("product")} {t("of")}{" "}
-					<span class="t-body">{localizeNumber(props.total)}</span>{" "}
-					{t("product")}
-				</p>
-				<div />
-			</div>
 			<table class={styles.table}>
 				<thead>
 					<tr>

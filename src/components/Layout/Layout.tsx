@@ -1,6 +1,5 @@
 import { JSX } from "solid-js/jsx-runtime";
 
-import NavigationFilter from "~components/NavigationFilter/NavigationFilter";
 import Button from "~components/Button/Button";
 import { SUBMIT_PRODUCT_FORM } from "~constants/documents";
 
@@ -82,10 +81,6 @@ export default function Layout(props: Props) {
 						<A href="/">
 							<img src={logo} class={styles.logo} alt="" role="presentation" />
 						</A>
-
-						<div class={styles.desktopFilter}>
-							<NavigationFilter />
-						</div>
 					</div>
 
 					<div class={styles.left}>
@@ -100,10 +95,6 @@ export default function Layout(props: Props) {
 							{t("navbar.add")}
 						</Button>
 					</div>
-				</div>
-
-				<div class={styles.mobileFilter}>
-					<NavigationFilter />
 				</div>
 			</nav>
 

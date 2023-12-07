@@ -46,8 +46,40 @@
 	}
 }
 
+.filters {
+	padding-inline: var(--s-5);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: var(--s-5);
+}
+
+.filterCount {
+	display: flex;
+	width: 20px;
+	height: 20px;
+	border-radius: 100%;
+	background: var(--colors-fills-outlines-red, #ff7032);
+	justify-content: center;
+	align-items: center;
+	font-weight: 600;
+
+	color: var(--colors-fills-outlines-black, #1a1a1a);
+}
+
 .ack {
 	margin-top: var(--s-7);
+}
+
+.overlay {
+	position: fixed;
+	background: #00000060;
+	backdrop-filter: blur(2px);
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: var(--z-2);
 }
 
 .footer {

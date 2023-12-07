@@ -1,3 +1,133 @@
 .filtersModal {
-	
+	position: fixed;
+	width: 350px;
+	height: 100%;
+	z-index: var(--z-3);
+
+	background: var(--c-bg);
+	top: 0;
+	right: 0;
+	border-left: 1px solid var(--colors-fills-outlines-gray-3, #393939);
+
+	text-align: right;
+
+	@media screen and (max-width: 700px) {
+		width: 100%;
+		height: 80vh;
+		bottom: 0;
+		top: unset;
+		border-left: none;
+	}
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-block-end: var(--s-3);
+	position: sticky;
+	top: 0;
+	background: var(--c-bg);
+	z-index: var(--z-5);
+	padding: var(--s-3);
+}
+
+.content {
+	overflow: auto;
+	padding-bottom: 100px;
+	max-height: 100vh;
+}
+
+.section {
+	border-top: solid 1px var(--colors-fills-outlines-gray-3, #393939);
+	margin-top: var(--s-3);
+	padding: var(--s-3);
+}
+
+.title {
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--colors-body-1, #efece0);
+	margin-block-end: var(--s-2);
+
+	&[data-active="true"]::after {
+		content: "";
+		display: inline-block;
+		width: 6px;
+		height: 6px;
+		margin-inline-start: var(--s-1);
+		border-radius: 100%;
+		background: var(--colors-fills-outlines-red, #ff7032);
+	}
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	gap: var(--s-4);
+
+	button {
+		cursor: pointer;
+		background-color: transparent;
+		border: none;
+	}
+}
+
+.clear {
+	color: var(--colors-fills-outlines-red, #ff7032);
+	font-size: 1rem;
+	font-weight: 400;
+	text-decoration: underline;
+}
+
+.close {
+	height: 16px;
+	width: 16px;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 100px;
+	display: flex;
+	flex-direction: column;
+	height: fit-content;
+	background: linear-gradient(0deg, #202020 0%, rgba(32, 32, 32, 0) 100%);
+
+	&::before {
+		background: linear-gradient(0deg, #202020 0%, rgba(32, 32, 32, 0) 100%);
+		height: 58px;
+		content: "";
+		display: block;
+	}
+
+	.action {
+		width: 100%;
+		border-radius: 0;
+		font-weight: 600;
+		height: 56px;
+		z-index: var(--z-4);
+
+		&:hover {
+			background: var(--c-bg);
+		}
+
+		> span {
+			color: var(--colors-fills-outlines-red, #ff7032);
+		}
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.action {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+	}
+
+	.content {
+		max-height: 75vh;
+	}
 }
