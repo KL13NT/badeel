@@ -44,6 +44,7 @@
 	display: flex;
 	align-items: center;
 	gap: var(--s-5);
+	flex-wrap: wrap;
 }
 
 .separator {
@@ -113,5 +114,9 @@
 
 	.logo {
 		height: 40px;
+	}
+
+	.separator {
+		display: none;
 	}
 }
