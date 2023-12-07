@@ -11,6 +11,10 @@ export const generateCategoryMap = (categories: Category[]) => {
 	});
 };
 
+export const getCategoryByKey = (key: string) => {
+	return categoryMap[key];
+};
+
 export const getProductCategory = (product: Product) => {
 	const category = categoryMap[product.Category];
 

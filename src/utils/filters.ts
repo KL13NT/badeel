@@ -1,30 +1,31 @@
 import { FuseResult } from "fuse.js";
 import { Filter, Product } from "~types";
 import { getSubCategories } from "./categories";
+import { arrayExists } from "./common";
 
 export const filterProducts = (
 	products: Product[],
-	filter?: Filter,
+	filter: Filter[] = [],
 	major?: string,
-	sub?: string
+	sub: string[] = []
 ) => {
 	let final = products;
 
-	if (filter && filter !== "all") {
-		final = final.filter((product) => product.status === filter);
+	if (arrayExists(filter)) {
+		final = final.filter((result) => filter.includes(result.status));
 	}
 
-	if (sub && sub !== "all") {
-		final = final.filter((product) => product.Category === sub);
+	if (arrayExists(sub)) {
+		final = final.filter((result) => sub.includes(result.Category));
 	}
 
-	if (major && major !== "all" && (!sub || sub === "all")) {
+	if (major && (!sub || sub.length === 0)) {
 		const subCategoriesKeys = getSubCategories(major).map(
 			(category) => category.english
 		);
 
-		return final.filter((product) =>
-			subCategoriesKeys.includes(product.Category)
+		return final.filter((result) =>
+			subCategoriesKeys.includes(result.Category)
 		);
 	}
 
@@ -37,23 +38,21 @@ export const filterProducts = (
  */
 export const filterResults = (
 	results: FuseResult<Product>[],
-	filter?: Filter,
+	filter: Filter[] = [],
 	major?: string,
-	sub?: string
+	sub: string[] = []
 ) => {
 	let final = results;
 
-	if (filter && filter !== "all") {
-		final = final.filter((result) => result.item.status === filter);
+	if (arrayExists(filter)) {
+		final = final.filter((result) => filter.includes(result.item.status));
 	}
 
-	if (sub && sub !== "all") {
-		final = final.filter(
-			(result) => result.item.status === filter && result.item.Category === sub
-		);
+	if (arrayExists(sub)) {
+		final = final.filter((result) => sub.includes(result.item.Category));
 	}
 
-	if (major && major !== "all" && (!sub || sub === "all")) {
+	if (major && !sub) {
 		const subCategoriesKeys = getSubCategories(major).map(
 			(category) => category.english
 		);

@@ -16,7 +16,7 @@ let productFuse: null | Fuse<Product> = null;
 const itemsPerPage = 20;
 
 export const useDocuments = () => {
-	const { params, updateParams } = useSearchQuery();
+	const { params, status, sub, updateParams } = useSearchQuery();
 	const [page, setPage] = createSignal(1);
 	const [results, setResults] = createSignal<FuseResult<Product>[]>([]);
 	const [fuseRef, setFuseRef] = createSignal<Fuse<Product> | null>(null);
@@ -39,14 +39,14 @@ export const useDocuments = () => {
 			return;
 		}
 
-		const found = productFuse.search(actual);
+		const found = productFuse.search(actual, {
+			limit: 10,
+		});
 
 		batch(() => {
 			updateParams({
+				...params,
 				query: actual,
-				major: undefined,
-				sub: undefined,
-				status: "all",
 			});
 			setResults(found);
 		});
@@ -106,17 +106,14 @@ export const useDocuments = () => {
 
 	const filtered = createMemo(() => {
 		if (results() && params.query && params.query !== "") {
-			return filterResults(
-				results()!,
-				params.status,
-				params.major,
-				params.sub
-			).map((product) => product.item);
+			return filterResults(results()!, status(), params.major, sub()).map(
+				(product) => product.item
+			);
 		}
 
 		const docs = fuseRef()?.getIndex()?.docs ?? [];
 
-		return filterProducts(docs, params.status, params.major, params.sub);
+		return filterProducts(docs, status(), params.major, sub());
 	});
 
 	const showMore = () => {

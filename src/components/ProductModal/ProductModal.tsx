@@ -142,9 +142,9 @@ export default function ProductModal() {
 			updateParams({
 				...params,
 				query: undefined,
-				sub: productModal.product?.Category,
+				sub: JSON.stringify([productModal.product?.Category]),
 				major: major.english,
-				status: "alternative",
+				status: JSON.stringify(["alternative"]),
 			});
 
 			setProductModal({

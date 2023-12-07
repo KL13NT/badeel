@@ -1,22 +1,18 @@
 import { Status } from "~types";
 import t from "~utils/messages";
 
-export const STATUS_FILTER_OPTIONS = [
+export const STATUS_FILTER_CHECKBOX_OPTIONS = [
 	{
-		key: "all",
-		title: t("filter.all"),
+		value: "boycott",
+		title: t("filters.boycott"),
 	},
 	{
-		key: "boycott",
-		title: t("filter.boycott"),
+		value: "alternative",
+		title: t("filters.alternative"),
 	},
 	{
-		key: "alternative",
-		title: t("filter.alternative"),
-	},
-	{
-		key: "unsure",
-		title: t("filter.unsure"),
+		value: "unsure",
+		title: t("filters.unsure"),
 	},
 ] as const;
 

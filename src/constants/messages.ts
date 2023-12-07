@@ -43,10 +43,27 @@ export const MESSAGES = {
 	"categories.all": "جميع الأقسام",
 
 	"navbar.add": "أضف مُنتّج أو شركة",
+	"navbar.feedback": "صندوق الإقتراحات",
 
 	"table.showMore": "تحميل المزيد من المنتجات",
 	"table.end": "لقد وصلت إلى نهاية القائمة.",
 	"footer.ack": "شكر وتقدير لكل من ساهم في هذا المشروع.",
+	"footer.why": "لماذا نقاطع؟",
 
 	of: "من أصل",
+
+	"filters.title": "التصفية",
+	"filters.activator": "تصفية المنتجات",
+	"filters.clear": "إلغاء التصفية",
+	"filters.close": "إغلاق",
+	"filters.boycott": "مقاطعة",
+	"filters.alternative": "بديل",
+	"filters.unsure": "قيد المراجعة",
+	"filters.status": "الحالة",
+	"filters.results": "إعرض النتائج",
+	"filters.subcategory": "النوع",
+	"filters.category": "القسم",
+	"filters.search": "بحث",
+
+	"filters.list.category": "إختر النوع",
 } as const;
