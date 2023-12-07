@@ -1,16 +1,17 @@
+import { Show } from "solid-js";
+
 import Button from "~components/Button/Button";
 
 import { getCategoryByKey, getCategoryMajor } from "~utils/categories";
 import { useSearchQuery } from "~hooks/useSearchQuery";
 import { localizeNumber } from "~utils/common";
-import t from "~utils/messages";
+import t, { MessageKey } from "~utils/messages";
 
 import { Category } from "~types";
 
 import styles from "./ActiveFilters.module.scss";
 
 import CloseIcon from "~assets/icons/x-2.svg?component-solid";
-import { Show } from "solid-js";
 
 interface ActiveFiltersProps {
 	categories: Category[];
@@ -62,7 +63,7 @@ export default function ActiveFilters(props: ActiveFiltersProps) {
 				>
 					<span>{t("filters.status")}: </span>
 					{status()
-						.map((status) => t(`filters.${status}`))
+						.map((status) => t(`filters.${status}` as MessageKey))
 						.join(", ")}
 					<CloseIcon />
 				</Button>

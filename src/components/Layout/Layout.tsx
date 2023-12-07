@@ -1,16 +1,17 @@
 import { JSX } from "solid-js/jsx-runtime";
+import { onMount } from "solid-js";
+import { A } from "@solidjs/router";
 
 import Button from "~components/Button/Button";
-import { SUBMIT_PRODUCT_FORM } from "~constants/documents";
 
-import HandshakeIcon from "~assets/icons/handshake.svg?component-solid";
+import t from "~utils/messages";
+import { SUBMIT_PRODUCT_FORM } from "~constants/documents";
 
 import styles from "./Layout.module.scss";
 
+import HandshakeIcon from "~assets/icons/handshake.svg?component-solid";
+
 import logo from "~assets/icons/logo.svg";
-import t from "~utils/messages";
-import { onMount } from "solid-js";
-import { A } from "@solidjs/router";
 
 interface Props {
 	children: JSX.Element;
@@ -105,6 +106,7 @@ export default function Layout(props: Props) {
 					جميع الحقوق محفوظة. مفتوح المصدر على{" "}
 					<a href="https://github.com/KL13NT/badeel">GitHub</a>.
 				</p>
+				<p>هذا الموقع لا يُحرِّض على مقاطعة مُنتَج أو شركة بعينها.</p>
 			</footer>
 		</>
 	);
