@@ -1,48 +1,19 @@
-import { For, batch, createSignal } from "solid-js";
+import { For, createSignal } from "solid-js";
 
 import Toggle from "~components/Toggle/Toggle";
 import Button from "~components/Button/Button";
 
-import { Filter } from "src/types";
-
-import styles from "./NavigationFilter.module.scss";
+import styles from "./FiltersModal.module.scss";
 
 import ArrowIcon from "~assets/icons/arrow-down.svg?component-solid";
-import { STATUS_FILTER_OPTIONS } from "~constants/filters";
-import { useSearchQuery } from "~hooks/useSearchQuery";
 import clsx from "clsx";
 
-interface Option {
-	key: Filter;
-	title: string;
-}
-
-export default function NavigationFilter() {
+export default function FiltersModal() {
 	const [expanded, setExpanded] = createSignal(false);
-	const { params, updateParams } = useSearchQuery();
-
-	const activate = (optionKey: Option["key"]) => {
-		const selected = STATUS_FILTER_OPTIONS.find(
-			(option) => option.key === optionKey
-		)!;
-
-		batch(() => {
-			setExpanded(false);
-			updateParams({
-				status: selected.key,
-			});
-		});
-	};
 
 	const toggleMenu = (updated: boolean) => {
 		setExpanded(updated);
 	};
-
-	const status = () => params.status ?? "all";
-	const rest = () =>
-		STATUS_FILTER_OPTIONS.filter((option) => option.key !== status());
-	const selected = () =>
-		STATUS_FILTER_OPTIONS.find((option) => option.key === status())!;
 
 	return (
 		<div class={styles.navigationFilter}>
