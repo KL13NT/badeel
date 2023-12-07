@@ -15,6 +15,11 @@ export default defineConfig({
 		solid(),
 		solidSvg({
 			defaultAsComponent: false,
+			svgo: {
+				svgoConfig: {
+					removeViewBox: false,
+				},
+			},
 		}),
 		devtools(),
 		mkcert(),

@@ -8,3 +8,9 @@ export const delay = (time: number, cb: () => void) => {
 export const localizeNumber = (number: number) => {
 	return numberFormatter.format(number);
 };
+
+export const arrayExists = (array: unknown[]) => {
+	if (array && array.length > 0) return true;
+
+	return false;
+};

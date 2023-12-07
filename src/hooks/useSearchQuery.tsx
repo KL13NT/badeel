@@ -1,17 +1,18 @@
 import { useSearchParams } from "@solidjs/router";
-import { Category, Filter } from "~types";
+import { Filter } from "~types";
 
-interface Params {
-	query?: string;
-	status?: Filter;
-	major?: Category["english"];
-	sub?: Category["english"];
-}
+const parse = (param: string) => {
+	try {
+		return JSON.parse(param);
+	} catch (error) {
+		return [];
+	}
+};
 
 export const useSearchQuery = () => {
 	const [params, setParams] = useSearchParams();
 
-	const updateParams = (update: Partial<Params>) => {
+	const updateParams = (update: Record<string, string | undefined>) => {
 		setParams(
 			{
 				...params,
@@ -23,8 +24,15 @@ export const useSearchQuery = () => {
 		);
 	};
 
+	const sub = () => (params.sub ? (parse(params.sub) as string[]) : []);
+
+	const status = () =>
+		params.status ? (parse(params.status) as Filter[]) : [];
+
 	return {
-		params: params as Params,
+		params,
+		sub,
+		status,
 		updateParams,
 	};
 };

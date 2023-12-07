@@ -9,7 +9,7 @@
 		"build": "vite build",
 		"preview": "vite preview --host --port 3000",
 		"lint": "eslint --ext .tsx,.ts src",
-		"check": "prettier src/**/*.{css,ts} --check",
+		"check": "prettier src/**/*.{scss,ts} --check",
 		"tsc": "tsc --noEmit"
 	},
 	"devDependencies": {

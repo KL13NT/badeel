@@ -1,8 +1,5 @@
 .dialog {
-	width: 500px;
 	position: fixed;
-	background: #00000060;
-	backdrop-filter: blur(2px);
 	height: 100%;
 	width: 100%;
 	top: 0;
@@ -10,7 +7,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: 10;
+	z-index: var(--z-3);
 }
 
 .body {

@@ -1,0 +1,31 @@
+.activeFilters {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: var(--s-5);
+	flex-wrap: wrap;
+}
+
+.filter {
+	background: var(--colors-fills-outlines-gray-2, #313131);
+	display: flex;
+	padding: 4px 10px;
+	border-radius: 8px;
+	font-weight: 600;
+
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+
+	svg {
+		color: var(--c-action);
+		height: 12px;
+		width: 12px;
+	}
+
+	span {
+		color: var(--colors-body-2, #9f9d98);
+		font-weight: 400;
+		font-size: 16px;
+	}
+}

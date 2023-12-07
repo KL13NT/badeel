@@ -40,6 +40,25 @@
 	}
 }
 
+.left {
+	display: flex;
+	align-items: center;
+	gap: var(--s-5);
+	flex-wrap: wrap;
+}
+
+.separator {
+	width: 1px;
+	background: var(--Stroke-Gray, #403f36);
+	height: 24px;
+}
+
+.feedback {
+	color: var(--colors-body-1, #efece0);
+	font-size: 1rem;
+	font-weight: 600;
+}
+
 .main {
 	max-width: 1920px;
 	margin-inline: auto;
@@ -95,5 +114,9 @@
 
 	.logo {
 		height: 40px;
+	}
+
+	.separator {
+		display: none;
 	}
 }

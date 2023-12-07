@@ -1,16 +1,17 @@
 import { JSX } from "solid-js/jsx-runtime";
+import { onMount } from "solid-js";
+import { A } from "@solidjs/router";
 
-import NavigationFilter from "~components/NavigationFilter/NavigationFilter";
 import Button from "~components/Button/Button";
-import { SUBMIT_PRODUCT_FORM } from "~constants/documents";
 
-import HandshakeIcon from "~assets/icons/handshake.svg?component-solid";
+import t from "~utils/messages";
+import { SUBMIT_PRODUCT_FORM } from "~constants/documents";
 
 import styles from "./Layout.module.scss";
 
+import HandshakeIcon from "~assets/icons/handshake.svg?component-solid";
+
 import logo from "~assets/icons/logo.svg";
-import t from "~utils/messages";
-import { onMount } from "solid-js";
 
 interface Props {
 	children: JSX.Element;
@@ -78,14 +79,22 @@ export default function Layout(props: Props) {
 			<nav class={styles.navbar} ref={headerRef}>
 				<div class={styles.upper}>
 					<div class={styles.right}>
-						<img src={logo} class={styles.logo} alt="" role="presentation" />
-
-						<div class={styles.desktopFilter}>
-							<NavigationFilter />
-						</div>
+						<A href="/">
+							<img src={logo} class={styles.logo} alt="" role="presentation" />
+						</A>
 					</div>
 
 					<div class={styles.left}>
+						<a
+							class={styles.feedback}
+							href="https://forms.gle/ELeQ5rtuEVVLipwV9"
+							target="_blank"
+						>
+							{t("navbar.feedback")}
+						</a>
+
+						<div class={styles.separator} />
+
 						<Button
 							as="a"
 							href={SUBMIT_PRODUCT_FORM}
@@ -98,10 +107,6 @@ export default function Layout(props: Props) {
 						</Button>
 					</div>
 				</div>
-
-				<div class={styles.mobileFilter}>
-					<NavigationFilter />
-				</div>
 			</nav>
 
 			<main class={styles.main}>{props.children}</main>
@@ -111,6 +116,7 @@ export default function Layout(props: Props) {
 					جميع الحقوق محفوظة. مفتوح المصدر على{" "}
 					<a href="https://github.com/KL13NT/badeel">GitHub</a>.
 				</p>
+				<p>هذا الموقع لا يُحرِّض على مقاطعة مُنتَج أو شركة بعينها.</p>
 			</footer>
 		</>
 	);

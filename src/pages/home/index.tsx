@@ -1,26 +1,32 @@
+import { Show, createSignal } from "solid-js";
+import { A } from "@solidjs/router";
+import { Transition } from "solid-transition-group";
+
 import TypeWriter from "~components/TypeWriter/TypeWriter";
 import SearchInput from "~components/SearchInput/SearchInput";
+import ProductModal from "~components/ProductModal/ProductModal";
+import Table, { TableSkeleton } from "~components/Table/Table";
+import Button from "~components/Button/Button";
+import FiltersModal from "~components/FiltersModal/FiltersModal";
+import ActiveFilters from "~components/ActiveFilters/ActiveFilters";
 
+import t from "~utils/messages";
+import { arrayExists } from "~utils/common";
 import { getCategoryMajor } from "~utils/categories";
 import { useDocuments } from "~hooks/useDocuments";
 import { useSearchQuery } from "~hooks/useSearchQuery";
-
 import { useProductModal } from "~stores/product-modal";
 
 import { Product } from "~types";
 
 import styles from "./index.module.scss";
-import ProductModal from "~components/ProductModal/ProductModal";
-import Table, { TableSkeleton } from "~components/Table/Table";
-import Filters from "~components/Filters/Filters";
-import { A } from "@solidjs/router";
-import Button from "~components/Button/Button";
-import t from "~utils/messages";
+
+import FilterIcon from "~assets/icons/filter.svg?component-solid";
 
 let searchThrottleTimeout: number | number = 0;
 
 function App() {
-	const { params, updateParams } = useSearchQuery();
+	const { params, sub, status, updateParams } = useSearchQuery();
 	const {
 		search,
 		results,
@@ -31,7 +37,8 @@ function App() {
 		hasMore,
 		showMore,
 	} = useDocuments();
-	const [, setProductModal] = useProductModal();
+	const [productModal, setProductModal] = useProductModal();
+	const [filtersOpen, setFiltersOpen] = createSignal(false);
 
 	const handleSubmit = (query: string) => {
 		clearTimeout(searchThrottleTimeout);
@@ -45,6 +52,14 @@ function App() {
 		setProductModal({
 			product,
 		});
+	};
+
+	const openFilters = () => {
+		setFiltersOpen(true);
+	};
+
+	const closeFilters = () => {
+		setFiltersOpen(false);
 	};
 
 	const handleMajorCategoryChange = (enabled: boolean, ev: MouseEvent) => {
@@ -70,11 +85,12 @@ function App() {
 		const target = ev.target as HTMLButtonElement;
 		const category = target.dataset.category!;
 		const major = category === "all" ? undefined : getCategoryMajor(category);
+
 		if (enabled) {
 			updateParams({
 				query: undefined,
 				major: (major?.english ?? params.major) as string,
-				sub: category,
+				sub: JSON.stringify([category]),
 			});
 		} else {
 			updateParams({
@@ -83,6 +99,14 @@ function App() {
 				sub: undefined,
 			});
 		}
+	};
+
+	const filtersCount = () => {
+		const total = sub().length + status().length;
+
+		if (params.major) return total + 1;
+
+		return total;
 	};
 
 	return (
@@ -98,16 +122,42 @@ function App() {
 						الخاص بك لا يمنع الإتصال بمواقع جووجل.
 					</p>
 				)}
-			</div>
-			<section>
-				{categories() && categories().length > 0 ? (
-					<Filters
-						categories={categories()}
-						handleMajorCategoryChange={handleMajorCategoryChange}
-						handleSubCategoryChange={handleSubCategoryChange}
-					/>
-				) : null}
 
+				{total() === 0 && params.query && (
+					<p class="error">لم نعثُر على هذا المنتج.</p>
+				)}
+			</div>
+
+			<Transition name="slide-right">
+				<Show when={filtersOpen()}>
+					<FiltersModal categories={categories()} close={closeFilters} />
+				</Show>
+			</Transition>
+
+			<div class={styles.filters}>
+				<Button
+					variant="action-invert"
+					onClick={openFilters}
+					data-active={
+						arrayExists(sub()) || arrayExists(status()) || params.major
+					}
+				>
+					<FilterIcon />
+					{t("filters.activator")}
+					{filtersCount() > 0 ? (
+						<span class={styles.filterCount}>{filtersCount()}</span>
+					) : null}
+				</Button>
+			</div>
+
+			<ActiveFilters
+				categories={categories()}
+				openFilters={openFilters}
+				total={total()}
+				current={results().length}
+			/>
+
+			<section>
 				{results() && !loading() ? (
 					<Table
 						products={results()}
@@ -136,7 +186,12 @@ function App() {
 
 			<section class={styles.ack}>
 				<A href="/acknowledgments">{t("footer.ack")}</A>
+				<A href="/why">{t("footer.why")}</A>
 			</section>
+
+			<Show when={productModal.product || filtersOpen()}>
+				<div class={styles.overlay} />
+			</Show>
 		</main>
 	);
 }
