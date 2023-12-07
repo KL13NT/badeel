@@ -49,4 +49,19 @@ export const MESSAGES = {
 	"footer.ack": "شكر وتقدير لكل من ساهم في هذا المشروع.",
 
 	of: "من أصل",
+
+	"filters.title": "التصفية",
+	"filters.activator": "تصفية المنتجات",
+	"filters.clear": "إلغاء التصفية",
+	"filters.close": "إغلاق",
+	"filters.boycott": "مقاطعة",
+	"filters.alternative": "بديل",
+	"filters.unsure": "قيد المراجعة",
+	"filters.status": "الحالة",
+	"filters.results": "إعرض النتائج",
+	"filters.subcategory": "النوع",
+	"filters.category": "القسم",
+	"filters.search": "بحث",
+
+	"filters.list.category": "إختر النوع",
 } as const;

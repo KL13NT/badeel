@@ -13,6 +13,42 @@
 	}
 }
 
+.slide-fade-down {
+	&-enter-active,
+	&-exit-active {
+		transition:
+			transform 0.3s ease-out,
+			opacity 0.3s ease-out;
+	}
+
+	&-enter,
+	&-exit-to {
+		transform: translateY(-20px);
+		opacity: 0;
+	}
+}
+
+.slide-right {
+	&-enter-active,
+	&-exit-active {
+		transition: transform 0.2s ease-out;
+	}
+
+	&-enter,
+	&-exit-to {
+		transform: translateX(100%);
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.slide-right {
+		&-enter,
+		&-exit-to {
+			transform: translateY(100%);
+		}
+	}
+}
+
 .slide-fade-table {
 	&-move {
 		transition: transform 0.2s ease-out;
