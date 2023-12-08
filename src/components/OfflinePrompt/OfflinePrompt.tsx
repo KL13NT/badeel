@@ -1,5 +1,5 @@
 import { useRegisterSW } from "virtual:pwa-register/solid";
-import { Show, createEffect } from "solid-js";
+import { Show } from "solid-js";
 import { Transition } from "solid-transition-group";
 
 import Button from "~components/Button/Button";
@@ -16,10 +16,6 @@ export default function OfflinePrompt() {
 	const close = () => {
 		setOfflineReady(false);
 	};
-
-	createEffect(() => {
-		console.log(offlineReady());
-	});
 
 	return (
 		<Transition name="slide-fade">
