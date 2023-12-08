@@ -32,7 +32,7 @@
 			"~hooks/*": ["./src/hooks/*"],
 			"~*": ["./src/*"]
 		},
-		"types": ["vite-plugin-solid-svg/types"]
+		"types": ["vite-plugin-solid-svg/types", "vite-plugin-pwa/solid"]
 	},
 	"include": ["src"],
 	"references": [{ "path": "./tsconfig.node.json" }]

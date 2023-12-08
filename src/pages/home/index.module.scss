@@ -75,17 +75,6 @@
 	}
 }
 
-.overlay {
-	position: fixed;
-	background: #00000060;
-	backdrop-filter: blur(2px);
-	height: 100%;
-	width: 100%;
-	top: 0;
-	left: 0;
-	z-index: var(--z-2);
-}
-
 .footer {
 	margin-inline: auto;
 	width: fit-content;

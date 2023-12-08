@@ -27,8 +27,10 @@ export default defineConfig({
 			registerType: "autoUpdate",
 			devOptions: {
 				enabled: true,
+				navigateFallback: "index.html",
 			},
 			workbox: {
+				cleanupOutdatedCaches: false,
 				runtimeCaching: [
 					{
 						urlPattern: /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,

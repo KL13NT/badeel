@@ -190,7 +190,7 @@ function App() {
 			</section>
 
 			<Show when={productModal.product || filtersOpen()}>
-				<div class={styles.overlay} />
+				<div class="overlay" />
 			</Show>
 		</main>
 	);

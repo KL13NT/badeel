@@ -1,0 +1,18 @@
+.body {
+	width: 500px;
+	border-radius: 24px;
+	box-shadow: 0px 4px 64px -32px rgba(0, 0, 0, 0.25);
+	background: var(--c-bg);
+	padding: var(--s-5);
+	text-align: right;
+}
+
+.action {
+	margin-top: var(--s-5);
+}
+
+@media screen and (max-width: 700px) {
+	.body {
+		width: 90%;
+	}
+}

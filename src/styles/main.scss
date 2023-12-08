@@ -1,7 +1,8 @@
-@import url("./ada.scss");
-@import url("./tokens.scss");
-@import url("./typography.scss");
-@import url("./transitions.scss");
+@use "./ada.scss";
+@use "./tokens.scss";
+@use "./typography.scss";
+@use "./utils.scss";
+@use "./transitions.scss";
 
 @tailwind base;
 @tailwind components;
