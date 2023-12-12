@@ -1,11 +1,4 @@
 export const MESSAGES = {
-	"filter.all": "جميع المنتجات",
-	"filter.unsure": "منتجات قيد المراجعة",
-	"filter.alternative": "منتجات بديلة",
-	"filter.boycott": "منتجات مُقاطعة",
-	"status.boycott": "قاطع",
-	"status.alternative": "إدعم",
-	"status.unsure": "قيد المراجعة",
 	"proof.content.arab":
 		"منتج من دولة خليجية من الدول التي أظهرت تضامناً مع الكيان أو رفضوا مساعدة اخواننا في غزة. هذه الدول تتمثل في السعودية والإمارات والكويت والبحرين.",
 	"proof.content.foreign":
@@ -45,7 +38,7 @@ export const MESSAGES = {
 	"navbar.add": "أضف مُنتّج أو شركة",
 	"navbar.feedback": "صندوق الإقتراحات",
 
-	"table.showMore": "تحميل المزيد من المنتجات",
+	"table.showMore": "عرض المزيد من المنتجات",
 	"table.end": "لقد وصلت إلى نهاية القائمة.",
 	"footer.ack": "شكر وتقدير لكل من ساهم في هذا المشروع.",
 	"footer.why": "لماذا نقاطع؟",
@@ -56,7 +49,7 @@ export const MESSAGES = {
 	"filters.activator": "تصفية المنتجات",
 	"filters.clear": "إلغاء التصفية",
 	"filters.close": "إغلاق",
-	"filters.boycott": "مقاطعة",
+	"filters.boycott": "داعم",
 	"filters.alternative": "بديل",
 	"filters.unsure": "قيد المراجعة",
 	"filters.status": "الحالة",

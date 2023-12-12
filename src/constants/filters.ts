@@ -17,7 +17,7 @@ export const STATUS_FILTER_CHECKBOX_OPTIONS = [
 ] as const;
 
 export const STATUS_TITLE_MAPPING: Record<Status, string> = {
-	alternative: "إدعم",
-	boycott: "قاطع",
+	alternative: "بديل",
+	boycott: "داعم",
 	unsure: "قيد المراجعة",
 } as const;

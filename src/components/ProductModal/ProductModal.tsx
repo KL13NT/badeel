@@ -25,9 +25,9 @@ const proofMapping = {
 };
 
 const statusMapping: Record<Status, string> = {
-	alternative: t("status.alternative"),
-	boycott: t("status.boycott"),
-	unsure: t("status.unsure"),
+	alternative: t("filters.alternative"),
+	boycott: t("filters.boycott"),
+	unsure: t("filters.unsure"),
 };
 
 type proofMappingKey = keyof typeof proofMapping;
