@@ -94,6 +94,7 @@
 	display: flex;
 	flex-direction: column;
 	height: fit-content;
+	pointer-events: none;
 	background: linear-gradient(0deg, #202020 0%, rgba(32, 32, 32, 0) 100%);
 
 	&::before {
@@ -109,6 +110,7 @@
 		font-weight: 600;
 		height: 56px;
 		z-index: var(--z-4);
+		pointer-events: all;
 
 		&:hover {
 			background: var(--c-bg);
