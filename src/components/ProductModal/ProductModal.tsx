@@ -145,6 +145,7 @@ export default function ProductModal() {
 				sub: JSON.stringify([productModal.product?.Category]),
 				major: major.english,
 				status: JSON.stringify(["alternative"]),
+				page: 1,
 			});
 
 			setProductModal({

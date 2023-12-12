@@ -16,8 +16,7 @@ let productFuse: null | Fuse<Product> = null;
 const itemsPerPage = 20;
 
 export const useDocuments = () => {
-	const { params, major, status, sub, updateParams } = useSearchQuery();
-	const [page, setPage] = createSignal(1);
+	const { params, major, status, sub, page, updateParams } = useSearchQuery();
 	const [results, setResults] = createSignal<FuseResult<Product>[]>([]);
 	const [fuseRef, setFuseRef] = createSignal<Fuse<Product> | null>(null);
 	const [categories, setCategories] = createSignal<Category[]>([]);
@@ -34,6 +33,7 @@ export const useDocuments = () => {
 					query: actual,
 					major: undefined,
 					sub: undefined,
+					page: 1,
 				});
 			});
 			return;
@@ -47,6 +47,7 @@ export const useDocuments = () => {
 			updateParams({
 				...params,
 				query: actual,
+				page: 1,
 			});
 			setResults(found);
 		});
@@ -118,7 +119,9 @@ export const useDocuments = () => {
 	});
 
 	const showMore = () => {
-		setPage(page() + 1);
+		updateParams({
+			page: page() + 1,
+		});
 	};
 
 	const hasMore = () => filtered().length > page() * itemsPerPage;

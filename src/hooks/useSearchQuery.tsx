@@ -1,4 +1,4 @@
-import { useSearchParams } from "@solidjs/router";
+import { SetParams, useSearchParams } from "@solidjs/router";
 import { Filter } from "~types";
 
 const parse = (param: string) => {
@@ -12,7 +12,7 @@ const parse = (param: string) => {
 export const useSearchQuery = () => {
 	const [params, setParams] = useSearchParams();
 
-	const updateParams = (update: Record<string, string | undefined>) => {
+	const updateParams = (update: SetParams) => {
 		setParams(
 			{
 				...params,
@@ -29,6 +29,9 @@ export const useSearchQuery = () => {
 	const status = () =>
 		params.status ? (parse(params.status) as Filter[]) : [];
 
+	const page = () =>
+		!Number.isNaN(Number(params.page)) ? Number(params.page) : 1;
+
 	const major = () =>
 		(params.major && params.major === "all") || !params.major
 			? undefined
@@ -42,6 +45,7 @@ export const useSearchQuery = () => {
 		sub,
 		status,
 		query,
+		page,
 		updateParams,
 	};
 };

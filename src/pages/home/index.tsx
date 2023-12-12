@@ -71,12 +71,14 @@ function App() {
 				query: undefined,
 				major: category,
 				sub: undefined,
+				page: 1,
 			});
 		} else {
 			updateParams({
 				query: undefined,
 				major: undefined,
 				sub: undefined,
+				page: 1,
 			});
 		}
 	};
@@ -91,12 +93,14 @@ function App() {
 				query: undefined,
 				major: (parent?.english ?? major()) as string,
 				sub: JSON.stringify([category]),
+				page: 1,
 			});
 		} else {
 			updateParams({
 				query: undefined,
 				major: (parent?.english ?? major()) as string,
 				sub: undefined,
+				page: 1,
 			});
 		}
 	};

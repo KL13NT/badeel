@@ -55,6 +55,7 @@ export default function FiltersModal(props: Props) {
 			major: undefined,
 			sub: undefined,
 			status: undefined,
+			page: 1,
 		});
 
 		props.close();
@@ -103,6 +104,7 @@ export default function FiltersModal(props: Props) {
 			major: state.major,
 			sub: JSON.stringify(state.sub),
 			status: JSON.stringify(state.status),
+			page: 1,
 		});
 
 		props.close();

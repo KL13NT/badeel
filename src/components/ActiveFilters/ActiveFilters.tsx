@@ -24,7 +24,9 @@ export default function ActiveFilters(props: ActiveFiltersProps) {
 	const { sub, status, query, major, updateParams } = useSearchQuery();
 
 	const handleClearFilter = (filter: string[]) => {
-		const update: Record<string, undefined> = {};
+		const update: Record<string, undefined | number> = {
+			page: 1,
+		};
 
 		filter.forEach((key) => {
 			update[key] = undefined;
