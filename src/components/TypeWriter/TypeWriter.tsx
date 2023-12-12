@@ -8,8 +8,8 @@ import styles from "./TypeWriter.module.scss";
  * Maximum character length should be 54 (calculated without Tashkeel).
  */
 const messages = [
-	"قَاوِمْ.. قَاطِعْ.. قَاتِل.",
 	"بِدِّي شَعْرَةً مِنُّه",
+	"مَعْلِش..",
 	"روح الروح, هذى روح الروح",
 	"والله ياما أخذت ٥٨٠ إبرة عشانه",
 	"هَي أِمَّي.. بَعْرِفْها مِن شَعْرَهَا",
@@ -19,12 +19,12 @@ const messages = [
 	"سَبَع سِنِين شَعْرُه أبْيَض وكيرلي وحِلو",
 	"كُنْتَ نَاوِي اعْمِلَّهَا عِيدَ مِيلَادٍ",
 	"مِين ضَلَّ عَايَشَ؟!",
-	"جِبْتِلَكْ ثَلَاثَ قَنَانِي حَلِيب بَفَكَّرَكَ بِدَّكْ تِعِيش وتِشْرَبْهُم يَابَا",
 	"بِدِّي أَلْعَب, بِدِّي أَلْعَب بَسْ",
 	"خَلِّية فِي حُضْنِي, خَلِّية فِي حُضْنِي",
-	"ماما أنا تِعِبْت من هذا الصوت, ماما بيكفي بدي انام",
+	"ماما أنا تِعِبْت من هذا الصوت",
 ];
 
+const speed = 65;
 let textRef: HTMLParagraphElement | undefined;
 let messageIndex = 0;
 let prevCharacterTimestamp = 0;
@@ -34,7 +34,8 @@ export default function TypeWriter() {
 		if (!textRef) return requestAnimationFrame(start);
 
 		const now = Date.now();
-		if (now - prevCharacterTimestamp < 50) return requestAnimationFrame(start);
+		if (now - prevCharacterTimestamp < speed)
+			return requestAnimationFrame(start);
 
 		const activeMessage = messages[messageIndex];
 		const writtenMessage = textRef.textContent!;
