@@ -6,6 +6,7 @@ import Button from "~components/Button/Button";
 
 import t from "~utils/messages";
 import { SUBMIT_PRODUCT_FORM } from "~constants/documents";
+import { localizeDate } from "~utils/common";
 
 import styles from "./Layout.module.scss";
 
@@ -106,6 +107,19 @@ export default function Layout(props: Props) {
 							{t("navbar.add")}
 						</Button>
 					</div>
+				</div>
+
+				<div class={styles.lower}>
+					<p>
+						{t("version")} {localizeDate(import.meta.env.BUILD_TIMESTAMP)}
+					</p>
+					<a
+						class={styles.feedback}
+						href="https://forms.gle/ELeQ5rtuEVVLipwV9"
+						target="_blank"
+					>
+						{t("navbar.feedback")}
+					</a>
 				</div>
 			</nav>
 

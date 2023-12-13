@@ -35,7 +35,7 @@ export const MESSAGES = {
 	"categories.title": "التصفية حسب التصنيف",
 	"categories.all": "جميع الأقسام",
 
-	"navbar.add": "أضف مُنتّج أو شركة",
+	"navbar.add": "أضف مُنتّج",
 	"navbar.feedback": "صندوق الإقتراحات",
 
 	"table.showMore": "عرض المزيد من المنتجات",
@@ -66,4 +66,6 @@ export const MESSAGES = {
 	"sort.manufacturer": "إسم المُنْتِج",
 	"sort.category": "التصنيف",
 	"sort.status": "الحالة",
+
+	version: "نُسخة",
 } as const;
