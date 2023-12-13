@@ -7,6 +7,9 @@ import devtools from "solid-devtools/vite";
 import solidSvg from "vite-plugin-solid-svg";
 
 export default defineConfig({
+	define: {
+		"import.meta.env.BUILD_TIMESTAMP": new Date(),
+	},
 	server: {
 		https: true,
 	},
