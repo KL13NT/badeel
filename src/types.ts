@@ -35,6 +35,8 @@ export interface SupportProduct extends BaseProduct {
 
 export type Product = BoycottProduct | UnsureProduct | SupportProduct;
 
+export type SortOption = "Name" | "English Name" | "status" | "Category";
+
 export interface Data {
 	products: Record<ID, Product>;
 }

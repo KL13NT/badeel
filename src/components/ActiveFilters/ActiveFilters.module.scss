@@ -21,6 +21,13 @@
 	justify-content: space-between;
 }
 
+.left,
+.sort {
+	display: flex;
+	align-items: center;
+	gap: var(--s-2);
+}
+
 .clear {
 	color: var(--colors-fills-outlines-red, #ff7032);
 	text-align: right;

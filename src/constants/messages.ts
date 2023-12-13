@@ -46,7 +46,7 @@ export const MESSAGES = {
 	of: "من أصل",
 
 	"filters.title": "التصفية",
-	"filters.activator": "تصفية المنتجات",
+	"filters.activator": "التصفية والترتيب",
 	"filters.clear": "إلغاء التصفية",
 	"filters.close": "إغلاق",
 	"filters.boycott": "داعم",
@@ -56,7 +56,14 @@ export const MESSAGES = {
 	"filters.results": "إعرض النتائج",
 	"filters.subcategory": "النوع",
 	"filters.category": "القسم",
+	"filters.sort": "الترتيب",
 	"filters.search": "بحث",
 
 	"filters.list.category": "إختر النوع",
+
+	"sort.arabicName": "الإسم العربي",
+	"sort.englishName": "الإسم الإنجليزي",
+	"sort.manufacturer": "إسم المُنْتِج",
+	"sort.category": "التصنيف",
+	"sort.status": "الحالة",
 } as const;

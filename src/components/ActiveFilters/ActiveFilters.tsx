@@ -13,15 +13,6 @@ import styles from "./ActiveFilters.module.scss";
 
 import CloseIcon from "~assets/icons/x-2.svg?component-solid";
 
-interface ActiveFiltersProps {
-	categories: Category[];
-	total: number;
-	current: number;
-	active: number;
-	openFilters: () => void;
-	clear: () => void;
-}
-
 interface TagsProps {
 	categories: Category[];
 	openFilters: () => void;
@@ -113,6 +104,15 @@ function Tags(props: TagsProps) {
 			</Show>
 		</>
 	);
+}
+
+interface ActiveFiltersProps {
+	categories: Category[];
+	total: number;
+	current: number;
+	active: number;
+	openFilters: () => void;
+	clear: () => void;
 }
 
 export default function ActiveFilters(props: ActiveFiltersProps) {

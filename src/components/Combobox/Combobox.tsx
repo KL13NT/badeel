@@ -14,9 +14,31 @@ interface Props {
 	options: Option[];
 	id: string;
 	label: string;
-	value?: string;
+	value?: Option;
 	default?: Option;
+	alwaysDisplayLabel?: boolean;
 	onSelect: (option: string) => void;
+}
+
+interface LabelProps {
+	alwaysDisplayLabel?: boolean;
+	label: string;
+	value?: Option;
+	default?: Option;
+}
+
+function Label(props: LabelProps) {
+	return (
+		<>
+			<Show when={props.alwaysDisplayLabel}>
+				{props.label} {props.value?.name ?? props.default?.name}
+			</Show>
+
+			<Show when={!props.alwaysDisplayLabel}>
+				{props.value?.name ?? props.default?.name ?? props.label}
+			</Show>
+		</>
+	);
 }
 
 export default function Combobox(props: Props) {
@@ -55,7 +77,12 @@ export default function Combobox(props: Props) {
 				onClick={toggle}
 				class={styles.activator}
 			>
-				{props.value ?? props.default?.name ?? props.label}
+				<Label
+					label={props.label}
+					default={props.default}
+					value={props.value}
+					alwaysDisplayLabel={props.alwaysDisplayLabel}
+				/>
 				<ArrowDownIcon />
 			</button>
 
@@ -89,6 +116,7 @@ export default function Combobox(props: Props) {
 										id={option.value}
 										role="option"
 										data-value={option.value}
+										data-active={option.value === props.value?.value}
 										tabIndex={0}
 										class={styles.option}
 									>

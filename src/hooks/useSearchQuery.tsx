@@ -1,5 +1,5 @@
 import { SetParams, useSearchParams } from "@solidjs/router";
-import { Filter } from "~types";
+import { Filter, SortOption } from "~types";
 
 const parse = (param: string) => {
 	try {
@@ -39,11 +39,14 @@ export const useSearchQuery = () => {
 
 	const query = () => params.query;
 
+	const sort = () => (params.sort ?? "Name") as unknown as SortOption;
+
 	return {
 		params,
 		major,
 		sub,
 		status,
+		sort,
 		query,
 		page,
 		updateParams,

@@ -5,6 +5,7 @@
 	background-color: var(--c-bg);
 	color: var(--c-offwhite);
 	padding: 8px 12px;
+	flex-shrink: 0;
 
 	cursor: pointer;
 	text-decoration: none;

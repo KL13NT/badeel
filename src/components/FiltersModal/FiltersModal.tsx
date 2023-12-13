@@ -9,8 +9,11 @@ import { useSearchQuery } from "~hooks/useSearchQuery";
 import { getCategoryByKey } from "~utils/categories";
 import t from "~utils/messages";
 
-import { STATUS_FILTER_CHECKBOX_OPTIONS } from "~constants/filters";
-import { Category, Filter } from "~types";
+import {
+	SORT_OPTIONS,
+	STATUS_FILTER_CHECKBOX_OPTIONS,
+} from "~constants/filters";
+import { Category, Filter, SortOption } from "~types";
 
 import styles from "./FiltersModal.module.scss";
 
@@ -25,11 +28,12 @@ interface Props {
 let ref: HTMLDivElement;
 
 export default function FiltersModal(props: Props) {
-	const { major, sub, status, updateParams } = useSearchQuery();
+	const { major, sub, status, sort, updateParams } = useSearchQuery();
 	const [state, setState] = createStore({
 		major: major(),
 		sub: sub(),
 		status: status(),
+		sort: sort(),
 	});
 
 	const handleCategoryChange = (value: string) => {
@@ -92,10 +96,33 @@ export default function FiltersModal(props: Props) {
 			major: state.major,
 			sub: JSON.stringify(state.sub),
 			status: JSON.stringify(state.status),
+			sort: state.sort,
 			page: 1,
 		});
 
 		props.close();
+	};
+
+	const selectedMajor = () => {
+		const category =
+			state.major && props.categories.length > 0
+				? getCategoryByKey(state.major)
+				: undefined;
+
+		if (category)
+			return {
+				name: category.arabic,
+				value: category.english,
+			};
+	};
+
+	const selectedSort = () =>
+		SORT_OPTIONS.find((option) => option.value === state.sort);
+
+	const handleSortChange = (selected: string) => {
+		setState({
+			sort: selected as SortOption,
+		});
 	};
 
 	return (
@@ -134,11 +161,7 @@ export default function FiltersModal(props: Props) {
 							onSelect={handleCategoryChange}
 							id="category-selection"
 							label={t("filters.list.category")}
-							value={
-								state.major && props.categories.length > 0
-									? getCategoryByKey(state.major).arabic
-									: undefined
-							}
+							value={selectedMajor()}
 						/>
 					</div>
 
@@ -184,6 +207,20 @@ export default function FiltersModal(props: Props) {
 								/>
 							)}
 						</For>
+					</div>
+
+					<div class={styles.section}>
+						<p class={styles.title} data-active={Boolean(state.major)}>
+							{t("filters.sort")}
+						</p>
+
+						<Combobox
+							options={SORT_OPTIONS}
+							onSelect={handleSortChange}
+							id="sort-selection"
+							label={"ترتيب حسب"}
+							value={selectedSort()}
+						/>
 					</div>
 				</div>
 

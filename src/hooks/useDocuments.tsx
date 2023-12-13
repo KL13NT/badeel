@@ -5,7 +5,14 @@ import {
 	CATEGORIES_URL,
 	UNSURE_URL,
 } from "~constants/documents";
-import { BaseProduct, Category, FuseIndex, Product, Status } from "~types";
+import {
+	BaseProduct,
+	Category,
+	FuseIndex,
+	Product,
+	SortOption,
+	Status,
+} from "~types";
 import { mapRequestToParsedCSV } from "~utils/responses";
 import Fuse, { FuseResult } from "fuse.js";
 import { useSearchQuery } from "./useSearchQuery";
@@ -15,8 +22,24 @@ import { filterProducts, filterResults } from "~utils/filters";
 let productFuse: null | Fuse<Product> = null;
 const itemsPerPage = 20;
 
+const sortKeyLocaleMap: Record<SortOption, string> = {
+	Name: "ar-EG",
+	status: "en-GB",
+	Category: "en-GB",
+	"English Name": "en-GB",
+};
+
+const sortProducts = (products: Product[], sort: SortOption) => {
+	return [...products].sort((a, b) =>
+		a[sort]
+			.trim()
+			.localeCompare(b[sort].trim(), sortKeyLocaleMap[sort] ?? "en-GB")
+	);
+};
+
 export const useDocuments = () => {
-	const { params, major, status, sub, page, updateParams } = useSearchQuery();
+	const { params, major, status, sub, page, sort, updateParams } =
+		useSearchQuery();
 	const [results, setResults] = createSignal<FuseResult<Product>[]>([]);
 	const [fuseRef, setFuseRef] = createSignal<Fuse<Product> | null>(null);
 	const [categories, setCategories] = createSignal<Category[]>([]);
@@ -107,15 +130,18 @@ export const useDocuments = () => {
 
 	const filtered = createMemo(() => {
 		if (results() && params.query && params.query !== "") {
-			return filterResults(results()!, status(), major(), sub()).map(
-				(product) => product.item
+			return sortProducts(
+				filterResults(results()!, status(), major(), sub()).map(
+					(product) => product.item
+				),
+				sort()
 			);
 		}
 
 		const index = fuseRef()?.getIndex() as unknown as FuseIndex;
 		const docs = index?.docs ?? [];
 
-		return filterProducts(docs, status(), major(), sub());
+		return sortProducts(filterProducts(docs, status(), major(), sub()), sort());
 	});
 
 	const showMore = () => {
