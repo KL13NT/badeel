@@ -17,10 +17,17 @@ interface ActiveFiltersProps {
 	categories: Category[];
 	total: number;
 	current: number;
+	active: number;
+	openFilters: () => void;
+	clear: () => void;
+}
+
+interface TagsProps {
+	categories: Category[];
 	openFilters: () => void;
 }
 
-export default function ActiveFilters(props: ActiveFiltersProps) {
+function Tags(props: TagsProps) {
 	const { sub, status, query, major, updateParams } = useSearchQuery();
 
 	const handleClearFilter = (filter: string[]) => {
@@ -36,13 +43,7 @@ export default function ActiveFilters(props: ActiveFiltersProps) {
 	};
 
 	return (
-		<div class={styles.activeFilters}>
-			<p>
-				{t("show")} <span class="t-body">{localizeNumber(props.current)}</span>{" "}
-				{t("product")} {t("of")}{" "}
-				<span class="t-body">{localizeNumber(props.total)}</span> {t("product")}
-			</p>
-
+		<>
 			<Show when={query()}>
 				<Button
 					variant="default"
@@ -110,6 +111,50 @@ export default function ActiveFilters(props: ActiveFiltersProps) {
 					+{localizeNumber(sub().length - 1)}
 				</Button>
 			</Show>
-		</div>
+		</>
+	);
+}
+
+export default function ActiveFilters(props: ActiveFiltersProps) {
+	return (
+		<>
+			<div class={styles.activeFilters}>
+				<div class={styles.right}>
+					<p>
+						{t("show")}{" "}
+						<span class="t-body">{localizeNumber(props.current)}</span>{" "}
+						{t("product")} {t("of")}{" "}
+						<span class="t-body">{localizeNumber(props.total)}</span>{" "}
+						{t("product")}
+					</p>
+
+					<div class={styles.desktopFilters}>
+						<Tags
+							openFilters={props.openFilters}
+							categories={props.categories}
+						/>
+					</div>
+				</div>
+
+				<Show when={props.active > 0}>
+					<button class={styles.clear} onClick={() => props.clear()}>
+						{t("filters.clear")}
+					</button>
+				</Show>
+			</div>
+
+			<div class={styles.overlayContainer}>
+				<div class={styles.mobileFilters}>
+					<div>
+						<Tags
+							openFilters={props.openFilters}
+							categories={props.categories}
+						/>
+					</div>
+				</div>
+
+				<div class={styles.overlay} />
+			</div>
+		</>
 	);
 }

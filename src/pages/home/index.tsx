@@ -62,6 +62,16 @@ function App() {
 		setFiltersOpen(false);
 	};
 
+	const clearFilters = () => {
+		updateParams({
+			major: undefined,
+			sub: undefined,
+			query: undefined,
+			status: undefined,
+			page: 1,
+		});
+	};
+
 	const handleMajorCategoryChange = (enabled: boolean, ev: MouseEvent) => {
 		const target = ev.target as HTMLButtonElement;
 		const category = target.dataset.category!;
@@ -159,6 +169,8 @@ function App() {
 					openFilters={openFilters}
 					total={total()}
 					current={results().length}
+					clear={clearFilters}
+					active={filtersCount()}
 				/>
 			</Show>
 
