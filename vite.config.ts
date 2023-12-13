@@ -21,7 +21,14 @@ export default defineConfig({
 				},
 			},
 		}),
-		devtools(),
+		devtools({
+			autoname: true,
+			locator: {
+				targetIDE: "vscode",
+				componentLocation: true,
+				jsxLocation: true,
+			},
+		}),
 		mkcert(),
 		vitePWA({
 			registerType: "autoUpdate",

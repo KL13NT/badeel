@@ -1,7 +1,9 @@
 /* @refresh reload */
 import { render } from "solid-js/web";
 
-import "solid-devtools";
+if (import.meta.env.DEV) {
+	await import("solid-devtools");
+}
 
 import Router from "./Router";
 
