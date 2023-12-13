@@ -14,9 +14,9 @@
 	direction: rtl;
 
 	color-scheme: light dark;
-	color: var(--c-white);
+	color: var(--c-offwhite);
 	background-color: #242424;
-	font-family: Rubik, system-ui, Helvetica, Arial, sans-serif;
+	font-family: var(--f-primary);
 	background-color: var(--c-bg);
 
 	font-synthesis: none;
@@ -30,11 +30,22 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: var(--f-primary);
 }
 
 html,
 body {
 	overflow-x: hidden;
+}
+
+html {
+	/* 10px */
+	font-size: 62.5%;
+}
+
+body {
+	/* 16px */
+	font-size: 1.6rem;
 }
 
 a {

@@ -3,8 +3,9 @@
 	border: 1px solid var(--c-stroke-gray, #403f36);
 	border-radius: var(--r-5xl);
 	background-color: var(--c-bg);
-	color: var(--c-white);
-	padding: 12px 16px;
+	color: var(--c-offwhite);
+	padding: 8px 12px;
+
 	cursor: pointer;
 	text-decoration: none;
 	line-height: 1.5;
@@ -22,7 +23,7 @@
 		color 0.2s ease-in-out;
 
 	&:hover {
-		background-color: var(--c-white-translucent);
+		background-color: var(--c-offwhite-translucent);
 	}
 }
 
@@ -56,11 +57,5 @@
 	border: 1px solid var(--c-action);
 	&:hover {
 		background-color: var(--c-action-translucent);
-	}
-}
-
-@media screen and (max-width: 700px) {
-	.button {
-		padding: 8px 16px;
 	}
 }

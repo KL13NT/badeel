@@ -117,7 +117,7 @@ function App() {
 		<main class={styles.container}>
 			<div class={styles.intro}>
 				<TypeWriter />
-				<p>قائمة بشركات والمنتجات المطلوب مقاطعتها لدعم القضية الفلسطينية.</p>
+				<p>قائمة بالمنتجات الداعمة للكيان الصهيوني والبدائل المحلية.</p>
 				<SearchInput onSubmit={handleSubmit} value={query()} />
 
 				{error() && (
@@ -141,6 +141,7 @@ function App() {
 			<div class={styles.filters}>
 				<Button
 					variant="action-invert"
+					class={styles.filter}
 					onClick={openFilters}
 					data-active={arrayExists(sub()) || arrayExists(status()) || major}
 				>

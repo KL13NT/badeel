@@ -1,16 +1,19 @@
 import clsx from "clsx";
 import { For, createSignal } from "solid-js";
-
-import { Category, Product } from "~types";
-import { STATUS_TITLE_MAPPING } from "~constants/filters";
-import Button from "~components/Button/Button";
-import t from "~utils/messages";
-import { getProductCategory } from "~utils/categories";
-import Badge from "~components/Badge/Badge";
 import { TransitionGroup } from "solid-transition-group";
 
-import styles from "./Table.module.scss";
+import Button from "~components/Button/Button";
+import Badge from "~components/Badge/Badge";
 import Skeleton from "~components/Skeleton/Skeleton";
+
+import t from "~utils/messages";
+import { getProductCategory } from "~utils/categories";
+import { STATUS_TITLE_MAPPING } from "~constants/filters";
+import { Category, Product } from "~types";
+
+import styles from "./Table.module.scss";
+
+import ViewIcon from "~assets/icons/view.svg?component-solid";
 
 interface Props {
 	products: Product[];
@@ -90,12 +93,13 @@ export default function Table(props: Props) {
 											</Badge>
 										</td>
 										<td>
-											<Button
+											<button
 												onClick={[props.showProof, result]}
 												class={styles.details}
 											>
 												<span>عرض المزيد</span>
-											</Button>
+												<ViewIcon />
+											</button>
 										</td>
 									</tr>
 								);

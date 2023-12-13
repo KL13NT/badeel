@@ -1,12 +1,12 @@
 .t-button {
-	font-size: 1rem;
+	font-size: var(--f-size-2);
 	font-family: Rubik;
 	font-weight: 500;
 	font-style: normal;
 }
 
 .t-body {
-	font-size: 1rem;
+	font-size: var(--f-size-2);
 	font-family: Rubik;
 	font-weight: 400;
 	font-style: normal;
@@ -15,16 +15,16 @@
 .title {
 	font-family: "29LT Ada Flat", system-ui, Avenir, Helvetica, Arial, sans-serif;
 	font-weight: bold;
-	font-size: 4rem;
+	font-size: var(--f-size-9);
 }
 
 .error {
 	color: var(--c-action);
-	font-size: 1.25rem;
+	font-size: var(--f-size-4);
 }
 
 @media screen and (max-width: 700px) {
 	.title {
-		font-size: 2rem;
+		font-size: var(--f-size-7);
 	}
 }

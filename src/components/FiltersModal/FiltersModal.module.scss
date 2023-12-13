@@ -45,7 +45,7 @@
 }
 
 .title {
-	font-size: 1rem;
+	font-size: var(--f-size-2);
 	font-weight: 600;
 	color: var(--colors-body-1, #efece0);
 	margin-block-end: var(--s-2);
@@ -75,7 +75,7 @@
 
 .clear {
 	color: var(--colors-fills-outlines-red, #ff7032);
-	font-size: 1rem;
+	font-size: var(--f-size-2);
 	font-weight: 400;
 	text-decoration: underline;
 }
@@ -83,7 +83,7 @@
 .close {
 	height: 16px;
 	width: 16px;
-	color: var(--c-white);
+	color: var(--c-offwhite);
 }
 
 .footer {

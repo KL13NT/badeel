@@ -4,7 +4,7 @@
 	position: relative;
 	padding-top: var(--s-7);
 	padding-bottom: 150px;
-	font-size: 1.125rem;
+	font-size: var(--f-size-3);
 	padding-inline: var(--s-3);
 
 	a {
@@ -34,6 +34,6 @@
 @media screen and (max-width: 700px) {
 	.container {
 		padding-inline: var(--s-2);
-		font-size: 1rem;
+		font-size: var(--f-size-2);
 	}
 }
