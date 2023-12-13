@@ -146,47 +146,45 @@ export default function ProductModal(props: ProductModalProps) {
 
 	return (
 		<Modal close={props.close} id="product-modal">
-			<div class={styles.dialog}>
-				<div class={styles.body}>
-					<div class={styles.header}>
-						<p class={clsx("t-button", styles.name)}>{product().Name}</p>
-						<p class={clsx("t-body", styles.englishName)}>
-							{product()["English Name"]}
+			<div class={styles.body}>
+				<div class={styles.header}>
+					<p class={clsx("t-button", styles.name)}>{product().Name}</p>
+					<p class={clsx("t-body", styles.englishName)}>
+						{product()["English Name"]}
+					</p>
+				</div>
+
+				<div class={styles.content}>
+					<div class={styles.meta}>
+						<Badge variant={product().status}>
+							{statusMapping[product().status]}
+						</Badge>
+					</div>
+
+					<div class={styles.proof}>
+						<p class={clsx("t-button")}>{t("manufacturer")}</p>
+						<p class={clsx("t-body")}>
+							{product().Manufacturer.length > 0
+								? product().Manufacturer
+								: "غير متوفر"}
 						</p>
 					</div>
 
-					<div class={styles.content}>
-						<div class={styles.meta}>
-							<Badge variant={product().status}>
-								{statusMapping[product().status]}
-							</Badge>
-						</div>
+					<Proof product={product()} />
 
-						<div class={styles.proof}>
-							<p class={clsx("t-button")}>{t("manufacturer")}</p>
-							<p class={clsx("t-body")}>
-								{product().Manufacturer.length > 0
-									? product().Manufacturer
-									: "غير متوفر"}
-							</p>
-						</div>
-
-						<Proof product={product()} />
-
-						<div class={styles.footer}>
-							<FooterActions
-								product={product()}
-								showAlternatives={showAlternatives}
-							/>
-							<Button
-								id="close"
-								aria-label="close dialog"
-								variant="action-invert"
-								onClick={props.close}
-							>
-								أغلق النافذة
-							</Button>
-						</div>
+					<div class={styles.footer}>
+						<FooterActions
+							product={product()}
+							showAlternatives={showAlternatives}
+						/>
+						<Button
+							id="close"
+							aria-label="close dialog"
+							variant="action-invert"
+							onClick={props.close}
+						>
+							أغلق النافذة
+						</Button>
 					</div>
 				</div>
 			</div>

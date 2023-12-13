@@ -22,6 +22,8 @@ interface Props {
 	close: () => void;
 }
 
+let ref: HTMLDivElement;
+
 export default function FiltersModal(props: Props) {
 	const { major, sub, status, updateParams } = useSearchQuery();
 	const [state, setState] = createStore({
@@ -98,7 +100,7 @@ export default function FiltersModal(props: Props) {
 
 	return (
 		<Modal close={props.close} id="filters-modal">
-			<div class={styles.filtersModal}>
+			<div class={styles.filtersModal} ref={ref}>
 				<div class={styles.content}>
 					<div class={styles.header}>
 						<h2>{t("filters.title")}</h2>

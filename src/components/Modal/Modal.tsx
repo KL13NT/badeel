@@ -19,7 +19,7 @@ export default function Modal(props: ModalProps) {
 	const handleClickOutside = (ev: MouseEvent) => {
 		const target = ev.target as HTMLElement;
 
-		if (!target.closest(".overlay > div")) {
+		if (!target.closest(`.${styles.modal} :first-child`)) {
 			props.close();
 		}
 	};
