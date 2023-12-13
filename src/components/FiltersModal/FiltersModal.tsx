@@ -1,4 +1,4 @@
-import { For, JSX, onCleanup, onMount } from "solid-js";
+import { For, JSX } from "solid-js";
 import { createStore } from "solid-js/store";
 
 import Combobox from "~components/Combobox/Combobox";
@@ -15,13 +15,13 @@ import { Category, Filter } from "~types";
 import styles from "./FiltersModal.module.scss";
 
 import CloseIcon from "~assets/icons/x.svg?component-solid";
+import Modal from "~components/Modal/Modal";
 
 interface Props {
 	categories: Category[];
 	close: () => void;
 }
 
-let ref: HTMLDivElement | undefined;
 export default function FiltersModal(props: Props) {
 	const { major, sub, status, updateParams } = useSearchQuery();
 	const [state, setState] = createStore({
@@ -29,12 +29,6 @@ export default function FiltersModal(props: Props) {
 		sub: sub(),
 		status: status(),
 	});
-
-	const handleKeyUp = (ev: KeyboardEvent) => {
-		if (ev.key.toLowerCase() === "escape") {
-			props.close();
-		}
-	};
 
 	const handleCategoryChange = (value: string) => {
 		if (value === "all") {
@@ -91,14 +85,6 @@ export default function FiltersModal(props: Props) {
 		});
 	};
 
-	const handleClickOutside = (ev: MouseEvent) => {
-		const target = ev.target as HTMLElement;
-
-		if (!target.closest(`.${styles.filtersModal}`)) {
-			props.close();
-		}
-	};
-
 	const apply = () => {
 		updateParams({
 			major: state.major,
@@ -110,119 +96,101 @@ export default function FiltersModal(props: Props) {
 		props.close();
 	};
 
-	onMount(() => {
-		document.addEventListener("click", handleClickOutside);
-
-		if (ref) {
-			ref.focus();
-		}
-	});
-
-	onCleanup(() => {
-		document.removeEventListener("click", handleClickOutside);
-	});
-
 	return (
-		<div
-			class={styles.filtersModal}
-			role="dialog"
-			aria-modal="true"
-			id="filters-modal"
-			tabIndex="-1"
-			ref={ref}
-			onKeyUp={handleKeyUp}
-		>
-			<div class={styles.content}>
-				<div class={styles.header}>
-					<h2>{t("filters.title")}</h2>
+		<Modal close={props.close} id="filters-modal">
+			<div class={styles.filtersModal}>
+				<div class={styles.content}>
+					<div class={styles.header}>
+						<h2>{t("filters.title")}</h2>
 
-					<div class={styles.actions}>
-						<button onClick={clear} class={styles.clear}>
-							{t("filters.clear")}
-						</button>
-						<button onClick={() => props.close()} class={styles.close}>
-							<CloseIcon />
-						</button>
+						<div class={styles.actions}>
+							<button onClick={clear} class={styles.clear}>
+								{t("filters.clear")}
+							</button>
+							<button onClick={() => props.close()} class={styles.close}>
+								<CloseIcon />
+							</button>
+						</div>
 					</div>
-				</div>
 
-				<div class={styles.section}>
-					<p class={styles.title} data-active={Boolean(state.major)}>
-						{t("filters.category")}
-					</p>
-
-					<Combobox
-						options={props.categories
-							.filter((category) => !category.major)
-							.map((category) => ({
-								value: category.english,
-								name: category.arabic,
-							}))}
-						default={{
-							name: "جميع المنتجات",
-							value: "all",
-						}}
-						onSelect={handleCategoryChange}
-						id="category-selection"
-						label={t("filters.list.category")}
-						value={
-							state.major && props.categories.length > 0
-								? getCategoryByKey(state.major).arabic
-								: undefined
-						}
-					/>
-				</div>
-
-				{state.major ? (
 					<div class={styles.section}>
-						<p class={styles.title} data-active={state.sub.length > 0}>
-							{t("filters.subcategory")}
+						<p class={styles.title} data-active={Boolean(state.major)}>
+							{t("filters.category")}
 						</p>
 
-						<For
-							each={props.categories.filter(
-								(category) => category.major === state.major
-							)}
-						>
-							{(category) => (
+						<Combobox
+							options={props.categories
+								.filter((category) => !category.major)
+								.map((category) => ({
+									value: category.english,
+									name: category.arabic,
+								}))}
+							default={{
+								name: "جميع المنتجات",
+								value: "all",
+							}}
+							onSelect={handleCategoryChange}
+							id="category-selection"
+							label={t("filters.list.category")}
+							value={
+								state.major && props.categories.length > 0
+									? getCategoryByKey(state.major).arabic
+									: undefined
+							}
+						/>
+					</div>
+
+					{state.major ? (
+						<div class={styles.section}>
+							<p class={styles.title} data-active={state.sub.length > 0}>
+								{t("filters.subcategory")}
+							</p>
+
+							<For
+								each={props.categories.filter(
+									(category) => category.major === state.major
+								)}
+							>
+								{(category) => (
+									<Checkbox
+										label={category.arabic}
+										value={category.english}
+										id={category.english}
+										name="subcategory"
+										onChange={handleSubChange}
+										checked={sub().includes(category.english)}
+									/>
+								)}
+							</For>
+						</div>
+					) : null}
+
+					<div class={styles.section}>
+						<p class={styles.title} data-active={state.status.length > 0}>
+							{t("filters.status")}
+						</p>
+
+						<For each={STATUS_FILTER_CHECKBOX_OPTIONS}>
+							{(option) => (
 								<Checkbox
-									label={category.arabic}
-									value={category.english}
-									id={category.english}
-									name="subcategory"
-									onChange={handleSubChange}
-									checked={sub().includes(category.english)}
+									label={option.title}
+									value={option.value}
+									id={option.value}
+									name="status"
+									onChange={handleStatusChange}
+									checked={status().includes(option.value)}
 								/>
 							)}
 						</For>
 					</div>
-				) : null}
+				</div>
 
-				<div class={styles.section}>
-					<p class={styles.title} data-active={state.status.length > 0}>
-						{t("filters.status")}
-					</p>
-
-					<For each={STATUS_FILTER_CHECKBOX_OPTIONS}>
-						{(option) => (
-							<Checkbox
-								label={option.title}
-								value={option.value}
-								id={option.value}
-								name="status"
-								onChange={handleStatusChange}
-								checked={status().includes(option.value)}
-							/>
-						)}
-					</For>
+				<div class={styles.footer}>
+					<Button variant="action-invert" class={styles.action} onClick={apply}>
+						{t("filters.results")}
+					</Button>
 				</div>
 			</div>
-
-			<div class={styles.footer}>
-				<Button variant="action-invert" class={styles.action} onClick={apply}>
-					{t("filters.results")}
-				</Button>
-			</div>
-		</div>
+		</Modal>
 	);
 }

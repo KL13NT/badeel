@@ -32,6 +32,7 @@
 
 		td:nth-of-type(2) {
 			color: var(--c-body-2);
+			font-size: var(--f-size-3);
 		}
 
 		&.hoverIndicator {
@@ -100,7 +101,7 @@
 .details {
 	display: inline-flex;
 	padding: 4px 12px 4px 12px;
-	max-width: 56px;
+	max-width: 40px;
 	overflow: hidden;
 	cursor: pointer;
 	transition:
@@ -135,7 +136,6 @@
 	}
 
 	> span {
-		display: none;
 		white-space: nowrap;
 	}
 }

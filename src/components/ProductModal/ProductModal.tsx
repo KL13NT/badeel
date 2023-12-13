@@ -1,16 +1,17 @@
-import { useProductModal } from "~stores/product-modal";
-import { Show, batch, createEffect } from "solid-js";
-import Button from "~components/Button/Button";
-import t from "~utils/messages";
-import { Transition } from "solid-transition-group";
-
-import styles from "./ProductModal.module.scss";
 import clsx from "clsx";
+import { batch } from "solid-js";
+
+import Button from "~components/Button/Button";
 import Badge from "~components/Badge/Badge";
+import Modal from "~components/Modal/Modal";
+
+import t from "~utils/messages";
 import { Product, Status } from "~types";
 import { UNSURE_SOURCE_URL } from "~constants/documents";
 import { useSearchQuery } from "~hooks/useSearchQuery";
 import { getCategoryMajor } from "~utils/categories";
+
+import styles from "./ProductModal.module.scss";
 
 const getCellURL = (ref: number) => `${UNSURE_SOURCE_URL}&range=A${ref}`;
 
@@ -32,11 +33,11 @@ const statusMapping: Record<Status, string> = {
 
 type proofMappingKey = keyof typeof proofMapping;
 
-interface Props {
+interface ProofProps {
 	product: Product;
 }
 
-const Proof = (props: Props) => {
+const Proof = (props: ProofProps) => {
 	return (
 		<>
 			{props.product.status === "boycott" ? (
@@ -116,108 +117,79 @@ const FooterActions = (props: FooterActionsProps) => {
 	);
 };
 
-let ref: HTMLDivElement | undefined;
-export default function ProductModal() {
-	const [productModal, setProductModal] = useProductModal();
+interface ProductModalProps {
+	product: Product;
+	close: () => void;
+}
+
+export default function ProductModal(props: ProductModalProps) {
 	const { params, updateParams } = useSearchQuery();
 
-	const close = () => {
-		setProductModal({
-			product: null,
-		});
-	};
-
-	const handleKeyUp = (ev: KeyboardEvent) => {
-		if (ev.key.toLowerCase() === "escape") {
-			close();
-		}
-	};
-
 	const showAlternatives = () => {
-		if (!productModal.product) return;
-
-		const major = getCategoryMajor(productModal.product?.Category);
+		const major = getCategoryMajor(props.product.Category);
 
 		batch(() => {
 			updateParams({
 				...params,
 				query: undefined,
-				sub: JSON.stringify([productModal.product?.Category]),
+				sub: JSON.stringify([props.product.Category]),
 				major: major.english,
 				status: JSON.stringify(["alternative"]),
 				page: 1,
 			});
 
-			setProductModal({
-				product: null,
-			});
+			props.close();
 		});
 	};
 
-	const product = () => productModal.product!;
-
-	createEffect(() => {
-		if (productModal.product && ref) {
-			ref.focus();
-		}
-	});
+	const product = () => props.product;
 
 	return (
-		<Transition name="slide-fade">
-			<Show when={product()}>
-				<div
-					role="dialog"
-					aria-modal="true"
-					id="product-modal"
-					class={styles.dialog}
-					ref={ref}
-					tabIndex="-1"
-					onKeyUp={handleKeyUp}
-				>
-					<div class={styles.body}>
-						<div class={styles.header}>
-							<p class={clsx("t-button", styles.name)}>{product().Name}</p>
-							<p class={clsx("t-body", styles.englishName)}>
-								{product()["English Name"]}
+		<Modal close={props.close} id="product-modal">
+			<div class={styles.dialog}>
+				<div class={styles.body}>
+					<div class={styles.header}>
+						<p class={clsx("t-button", styles.name)}>{product().Name}</p>
+						<p class={clsx("t-body", styles.englishName)}>
+							{product()["English Name"]}
+						</p>
+					</div>
+
+					<div class={styles.content}>
+						<div class={styles.meta}>
+							<Badge variant={product().status}>
+								{statusMapping[product().status]}
+							</Badge>
+						</div>
+
+						<div class={styles.proof}>
+							<p class={clsx("t-button")}>{t("manufacturer")}</p>
+							<p class={clsx("t-body")}>
+								{product().Manufacturer.length > 0
+									? product().Manufacturer
+									: "غير متوفر"}
 							</p>
 						</div>
 
-						<div class={styles.content}>
-							<div class={styles.meta}>
-								<Badge variant={product().status}>
-									{statusMapping[product().status]}
-								</Badge>
-							</div>
+						<Proof product={product()} />
 
-							<div class={styles.proof}>
-								<p class={clsx("t-button")}>{t("manufacturer")}</p>
-								<p class={clsx("t-body")}>
-									{product().Manufacturer.length > 0
-										? product().Manufacturer
-										: "غير متوفر"}
-								</p>
-							</div>
-
-							<Proof product={product()} />
-
-							<div class={styles.footer}>
-								<FooterActions
-									product={product()}
-									showAlternatives={showAlternatives}
-								/>
-								<Button
-									id="close"
-									aria-label="close dialog"
-									variant="action-invert"
-									onClick={close}
-								>
-									أغلق النافذة
-								</Button>
-							</div>
+						<div class={styles.footer}>
+							<FooterActions
+								product={product()}
+								showAlternatives={showAlternatives}
+							/>
+							<Button
+								id="close"
+								aria-label="close dialog"
+								variant="action-invert"
+								onClick={props.close}
+							>
+								أغلق النافذة
+							</Button>
 						</div>
 					</div>
 				</div>
-			</Show>
-		</Transition>
+			</div>
+		</Modal>
 	);
 }

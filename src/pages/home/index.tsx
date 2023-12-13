@@ -15,7 +15,6 @@ import { arrayExists } from "~utils/common";
 import { getCategoryMajor } from "~utils/categories";
 import { useDocuments } from "~hooks/useDocuments";
 import { useSearchQuery } from "~hooks/useSearchQuery";
-import { useProductModal } from "~stores/product-modal";
 
 import { Product } from "~types";
 
@@ -37,7 +36,9 @@ function App() {
 		hasMore,
 		showMore,
 	} = useDocuments();
-	const [productModal, setProductModal] = useProductModal();
+	const [focusedProduct, setFocusedProduct] = createSignal<Product | null>(
+		null
+	);
 	const [filtersOpen, setFiltersOpen] = createSignal(false);
 
 	const handleSubmit = (query: string) => {
@@ -49,9 +50,7 @@ function App() {
 	};
 
 	const showProof = (product: Product) => {
-		setProductModal({
-			product,
-		});
+		setFocusedProduct(product);
 	};
 
 	const openFilters = () => {
@@ -60,6 +59,10 @@ function App() {
 
 	const closeFilters = () => {
 		setFiltersOpen(false);
+	};
+
+	const closeProductModal = () => {
+		setFocusedProduct(null);
 	};
 
 	const clearFilters = () => {
@@ -125,6 +128,10 @@ function App() {
 
 	return (
 		<main class={styles.container}>
+			<Show when={focusedProduct() || filtersOpen()}>
+				<div class="overlay" />
+			</Show>
+
 			<div class={styles.intro}>
 				<TypeWriter />
 				<p>قائمة بالمنتجات الداعمة للكيان الصهيوني والبدائل المحلية.</p>
@@ -198,16 +205,19 @@ function App() {
 					)}
 				</div>
 
-				<ProductModal />
+				<Transition name="slide-fade">
+					<Show when={focusedProduct()}>
+						<ProductModal
+							product={focusedProduct()!}
+							close={closeProductModal}
+						/>
+					</Show>
+				</Transition>
 			</section>
 
 			<section class={styles.ack}>
 				<A href="/acknowledgments">{t("footer.ack")}</A>
 			</section>
-
-			<Show when={productModal.product || filtersOpen()}>
-				<div class="overlay" />
-			</Show>
 		</main>
 	);
 }

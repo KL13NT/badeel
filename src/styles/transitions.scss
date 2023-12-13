@@ -31,7 +31,7 @@
 .slide-right {
 	&-enter-active,
 	&-exit-active {
-		transition: transform 0.2s ease-out;
+		transition: transform 0.3s ease-out;
 	}
 
 	&-enter,
@@ -51,12 +51,12 @@
 
 .slide-fade-table {
 	&-move {
-		transition: transform 0.2s ease-out;
+		transition: transform 0.2s linear;
 	}
 
 	&-enter-active,
 	&-exit-active {
-		transition: all 0.2s ease-out;
+		transition: all 0.2s linear;
 	}
 
 	&-enter,
