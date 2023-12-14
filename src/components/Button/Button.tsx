@@ -18,6 +18,7 @@ interface Props extends JSX.AriaAttributes {
 	variant?: "default" | "danger" | "action" | "action-invert";
 	type?: ButtonProps["type"];
 	id?: ButtonProps["id"];
+	disabled?: boolean;
 }
 
 export default function Button(_props: Props) {
