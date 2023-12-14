@@ -22,7 +22,7 @@ import { filterProducts, filterResults } from "~utils/filters";
 let productFuse: null | Fuse<Product> = null;
 const itemsPerPage = 20;
 
-const sortKeyLocaleMap: Record<SortOption, string> = {
+const sortKeyLocaleMap: Record<Exclude<SortOption, "accuracy">, string> = {
 	Name: "ar-EG",
 	status: "en-GB",
 	Category: "en-GB",
@@ -30,6 +30,10 @@ const sortKeyLocaleMap: Record<SortOption, string> = {
 };
 
 const sortProducts = (products: Product[], sort: SortOption) => {
+	if (sort === "accuracy") {
+		return products;
+	}
+
 	return [...products].sort((a, b) =>
 		a[sort]
 			.trim()
@@ -71,6 +75,7 @@ export const useDocuments = () => {
 				...params,
 				query: actual,
 				page: 1,
+				sort: "accuracy",
 			});
 			setResults(found);
 		});

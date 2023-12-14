@@ -39,7 +39,7 @@ export const useSearchQuery = () => {
 
 	const query = () => params.query;
 
-	const sort = () => (params.sort ?? "Name") as unknown as SortOption;
+	const sort = () => (params.sort ?? "accuracy") as unknown as SortOption;
 
 	return {
 		params,

@@ -36,6 +36,10 @@ export const SORT_OPTIONS: {
 		name: t("sort.category"),
 		value: "Category",
 	},
+	{
+		name: t("sort.accuracy"),
+		value: "accuracy",
+	},
 ];
 
 export const STATUS_TITLE_MAPPING: Record<Status, string> = {
