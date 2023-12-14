@@ -119,9 +119,10 @@ function App() {
 	};
 
 	const filtersCount = () => {
-		const total = sub().length + status().length;
+		let total = sub().length + status().length;
 
-		if (major()) return total + 1;
+		if (major()) total += 1;
+		if (query()) total += 1;
 
 		return total;
 	};
@@ -174,8 +175,7 @@ function App() {
 				<ActiveFilters
 					categories={categories()}
 					openFilters={openFilters}
-					total={total()}
-					current={results().length}
+					sort={sort()}
 					clear={clearFilters}
 					active={filtersCount()}
 				/>

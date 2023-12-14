@@ -7,11 +7,19 @@ import { useSearchQuery } from "~hooks/useSearchQuery";
 import { localizeNumber } from "~utils/common";
 import t, { MessageKey } from "~utils/messages";
 
-import { Category } from "~types";
+import { Category, SortOption } from "~types";
 
 import styles from "./ActiveFilters.module.scss";
 
 import CloseIcon from "~assets/icons/x-2.svg?component-solid";
+
+const sortKeyMessageMap: Record<SortOption, string> = {
+	accuracy: t("sort.accuracy"),
+	status: t("sort.status"),
+	Name: t("sort.arabicName"),
+	Category: t("sort.category"),
+	"English Name": t("sort.englishName"),
+};
 
 interface TagsProps {
 	categories: Category[];
@@ -108,9 +116,8 @@ function Tags(props: TagsProps) {
 
 interface ActiveFiltersProps {
 	categories: Category[];
-	total: number;
-	current: number;
 	active: number;
+	sort: SortOption;
 	openFilters: () => void;
 	clear: () => void;
 }
@@ -121,11 +128,7 @@ export default function ActiveFilters(props: ActiveFiltersProps) {
 			<div class={styles.activeFilters}>
 				<div class={styles.right}>
 					<p>
-						{t("show")}{" "}
-						<span class="t-body">{localizeNumber(props.current)}</span>{" "}
-						{t("product")} {t("of")}{" "}
-						<span class="t-body">{localizeNumber(props.total)}</span>{" "}
-						{t("product")}
+						{t("show")} {sortKeyMessageMap[props.sort]}
 					</p>
 
 					<div class={styles.desktopFilters}>
