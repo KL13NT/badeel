@@ -23,11 +23,13 @@ import styles from "./index.module.scss";
 import FilterIcon from "~assets/icons/filter.svg?component-solid";
 
 let searchThrottleTimeout: number | number = 0;
+let resultsRef: HTMLElement;
 
 function App() {
-	const { major, sub, status, query, updateParams } = useSearchQuery();
+	const { major, sub, status, query, sort, updateParams } = useSearchQuery();
 	const {
 		search,
+		getSuggestions,
 		results,
 		categories,
 		error,
@@ -41,11 +43,17 @@ function App() {
 	);
 	const [filtersOpen, setFiltersOpen] = createSignal(false);
 
-	const handleSubmit = (query: string) => {
+	const handleSearch = (query: string, shouldClearFilters = false) => {
 		clearTimeout(searchThrottleTimeout);
 
+		resultsRef.focus();
+		window.scrollTo({
+			top: resultsRef.getBoundingClientRect().top + window.pageYOffset - 180,
+			behavior: "smooth",
+		});
+
 		searchThrottleTimeout = setTimeout(() => {
-			search(query);
+			search(query, shouldClearFilters);
 		}, 250);
 	};
 
@@ -136,7 +144,11 @@ function App() {
 			<div class={styles.intro}>
 				<TypeWriter />
 				<p>قائمة بالمنتجات الداعمة للكيان الصهيوني والبدائل المحلية.</p>
-				<SearchInput onSubmit={handleSubmit} value={query()} />
+				<SearchInput
+					onSubmit={handleSearch}
+					onSuggest={getSuggestions}
+					value={query()}
+				/>
 
 				{error() && (
 					<p class="error">
@@ -181,7 +193,7 @@ function App() {
 				/>
 			</Show>
 
-			<section>
+			<section ref={resultsRef} tabIndex={-1} class={styles.table}>
 				{results() && !loading() ? (
 					<Table
 						products={results()}

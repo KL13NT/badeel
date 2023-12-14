@@ -50,7 +50,7 @@ export const useDocuments = () => {
 	const [error, setError] = createSignal(false);
 	const [loading, setLoading] = createSignal(true);
 
-	const search = (query?: string) => {
+	const search = (query?: string, shouldClearFilters = false) => {
 		const actual = query ?? params.query ?? "";
 
 		if (!productFuse) {
@@ -71,13 +71,35 @@ export const useDocuments = () => {
 		});
 
 		batch(() => {
-			updateParams({
-				...params,
-				query: actual,
-				page: 1,
-				sort: "accuracy",
-			});
+			if (shouldClearFilters) {
+				updateParams({
+					...params,
+					query: actual,
+					page: 1,
+					major: undefined,
+					sub: undefined,
+					status: undefined,
+					sort: "accuracy",
+				});
+			} else {
+				updateParams({
+					...params,
+					query: actual,
+					page: 1,
+					sort: "accuracy",
+				});
+			}
 			setResults(found);
+		});
+	};
+
+	const getSuggestions = (query: string) => {
+		if (!productFuse) {
+			return [];
+		}
+
+		return productFuse.search(query, {
+			limit: 5,
 		});
 	};
 
@@ -113,6 +135,8 @@ export const useDocuments = () => {
 				keys: ["Name", "English Name", "Manufacturer"],
 				includeScore: true,
 				findAllMatches: false,
+				includeMatches: true,
+				isCaseSensitive: true,
 			});
 
 			generateCategoryMap(categories);
@@ -162,6 +186,7 @@ export const useDocuments = () => {
 	return {
 		fuse: fuseRef,
 		results: paginated,
+		getSuggestions,
 		search,
 		categories,
 		error,
