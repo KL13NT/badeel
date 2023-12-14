@@ -104,6 +104,7 @@
 	> p {
 		margin-top: var(--s-4);
 		padding-inline: var(--s-2);
+		line-height: 1.6;
 	}
 }
 
@@ -134,7 +135,7 @@
 		width: 100%;
 		top: 0;
 		left: 0;
-		z-index: 4;
+		z-index: var(--z-3);
 		background: var(--c-bg);
 
 		> div:first-of-type {

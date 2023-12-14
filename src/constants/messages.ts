@@ -24,7 +24,7 @@ export const MESSAGES = {
 	contact: "تواصَل",
 	source: "تصفح المصدر",
 	product: "مُنتَج",
-	show: "تُظهر",
+	show: "تُظهِر المُنتَجات مُرتّبة حسب",
 	manufacturer: "المُنتِج",
 
 	"table.name": "اسم المنتج أو الشركة",
