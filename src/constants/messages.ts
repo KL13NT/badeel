@@ -67,5 +67,5 @@ export const MESSAGES = {
 	"sort.category": "التصنيف",
 	"sort.status": "الحالة",
 
-	version: "نُسخة",
+	version: "تحديث",
 } as const;
