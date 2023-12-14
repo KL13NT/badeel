@@ -19,7 +19,7 @@ export const filterProducts = (
 		final = final.filter((result) => sub.includes(result.Category));
 	}
 
-	if (major && (!sub || sub.length === 0)) {
+	if (major && !arrayExists(sub)) {
 		const subCategoriesKeys = getSubCategories(major).map(
 			(category) => category.english
 		);
@@ -52,7 +52,7 @@ export const filterResults = (
 		final = final.filter((result) => sub.includes(result.item.Category));
 	}
 
-	if (major && !sub) {
+	if (major && !arrayExists(sub)) {
 		const subCategoriesKeys = getSubCategories(major).map(
 			(category) => category.english
 		);
