@@ -33,19 +33,6 @@ export default function Tags(props: TagsProps) {
 
 	return (
 		<>
-			<Show when={sort() !== "accuracy"}>
-				<Button
-					variant="default"
-					class={styles.filter}
-					data-filter="sort"
-					onClick={[handleClearFilter, ["sort"]]}
-				>
-					<span>{t("filters.sort")}: </span>
-					{t(`sort.${sort()}` as MessageKey)}
-					<CloseIcon />
-				</Button>
-			</Show>
-
 			<Show when={query()}>
 				<Button
 					variant="default"
@@ -55,6 +42,19 @@ export default function Tags(props: TagsProps) {
 				>
 					<span>{t("filters.search")}: </span>
 					{query()}
+					<CloseIcon />
+				</Button>
+			</Show>
+
+			<Show when={sort() !== "accuracy"}>
+				<Button
+					variant="default"
+					class={styles.filter}
+					data-filter="sort"
+					onClick={[handleClearFilter, ["sort"]]}
+				>
+					<span>{t("filters.sort")}: </span>
+					{t(`sort.${sort()}` as MessageKey)}
 					<CloseIcon />
 				</Button>
 			</Show>
