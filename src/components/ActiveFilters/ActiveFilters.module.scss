@@ -29,7 +29,7 @@
 }
 
 .clear {
-	color: var(--colors-fills-outlines-red, #ff7032);
+	color: var(--c-red, #ff7032);
 	text-align: right;
 
 	text-decoration-line: underline;
@@ -37,30 +37,6 @@
 	background: none;
 	border: none;
 	font-size: var(--f-size-2);
-}
-
-.filter {
-	background: var(--colors-fills-outlines-gray-2, #313131);
-	display: flex;
-	padding: 4px 10px;
-	border-radius: 8px;
-	font-weight: 600;
-
-	justify-content: center;
-	align-items: center;
-	gap: 8px;
-
-	svg {
-		color: var(--c-action);
-		height: 12px;
-		width: 12px;
-	}
-
-	span {
-		color: var(--colors-body-2, #9f9d98);
-		font-weight: 400;
-		font-size: var(--f-size-2);
-	}
 }
 
 .mobileFilters {
@@ -113,6 +89,47 @@
 	}
 }
 
+.left {
+	display: flex;
+	gap: var(--s-7);
+}
+
+.separator {
+	height: 32px;
+	width: 1px;
+	background-color: var(--c-gray-3);
+}
+
+.view {
+	display: flex;
+	gap: var(--s-1);
+}
+
+.toggle {
+	padding: 0;
+	border: none;
+	background-color: transparent;
+	color: var(--c-gray-2);
+
+	&[aria-pressed="true"] {
+		background-color: transparent;
+		color: var(--c-red);
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: var(--c-red);
+		}
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		background-color: transparent;
+		color: var(--c-gray-3);
+	}
+}
+
 @media screen and (max-width: 700px) {
 	.activeFilters {
 		padding-block: var(--s-3);
@@ -125,6 +142,11 @@
 	}
 
 	.desktopFilters {
+		display: none;
+	}
+
+	.view,
+	.separator {
 		display: none;
 	}
 }
