@@ -16,6 +16,7 @@ interface Props extends ButtonProps {
 	class?: string;
 	onChange: (updated: boolean, event: MouseEvent) => unknown;
 	pressed?: boolean;
+	allowDisable?: false;
 }
 
 export default function Toggle(_props: Props) {
@@ -26,11 +27,16 @@ export default function Toggle(_props: Props) {
 		"class",
 		"label",
 		"onChange",
+		"allowDisable",
 	]);
 	const [pressed, setPressed] = createSignal(false);
 
 	const toggle = (ev: MouseEvent) => {
 		const updated = !pressed();
+
+		if (!props.allowDisable && !updated) {
+			return;
+		}
 
 		setPressed(updated);
 		props.onChange(updated, ev);
