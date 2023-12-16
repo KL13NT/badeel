@@ -98,64 +98,67 @@ export default function SearchInput(props: Props) {
 		query().length > 0 && arabicLettersRegex.test(query()) ? "ar" : "en";
 
 	return (
-		<form
-			onSubmit={handleSubmit}
-			class={styles.search}
-			data-active={query().length > 0 && results().length > 0}
-			onKeyDown={handleKeyDown}
-		>
-			<div>
-				<div class={styles.content}>
-					<SearchIcon />
-					<input
-						type="text"
-						name="query"
-						placeholder="إبحث عن منتج أو شركة..."
-						class={clsx("t-body", styles.input)}
-						value={props.value ?? ""}
-						onInput={(ev) => setQuery(ev.currentTarget.value)}
-						autocomplete="off"
-					/>
-				</div>
-				<Button
-					type="submit"
-					class={styles.submit}
-					variant="action"
-					disabled={query().length === 0}
-				>
-					إبحث
-				</Button>
-			</div>
-
-			<Transition name="slide-fade">
-				<Show when={query().length > 0 && results().length > 0}>
-					<div class={styles.results} data-language={language()}>
-						<For each={results()}>
-							{(product) => {
-								const name = product.matches![0].value!;
-
-								return (
-									<button
-										dir="auto"
-										class={styles.result}
-										onClick={[handleResultClick, name]}
-										type="button"
-									>
-										{arabicLettersRegex.test(name) ? (
-											name
-										) : (
-											<FormattedResultText
-												inputString={name}
-												matchIndices={product.matches![0].indices}
-											/>
-										)}
-									</button>
-								);
-							}}
-						</For>
+		<div class={styles.wrapper}>
+			<form
+				onSubmit={handleSubmit}
+				class={styles.search}
+				data-active={query().length > 0 && results().length > 0}
+				onKeyDown={handleKeyDown}
+			>
+				<div>
+					<div class={styles.content}>
+						<SearchIcon />
+						<input
+							type="text"
+							name="query"
+							placeholder="إبحث عن منتج أو شركة..."
+							class={clsx("t-body", styles.input)}
+							value={props.value ?? ""}
+							onInput={(ev) => setQuery(ev.currentTarget.value)}
+							autocomplete="off"
+						/>
 					</div>
-				</Show>
-			</Transition>
-		</form>
+					<Button
+						type="submit"
+						class={styles.submit}
+						variant="action"
+						disabled={query().length === 0}
+					>
+						إبحث
+					</Button>
+				</div>
+
+				<Transition name="slide-fade">
+					<Show when={query().length > 0 && results().length > 0}>
+						<div class={styles.results} data-language={language()}>
+							<For each={results()}>
+								{(product) => {
+									const name = product.matches![0].value!;
+
+									return (
+										<button
+											dir="auto"
+											class={styles.result}
+											onClick={[handleResultClick, name]}
+											type="button"
+										>
+											{arabicLettersRegex.test(name) ? (
+												name
+											) : (
+												<FormattedResultText
+													inputString={name}
+													matchIndices={product.matches![0].indices}
+												/>
+											)}
+										</button>
+									);
+								}}
+							</For>
+						</div>
+					</Show>
+				</Transition>
+			</form>
+			<div class={clsx("overlay", styles.overlay)} />
+		</div>
 	);
 }

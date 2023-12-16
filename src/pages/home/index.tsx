@@ -23,7 +23,7 @@ import styles from "./index.module.scss";
 import FilterIcon from "~assets/icons/filter.svg?component-solid";
 
 let searchThrottleTimeout: number | number = 0;
-let resultsRef: HTMLElement;
+let searchInputContainerRef: HTMLDivElement;
 
 function App() {
 	const { major, sub, status, query, sort, updateParams } = useSearchQuery();
@@ -46,9 +46,8 @@ function App() {
 	const handleSearch = (query: string, shouldClearFilters = false) => {
 		clearTimeout(searchThrottleTimeout);
 
-		resultsRef.focus();
-		window.scrollTo({
-			top: resultsRef.getBoundingClientRect().top + window.pageYOffset - 180,
+		searchInputContainerRef.focus();
+		searchInputContainerRef.scrollIntoView({
 			behavior: "smooth",
 		});
 
@@ -144,11 +143,13 @@ function App() {
 			<div class={styles.intro}>
 				<TypeWriter />
 				<p>قائمة بالمنتجات الداعمة للكيان الصهيوني والبدائل المحلية.</p>
-				<SearchInput
-					onSubmit={handleSearch}
-					onSuggest={getSuggestions}
-					value={query()}
-				/>
+				<div ref={searchInputContainerRef} tabIndex={-1}>
+					<SearchInput
+						onSubmit={handleSearch}
+						onSuggest={getSuggestions}
+						value={query()}
+					/>
+				</div>
 
 				{error() && (
 					<p class="error">
@@ -193,7 +194,7 @@ function App() {
 				/>
 			</Show>
 
-			<section ref={resultsRef} tabIndex={-1} class={styles.table}>
+			<section class={styles.table}>
 				{results() && !loading() ? (
 					<Table
 						products={results()}

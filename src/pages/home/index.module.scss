@@ -13,7 +13,7 @@
 		margin-top: var(--s-3);
 	}
 
-	> form {
+	> div:last-of-type {
 		margin-top: var(--s-5);
 		margin-inline: auto;
 	}

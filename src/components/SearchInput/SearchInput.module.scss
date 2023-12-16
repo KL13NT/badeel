@@ -1,3 +1,11 @@
+.wrapper {
+	height: 56px;
+}
+
+.overlay {
+	display: none;
+}
+
 .search {
 	width: 580px;
 	border-radius: var(--r-5xl);
@@ -210,5 +218,20 @@
 @media screen and (max-width: 700px) {
 	.search {
 		width: 100%;
+	}
+
+	.search:focus-within {
+		position: fixed;
+		top: 10px;
+		left: 0;
+		right: 0;
+		width: 95%;
+		margin: auto;
+		z-index: var(--z-7);
+		background-color: var(--c-bg);
+	}
+
+	.search:focus-within ~ .overlay {
+		display: block;
 	}
 }
