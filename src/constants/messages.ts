@@ -39,6 +39,7 @@ export const MESSAGES = {
 	"navbar.feedback": "صندوق الإقتراحات",
 
 	"table.showMore": "عرض المزيد من المنتجات",
+	"table.showDetails": "عرض التفاصيل",
 	"table.end": "لقد وصلت إلى نهاية القائمة.",
 	"footer.ack": "شكر وتقدير لكل من ساهم في هذا المشروع.",
 	"footer.why": "لماذا نقاطع؟",
@@ -69,4 +70,7 @@ export const MESSAGES = {
 	"sort.accuracy": "الدقة",
 
 	version: "تحديث",
+
+	"view.table": "عرض كطاولة",
+	"view.cards": "عرض ككروت",
 } as const;

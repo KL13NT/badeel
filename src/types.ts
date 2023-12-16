@@ -55,3 +55,5 @@ export interface Category {
 export interface FuseIndex {
 	docs: Product[];
 }
+
+export type View = "cards" | "table";

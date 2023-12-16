@@ -16,17 +16,19 @@ import { getCategoryMajor } from "~utils/categories";
 import { useDocuments } from "~hooks/useDocuments";
 import { useSearchQuery } from "~hooks/useSearchQuery";
 
-import { Product } from "~types";
+import { Product, View } from "~types";
 
 import styles from "./index.module.scss";
 
 import FilterIcon from "~assets/icons/filter.svg?component-solid";
+import ResultCards from "~components/ResultCards/ResultCards";
 
 let searchThrottleTimeout: number | number = 0;
 let searchInputContainerRef: HTMLDivElement;
 
 function App() {
-	const { major, sub, status, query, sort, updateParams } = useSearchQuery();
+	const { major, sub, status, query, sort, view, updateParams } =
+		useSearchQuery();
 	const {
 		search,
 		getSuggestions,
@@ -82,27 +84,6 @@ function App() {
 		});
 	};
 
-	const handleMajorCategoryChange = (enabled: boolean, ev: MouseEvent) => {
-		const target = ev.target as HTMLButtonElement;
-		const category = target.dataset.category!;
-
-		if (enabled) {
-			updateParams({
-				query: undefined,
-				major: category,
-				sub: undefined,
-				page: 1,
-			});
-		} else {
-			updateParams({
-				query: undefined,
-				major: undefined,
-				sub: undefined,
-				page: 1,
-			});
-		}
-	};
-
 	const handleSubCategoryChange = (enabled: boolean, ev: MouseEvent) => {
 		const target = ev.target as HTMLButtonElement;
 		const category = target.dataset.category!;
@@ -132,6 +113,12 @@ function App() {
 		if (query()) total += 1;
 
 		return total;
+	};
+
+	const switchView = (view: View) => {
+		updateParams({
+			view,
+		});
 	};
 
 	return (
@@ -191,22 +178,35 @@ function App() {
 					sort={sort()}
 					clear={clearFilters}
 					active={filtersCount()}
+					switchView={switchView}
+					view={view()}
 				/>
 			</Show>
 
 			<section class={styles.table}>
-				{results() && !loading() ? (
-					<Table
-						products={results()}
-						categories={categories()}
-						total={total()}
-						showProof={showProof}
-						handleMajorCategoryChange={handleMajorCategoryChange}
-						handleSubCategoryChange={handleSubCategoryChange}
-					/>
-				) : (
-					<TableSkeleton />
-				)}
+				<Show when={view() === "table"}>
+					{results() && !loading() ? (
+						<Table
+							products={results()}
+							showProof={showProof}
+							handleSubCategoryChange={handleSubCategoryChange}
+						/>
+					) : (
+						<TableSkeleton />
+					)}
+				</Show>
+
+				<Show when={view() === "cards"}>
+					{results() && !loading() ? (
+						<ResultCards
+							products={results()}
+							showProof={showProof}
+							handleSubCategoryChange={handleSubCategoryChange}
+						/>
+					) : (
+						<TableSkeleton />
+					)}
+				</Show>
 
 				<div class={styles.footer}>
 					{hasMore() ? (

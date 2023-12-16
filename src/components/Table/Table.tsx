@@ -9,7 +9,7 @@ import Skeleton from "~components/Skeleton/Skeleton";
 import t from "~utils/messages";
 import { getProductCategory } from "~utils/categories";
 import { STATUS_TITLE_MAPPING } from "~constants/filters";
-import { Category, Product } from "~types";
+import { Product } from "~types";
 
 import styles from "./Table.module.scss";
 
@@ -17,11 +17,8 @@ import ViewIcon from "~assets/icons/view.svg?component-solid";
 
 interface Props {
 	products: Product[];
-	total: number;
-	categories: Category[];
-	handleSubCategoryChange: (enabled: boolean, ev: MouseEvent) => unknown;
-	handleMajorCategoryChange: (enabled: boolean, ev: MouseEvent) => unknown;
 	showProof: (product: Product) => void;
+	handleSubCategoryChange: (enabled: boolean, ev: MouseEvent) => unknown;
 }
 
 export default function Table(props: Props) {
@@ -97,7 +94,7 @@ export default function Table(props: Props) {
 												onClick={[props.showProof, result]}
 												class={styles.details}
 											>
-												<span>عرض المزيد</span>
+												<span>{t("table.showDetails")}</span>
 												<ViewIcon />
 											</button>
 										</td>
