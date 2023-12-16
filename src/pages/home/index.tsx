@@ -206,17 +206,15 @@ function App() {
 				</div>
 			</div>
 
-			<Show when={!loading() && !error()}>
-				<ActiveFilters
-					categories={categories()}
-					openFilters={openFilters}
-					sort={sort()}
-					clear={clearFilters}
-					active={filtersCount()}
-					switchView={switchView}
-					view={view()}
-				/>
-			</Show>
+			<ActiveFilters
+				categories={categories()}
+				openFilters={openFilters}
+				sort={sort()}
+				clear={clearFilters}
+				active={filtersCount()}
+				switchView={switchView}
+				view={view()}
+			/>
 
 			<section class={styles.table}>
 				<Transition name="slide-fade">
