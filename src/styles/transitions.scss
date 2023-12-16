@@ -50,10 +50,19 @@
 }
 
 .slide-fade-table {
-	&-move {
-		transition: transform 0.2s linear;
+	&-enter-active,
+	&-exit-active {
+		transition: all 0.2s linear;
 	}
 
+	&-enter,
+	&-exit-to {
+		transform: translateX(10px);
+		opacity: 0;
+	}
+}
+
+.slide-fade-cards {
 	&-enter-active,
 	&-exit-active {
 		transition: all 0.2s linear;
