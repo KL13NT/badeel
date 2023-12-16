@@ -137,10 +137,6 @@
 		left: 0;
 		z-index: var(--z-5);
 		background: var(--c-bg);
-
-		> div:first-of-type {
-			padding: 16px;
-		}
 	}
 
 	.add {
@@ -153,6 +149,11 @@
 
 	.separator {
 		display: none;
+	}
+
+	.upper,
+	.lower {
+		padding: var(--s-1) var(--s-3);
 	}
 
 	.left > .feedback {
