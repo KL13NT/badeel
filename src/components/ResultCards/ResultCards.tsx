@@ -1,4 +1,5 @@
 import { For } from "solid-js";
+import { TransitionGroup } from "solid-transition-group";
 
 import Button from "~components/Button/Button";
 import Badge from "~components/Badge/Badge";
@@ -12,7 +13,8 @@ import { Product } from "~types";
 import styles from "./ResultCards.module.scss";
 
 import ViewIcon from "~assets/icons/view.svg?component-solid";
-import { TransitionGroup } from "solid-transition-group";
+import Skeleton from "~components/Skeleton/Skeleton";
+import clsx from "clsx";
 
 interface ResultCardsProps {
 	products: Product[];
@@ -53,6 +55,24 @@ export default function ResultCards(props: ResultCardsProps) {
 							</div>
 						</div>
 					)}
+				</For>
+			</TransitionGroup>
+		</div>
+	);
+}
+
+export function ResultCardsSkeleton() {
+	return (
+		<div class={styles.results}>
+			<TransitionGroup name="slide-fade-cards">
+				<For each={new Array(20).fill(null)}>
+					{() => {
+						return (
+							<tr>
+								<Skeleton as="div" colspan="10" class={clsx(styles.result, styles.skeleton)} />
+							</tr>
+						);
+					}}
 				</For>
 			</TransitionGroup>
 		</div>

@@ -9,7 +9,9 @@ import Table, { TableSkeleton } from "~components/Table/Table";
 import Button from "~components/Button/Button";
 import FiltersModal from "~components/FiltersModal/FiltersModal";
 import ActiveFilters from "~components/ActiveFilters/ActiveFilters";
-import ResultCards from "~components/ResultCards/ResultCards";
+import ResultCards, {
+	ResultCardsSkeleton,
+} from "~components/ResultCards/ResultCards";
 import Toggle from "~components/Toggle/Toggle";
 
 import t from "~utils/messages";
@@ -217,29 +219,33 @@ function App() {
 			</Show>
 
 			<section class={styles.table}>
-				<Show when={view() === "table"}>
-					{results() && !loading() ? (
-						<Table
-							products={results()}
-							showProof={showProof}
-							handleSubCategoryChange={handleSubCategoryChange}
-						/>
-					) : (
-						<TableSkeleton />
-					)}
-				</Show>
+				<Transition name="slide-fade">
+					<Show when={view() === "table"}>
+						{results() && !loading() ? (
+							<Table
+								products={results()}
+								showProof={showProof}
+								handleSubCategoryChange={handleSubCategoryChange}
+							/>
+						) : (
+							<TableSkeleton />
+						)}
+					</Show>
+				</Transition>
 
-				<Show when={view() === "cards"}>
-					{results() && !loading() ? (
-						<ResultCards
-							products={results()}
-							showProof={showProof}
-							handleSubCategoryChange={handleSubCategoryChange}
-						/>
-					) : (
-						<TableSkeleton />
-					)}
-				</Show>
+				<Transition name="slide-fade">
+					<Show when={view() === "cards"}>
+						{results() && !loading() ? (
+							<ResultCards
+								products={results()}
+								showProof={showProof}
+								handleSubCategoryChange={handleSubCategoryChange}
+							/>
+						) : (
+							<ResultCardsSkeleton />
+						)}
+					</Show>
+				</Transition>
 
 				<div class={styles.footer}>
 					{hasMore() ? (
