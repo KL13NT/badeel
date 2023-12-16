@@ -1,3 +1,6 @@
+// TODO: fix obsolete results
+// fix transition when results + blur
+
 import { createMemo, createSignal, For, Show } from "solid-js";
 import clsx from "clsx";
 

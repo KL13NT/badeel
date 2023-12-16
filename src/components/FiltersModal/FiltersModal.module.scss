@@ -2,7 +2,7 @@
 	position: fixed;
 	width: 350px;
 	height: 100%;
-	z-index: var(--z-3);
+	z-index: var(--z-7);
 
 	background: var(--c-bg);
 	top: 0;
@@ -28,7 +28,7 @@
 	position: sticky;
 	top: 0;
 	background: var(--c-bg);
-	z-index: var(--z-5);
+	z-index: var(--z-8);
 	padding: var(--s-3);
 }
 
@@ -110,7 +110,7 @@
 		border-radius: 0;
 		font-weight: 600;
 		height: 56px;
-		z-index: var(--z-4);
+		z-index: var(--z-7);
 		pointer-events: all;
 
 		&:hover {
