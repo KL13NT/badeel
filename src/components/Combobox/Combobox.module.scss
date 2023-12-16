@@ -23,7 +23,7 @@
 	gap: var(--s-3);
 
 	border-radius: 12px;
-	border: 1px solid var(--colors-fills-outlines-gray-3, #393939);
+	border: 1px solid var(--c-gray-3, #393939);
 	transition:
 		border-radius 0.2s ease-out,
 		border-color 0.2s ease-out;
@@ -41,7 +41,7 @@
 }
 
 .combobox[aria-expanded="true"] .activator {
-	border-color: var(--colors-fills-outlines-red, #ff7032);
+	border-color: var(--c-red, #ff7032);
 	border-radius: 12px 12px 0 0;
 
 	svg {
@@ -50,7 +50,7 @@
 }
 
 .content {
-	background: var(--colors-fills-outlines-gray-2, #313131);
+	background: var(--c-gray-2, #313131);
 	border-radius: 0px 0px 12px 12px;
 	max-height: 250px;
 	overflow-y: auto;
@@ -68,7 +68,7 @@
 	list-style: none;
 
 	> li:not(:last-of-type) {
-		border-bottom: solid 1px var(--colors-fills-outlines-gray-3, #393939);
+		border-bottom: solid 1px var(--c-gray-3, #393939);
 	}
 }
 
@@ -87,7 +87,7 @@
 			height: 6px;
 			margin-inline-start: var(--s-1);
 			border-radius: 100%;
-			background: var(--colors-fills-outlines-red, #ff7032);
+			background: var(--c-red, #ff7032);
 		}
 	}
 }
