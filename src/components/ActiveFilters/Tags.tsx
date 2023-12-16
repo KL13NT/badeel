@@ -17,7 +17,7 @@ interface TagsProps {
 }
 
 export default function Tags(props: TagsProps) {
-	const { sub, status, query, major, updateParams } = useSearchQuery();
+	const { sub, status, query, major, sort, updateParams } = useSearchQuery();
 
 	const handleClearFilter = (filter: string[]) => {
 		const update: Record<string, undefined | number> = {
@@ -33,6 +33,19 @@ export default function Tags(props: TagsProps) {
 
 	return (
 		<>
+			<Show when={sort() !== "accuracy"}>
+				<Button
+					variant="default"
+					class={styles.filter}
+					data-filter="sort"
+					onClick={[handleClearFilter, ["sort"]]}
+				>
+					<span>{t("filters.sort")}: </span>
+					{t(`sort.${sort()}` as MessageKey)}
+					<CloseIcon />
+				</Button>
+			</Show>
+
 			<Show when={query()}>
 				<Button
 					variant="default"

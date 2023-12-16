@@ -21,11 +21,11 @@ export const SORT_OPTIONS: {
 	value: SortOption;
 }[] = [
 	{
-		name: t("sort.arabicName"),
+		name: t("sort.Name"),
 		value: "Name",
 	},
 	{
-		name: t("sort.englishName"),
+		name: t("sort.English Name"),
 		value: "English Name",
 	},
 	{
@@ -33,12 +33,8 @@ export const SORT_OPTIONS: {
 		value: "status",
 	},
 	{
-		name: t("sort.category"),
+		name: t("sort.Category"),
 		value: "Category",
-	},
-	{
-		name: t("sort.accuracy"),
-		value: "accuracy",
 	},
 ];
 

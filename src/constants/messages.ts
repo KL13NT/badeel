@@ -62,10 +62,10 @@ export const MESSAGES = {
 
 	"filters.list.category": "إختر النوع",
 
-	"sort.arabicName": "الإسم بالعربية",
-	"sort.englishName": "الإسم بالإنجليزية",
+	"sort.Name": "الإسم بالعربية",
+	"sort.English Name": "الإسم بالإنجليزية",
 	"sort.manufacturer": "إسم المُنْتِج",
-	"sort.category": "التصنيف",
+	"sort.Category": "التصنيف",
 	"sort.status": "الحالة",
 	"sort.accuracy": "الدقة",
 

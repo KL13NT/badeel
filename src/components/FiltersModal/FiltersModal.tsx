@@ -55,6 +55,7 @@ export default function FiltersModal(props: Props) {
 			major: undefined,
 			sub: undefined,
 			status: undefined,
+			sort: undefined,
 			page: 1,
 		});
 
@@ -210,7 +211,10 @@ export default function FiltersModal(props: Props) {
 					</div>
 
 					<div class={styles.section}>
-						<p class={styles.title} data-active={Boolean(state.major)}>
+						<p
+							class={styles.title}
+							data-active={state.sort && state.sort !== "accuracy"}
+						>
 							{t("filters.sort")}
 						</p>
 
@@ -219,6 +223,10 @@ export default function FiltersModal(props: Props) {
 							onSelect={handleSortChange}
 							id="sort-selection"
 							label={"ترتيب حسب"}
+							default={{
+								name: "بدون ترتيب",
+								value: "accuracy",
+							}}
 							value={selectedSort()}
 						/>
 					</div>

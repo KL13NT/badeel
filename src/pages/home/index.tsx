@@ -9,6 +9,8 @@ import Table, { TableSkeleton } from "~components/Table/Table";
 import Button from "~components/Button/Button";
 import FiltersModal from "~components/FiltersModal/FiltersModal";
 import ActiveFilters from "~components/ActiveFilters/ActiveFilters";
+import ResultCards from "~components/ResultCards/ResultCards";
+import Toggle from "~components/Toggle/Toggle";
 
 import t from "~utils/messages";
 import { arrayExists } from "~utils/common";
@@ -21,7 +23,9 @@ import { Product, View } from "~types";
 import styles from "./index.module.scss";
 
 import FilterIcon from "~assets/icons/filter.svg?component-solid";
-import ResultCards from "~components/ResultCards/ResultCards";
+
+import CardsToggleIcon from "~assets/icons/cards-toggle.svg?component-solid";
+import TableToggleIcon from "~assets/icons/table-toggle.svg?component-solid";
 
 let searchThrottleTimeout: number | number = 0;
 let searchInputContainerRef: HTMLDivElement;
@@ -80,6 +84,7 @@ function App() {
 			sub: undefined,
 			query: undefined,
 			status: undefined,
+			sort: undefined,
 			page: 1,
 		});
 	};
@@ -111,6 +116,7 @@ function App() {
 
 		if (major()) total += 1;
 		if (query()) total += 1;
+		if (sort() && sort() !== "accuracy") total += 1;
 
 		return total;
 	};
@@ -169,6 +175,33 @@ function App() {
 						<span class={styles.filterCount}>{filtersCount()}</span>
 					) : null}
 				</Button>
+
+				<div class={styles.left}>
+					<Show when={filtersCount() > 0}>
+						<button class={styles.clear} onClick={clearFilters}>
+							{t("filters.clear")}
+						</button>
+					</Show>
+					<div class={styles.separator} />
+					<div class={styles.view}>
+						<Toggle
+							class={styles.toggle}
+							label={t("view.cards")}
+							onChange={() => switchView("cards")}
+							pressed={view() === "cards"}
+						>
+							<CardsToggleIcon />
+						</Toggle>
+						<Toggle
+							class={styles.toggle}
+							label={t("view.table")}
+							onChange={() => switchView("table")}
+							pressed={view() === "table"}
+						>
+							<TableToggleIcon />
+						</Toggle>
+					</div>
+				</div>
 			</div>
 
 			<Show when={!loading() && !error()}>

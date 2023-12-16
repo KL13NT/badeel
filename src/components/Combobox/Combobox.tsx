@@ -7,7 +7,7 @@ import ArrowDownIcon from "~assets/icons/arrow-down.svg?component-solid";
 
 type Option = {
 	name: string;
-	value: string;
+	value: unknown;
 };
 
 interface Props {
@@ -100,7 +100,7 @@ export default function Combobox(props: Props) {
 						>
 							{props.default && (
 								<li
-									id={props.default.value}
+									id={String(props.default.value)}
 									role="option"
 									data-value={props.default.value}
 									tabIndex={0}
@@ -113,7 +113,7 @@ export default function Combobox(props: Props) {
 							<For each={props.options}>
 								{(option) => (
 									<li
-										id={option.value}
+										id={String(option.value)}
 										role="option"
 										data-value={option.value}
 										data-active={option.value === props.value?.value}
