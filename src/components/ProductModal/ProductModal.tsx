@@ -16,11 +16,9 @@ import styles from "./ProductModal.module.scss";
 const getCellURL = (ref: number) => `${UNSURE_SOURCE_URL}&range=A${ref}`;
 
 const proofMapping = {
-	Arab: t("proof.content.arab"),
 	Israeli: t("proof.content.israeli"),
 	Emirati: t("proof.content.emirati"),
 	Saudi: t("proof.content.saudi"),
-	Kuwaiti: t("proof.content.kuwaiti"),
 	Supporter: t("proof.content.supporter"),
 	Foreign: t("proof.content.foreign"),
 };
