@@ -13,7 +13,7 @@ module.exports = {
 			env: {
 				node: true,
 			},
-			files: [".eslintrc.{js,cjs}"],
+			files: [".eslintrc.{js,cjs}", "commitlint.config.cjs"],
 			parserOptions: {
 				sourceType: "script",
 			},
