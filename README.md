@@ -2,7 +2,7 @@
 
 | An Egyptian alternatives listing project with UX and community in mind.
 
-Available at [badeel-misr](https://badeel-masr.netlify.app).
+Available at [Badeel.wiki](https://badeel.wiki).
 
 ## Contributing
 
