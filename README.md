@@ -1,5 +1,11 @@
 # Badeel
 
+[![All Contributors](https://img.shields.io/github/contributors/kl13nt/badeel)](#contributors)
+[![GitHub
+Issues](https://img.shields.io/github/issues/kl13nt/badeel)](https://github.com/KL13NT/badeel/issues/)
+[![GitHub License](https://img.shields.io/github/license/kl13nt/badeel)](./LICENSE)
+[![GitHub Repo stars](https://img.shields.io/github/stars/kl13nt/badeel)](https://github.com/KL13NT/badeel/stargazers)
+
 | An Egyptian alternatives listing project with UX and community in mind.
 
 Available at [Badeel.wiki](https://badeel.wiki).
@@ -50,3 +56,39 @@ feel free to use the form for that, or follow the steps:
 2. Make any necessary additions you'd like on your copy
 3. Send a link to our feedback form or our product submission form. We check
    both regularly. Make sure to ["Share your file publicly"](https://support.google.com/docs/answer/2494822?hl=en&sjid=4471142965946458526-EU#zippy=%2Cshare-a-file-publicly).
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/KL13NT"><img src="https://avatars.githubusercontent.com/u/20807178?v=4?s=100" width="100px;" alt="Nabil Tharwat"/><br /><sub><b>Nabil Tharwat</b></sub></a><br /><a href="https://github.com/KL13NT/badeel/commits?author=KL13NT" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://karimshalapy.github.io/"><img src="https://avatars.githubusercontent.com/u/66819303?v=4?s=100" width="100px;" alt="Karim Shalapy"/><br /><sub><b>Karim Shalapy</b></sub></a><br /><a href="https://github.com/KL13NT/badeel/commits?author=karimshalapy" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ahussein3"><img src="https://avatars.githubusercontent.com/u/10266009?v=4?s=100" width="100px;" alt="Ahmed Magdy "/><br /><sub><b>Ahmed Magdy </b></sub></a><br /><a href="https://github.com/KL13NT/badeel/commits?author=ahussein3" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td align="center" size="13px" colspan="7">
+        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
+          <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
+        </img>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
