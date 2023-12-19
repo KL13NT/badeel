@@ -1,0 +1,50 @@
+.group {
+	border: none;
+}
+
+.options {
+	display: flex;
+	gap: var(--s-3);
+	margin-top: var(--s-1);
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.radio {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 8px;
+	width: fit-content;
+	font-size: var(--f-size-2);
+
+	cursor: pointer;
+
+	input {
+		display: none;
+	}
+
+	input:checked ~ .checkmark {
+		background-color: var(--colors-body-1, #efece0);
+	}
+}
+
+.checkmark {
+	display: flex;
+	flex-shrink: 0;
+	width: 18px;
+	height: 18px;
+	transition: background-color 0.2s ease-out;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	border: 1px solid var(--colors-body-2, #9f9d98);
+	border-radius: 100%;
+}
+
+@media screen and (max-width: 700px) {
+	.checkbox {
+		margin-top: var(--s-2);
+		gap: 16px;
+	}
+}
