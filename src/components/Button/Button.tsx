@@ -9,7 +9,8 @@ type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 
 interface Props extends JSX.AriaAttributes {
 	class?: string;
-	as?: keyof JSX.HTMLElementTags;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	as?: keyof JSX.HTMLElementTags | ((props: any) => JSX.Element);
 	children: JSX.Element;
 	href?: AnchorProps["href"];
 	target?: AnchorProps["target"];

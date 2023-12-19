@@ -26,10 +26,20 @@
 	&:hover {
 		background-color: var(--c-offwhite-translucent);
 	}
+
+	&[disabled] {
+		opacity: 0.7;
+
+		&:hover {
+			background-color: var(--c-bg);
+			cursor: not-allowed;
+		}
+	}
 }
 
 .danger {
 	border-color: var(--c-action);
+
 	&:hover {
 		background-color: var(--c-action-translucent);
 	}
@@ -56,6 +66,7 @@
 
 .action-invert {
 	border: 1px solid var(--c-action);
+
 	&:hover {
 		background-color: var(--c-action-translucent);
 	}
