@@ -1,0 +1,146 @@
+.container {
+	margin: var(--s-7) auto;
+	width: fit-content;
+	position: relative;
+	padding-bottom: 150px;
+	font-size: var(--f-size-3);
+	padding-inline: var(--s-3);
+
+	ul {
+		list-style: inside;
+		width: fit-content;
+		margin-top: var(--s-4);
+	}
+
+	li {
+		margin-top: var(--s-1);
+	}
+
+	p {
+		margin-top: var(--s-3);
+	}
+}
+
+.body {
+	width: fit-content;
+	margin: auto;
+	max-width: var(--w-text-content);
+	text-align: center;
+}
+
+.form {
+	margin-inline: auto;
+	width: fit-content;
+	margin-top: 60px;
+	text-align: right;
+
+	> p:last-of-type {
+		margin-top: var(--s-3);
+	}
+}
+
+.input {
+	display: block;
+	margin-top: var(--s-5);
+	margin-inline: auto;
+	width: fit-content;
+
+	> input,
+	> textarea {
+		width: 400px;
+		display: block;
+		border: 1px solid var(--c-stroke-gray, #403f36);
+		border-radius: var(--r-5xl);
+		background-color: var(--c-bg);
+		color: var(--c-offwhite);
+		padding: 8px 12px;
+
+		text-decoration: none;
+		line-height: 1.5;
+		font-weight: 600;
+
+		transition:
+			background-color 0.2s ease-in-out,
+			color 0.2s ease-in-out;
+
+		margin-top: var(--s-1);
+
+		&::placeholder {
+			letter-spacing: 1px;
+		}
+
+		&:hover {
+			background-color: var(--c-button-floating-bg);
+		}
+
+		&:active,
+		&:focus {
+			outline: none;
+			background-color: var(--c-gray-1);
+		}
+
+		&:user-invalid {
+			color: var(--c-action);
+			border-color: var(--c-action);
+		}
+	}
+
+	> textarea {
+		resize: vertical;
+	}
+}
+
+.submit {
+	margin-top: var(--s-7);
+	margin-inline: auto;
+	min-width: 200px;
+
+	> svg {
+		display: none;
+		animation: rotating 2s linear infinite;
+		height: 24px;
+		width: 24px;
+	}
+
+	&[data-status="submitting"] > svg {
+		display: block;
+	}
+}
+
+@keyframes rotating {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.container {
+		padding-inline: var(--s-2);
+		font-size: var(--f-size-2);
+	}
+
+	.form {
+		margin-top: var(--s-7);
+		width: 100%;
+	}
+
+	.body {
+		max-width: 100%;
+
+		p {
+			margin-top: var(--s-3);
+		}
+	}
+
+	.input {
+		width: 100%;
+
+		> input,
+		> textarea {
+			width: 100%;
+		}
+	}
+}

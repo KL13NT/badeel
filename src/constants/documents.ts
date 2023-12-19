@@ -8,3 +8,5 @@ export const SUBMIT_PRODUCT_FORM = `https://forms.gle/HCdPtLxeTg93r75t5`;
 export const FEEDBACK_FORM = `https://forms.gle/ELeQ5rtuEVVLipwV9`;
 
 export const UNSURE_SOURCE_URL = `${SHEET_URL}/edit#gid=1796342302?usp=sharing`;
+
+export const SUBMIT_PRODUCT_ACTION = `https://script.google.com/macros/s/AKfycbxAzl8dtnNQygyZVzzzQOvMP4BiMOZyYoQGGaWd6zYXRgKs-08Z6OGr6i5QBuVZjKOi/exec`;

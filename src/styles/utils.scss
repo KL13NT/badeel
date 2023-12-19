@@ -14,3 +14,25 @@
 	justify-content: center;
 	align-items: center;
 }
+
+.error {
+	color: var(--c-action);
+	font-size: var(--f-size-4);
+
+	> a,
+	> span {
+		font-size: var(--f-size-4);
+		color: var(--c-action);
+	}
+}
+
+.success {
+	color: var(--c-green);
+	font-size: var(--f-size-4);
+
+	> a,
+	> span {
+		font-size: var(--f-size-4);
+		color: var(--c-green);
+	}
+}

@@ -14,14 +14,13 @@ import { Product } from "~types";
 import { Transition } from "solid-transition-group";
 import { FuseResult, RangeTuple } from "fuse.js";
 import { useSearchQuery } from "~hooks/useSearchQuery";
+import { arabicLettersRegex } from "~constants/submit";
 
 interface Props {
 	onSubmit: (query: string, shouldClearFilters?: boolean) => unknown;
 	onSuggest: (query: string) => FuseResult<Product>[];
 	value?: string;
 }
-
-const arabicLettersRegex = /[\u0621-\u064A 0-9]+/;
 
 interface FormattedResultTextProps {
 	inputString: string;

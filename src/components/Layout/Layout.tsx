@@ -5,7 +5,7 @@ import { A } from "@solidjs/router";
 import Button from "~components/Button/Button";
 
 import t from "~utils/messages";
-import { SUBMIT_PRODUCT_FORM } from "~constants/documents";
+import { FEEDBACK_FORM } from "~constants/documents";
 import { localizeDate } from "~utils/common";
 
 import styles from "./Layout.module.scss";
@@ -96,13 +96,7 @@ export default function Layout(props: Props) {
 
 						<div class={styles.separator} />
 
-						<Button
-							as="a"
-							href={SUBMIT_PRODUCT_FORM}
-							class={styles.add}
-							target="_blank"
-							variant="danger"
-						>
+						<Button as={A} href="/submit" class={styles.add} variant="danger">
 							<HandshakeIcon />
 							{t("navbar.add")}
 						</Button>
@@ -113,11 +107,7 @@ export default function Layout(props: Props) {
 					<p>
 						{t("version")} {localizeDate(import.meta.env.BUILD_TIMESTAMP)}
 					</p>
-					<a
-						class={styles.feedback}
-						href="https://forms.gle/ELeQ5rtuEVVLipwV9"
-						target="_blank"
-					>
+					<a class={styles.feedback} href={FEEDBACK_FORM} target="_blank">
 						{t("navbar.feedback")}
 					</a>
 				</div>

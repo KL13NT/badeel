@@ -6,6 +6,7 @@ import OfflinePrompt from "~components/OfflinePrompt/OfflinePrompt";
 
 const Acknowledgments = lazy(() => import("./pages/acknowledgments"));
 const Home = lazy(() => import("./pages/home/index"));
+const Submit = lazy(() => import("./pages/submit/index"));
 
 export default function AppRouter() {
 	return (
@@ -13,6 +14,7 @@ export default function AppRouter() {
 			<Layout>
 				<Routes>
 					<Route path="/acknowledgments" component={Acknowledgments} />
+					<Route path="/submit" component={Submit} />
 					<Route path="*" component={Home} />
 				</Routes>
 

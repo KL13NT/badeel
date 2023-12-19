@@ -13,7 +13,7 @@ export const MESSAGES = {
 	"proof.content.unsure":
 		"منتج لم يتم التأكد من عدم دعمه للكيان بشكل مباشر أو غير مباشر. تفقدوا الأدلة وقرروا بأنفسكم.",
 
-	"proof.title.boycott": "سبب المقاطعة",
+	"proof.title.boycott": "السبب",
 	"proof.title.support": "الدليل",
 	"proof.title.context": "الحالة",
 
@@ -69,4 +69,9 @@ export const MESSAGES = {
 
 	"view.table": "عرض كطاولة",
 	"view.cards": "عرض ككروت",
+
+	"submit.boycott": "داعم",
+	"submit.alternative": "بديل",
+	"submit.unsure": "غير متأكد",
+	"submit.type": "حالة المُنتَج",
 } as const;
