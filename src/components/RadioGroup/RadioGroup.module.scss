@@ -25,7 +25,12 @@
 	}
 
 	input:checked ~ .checkmark {
-		background-color: var(--colors-body-1, #efece0);
+		background-color: var(--c-body-1, #efece0);
+	}
+
+	input:user-invalid ~ .checkmark {
+		background-color: var(--c-red);
+		border-color: var(--c-red);
 	}
 }
 
@@ -34,7 +39,9 @@
 	flex-shrink: 0;
 	width: 18px;
 	height: 18px;
-	transition: background-color 0.2s ease-out;
+	transition:
+		background-color 0.2s ease-out,
+		border-color 0.2s ease-out;
 	justify-content: center;
 	align-items: center;
 	gap: 10px;

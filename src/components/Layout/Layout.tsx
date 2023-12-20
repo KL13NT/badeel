@@ -86,13 +86,9 @@ export default function Layout(props: Props) {
 					</div>
 
 					<div class={styles.left}>
-						<a
-							class={styles.feedback}
-							href="https://forms.gle/ELeQ5rtuEVVLipwV9"
-							target="_blank"
-						>
+						<A class={styles.feedback} href="/feedback">
 							{t("navbar.feedback")}
-						</a>
+						</A>
 
 						<div class={styles.separator} />
 

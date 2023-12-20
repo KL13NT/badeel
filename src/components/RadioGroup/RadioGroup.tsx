@@ -13,10 +13,12 @@ interface Props {
 	name: string;
 	label: string;
 	checked: string;
+	required?: boolean;
 }
 
 export default function RadioGroup(_props: Props) {
 	const [local, props] = splitProps(_props, [
+		"required",
 		"items",
 		"name",
 		"label",
@@ -52,6 +54,7 @@ export default function RadioGroup(_props: Props) {
 								value={item.value}
 								checked={value() === item.value}
 								onChange={handleChange}
+								required={local. required}
 							/>
 
 							<span class={styles.checkmark} />

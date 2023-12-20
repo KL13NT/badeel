@@ -1,0 +1,50 @@
+.input {
+	display: block;
+	margin-top: var(--s-5);
+	margin-inline: auto;
+	width: fit-content;
+
+	> input,
+	> textarea {
+		width: 400px;
+		display: block;
+		border: 1px solid var(--c-stroke-gray, #403f36);
+		border-radius: var(--r-5xl);
+		background-color: var(--c-bg);
+		color: var(--c-offwhite);
+		padding: 8px 12px;
+
+		text-decoration: none;
+		line-height: 1.5;
+		font-weight: 600;
+
+		transition:
+			background-color 0.2s ease-in-out,
+			color 0.2s ease-in-out;
+
+		margin-top: var(--s-1);
+
+		&::placeholder {
+			letter-spacing: 1px;
+		}
+
+		&:hover {
+			background-color: var(--c-button-floating-bg);
+		}
+
+		&:active,
+		&:focus {
+			outline: none;
+			background-color: var(--c-gray-1);
+		}
+
+		&:user-invalid {
+			color: var(--c-action);
+			border-color: var(--c-action);
+		}
+	}
+
+	> textarea {
+		resize: vertical;
+	}
+}

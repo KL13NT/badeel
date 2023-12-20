@@ -2,21 +2,26 @@ import { Show, createSignal } from "solid-js";
 
 import Button from "~components/Button/Button";
 import RadioGroup from "~components/RadioGroup/RadioGroup";
+import Input from "~components/Forms/Input/Input";
 
 import t from "~utils/messages";
-import { FEEDBACK_FORM, SUBMIT_PRODUCT_ACTION } from "~constants/documents";
+import {
+	SUBMIT_PRODUCT_ACTION,
+	SUBMIT_PRODUCT_FORM,
+} from "~constants/documents";
 import {
 	PRODUCT_TYPE_OPTIONS,
 	arabicLettersRegex,
 	englishLettersRegex,
 } from "~constants/submit";
 
+import { Status } from "~types";
+
 import styles from "./index.module.scss";
 
 import LoadingIcon from "~assets/icons/loading.svg?component-solid";
-import { Status } from "~types";
 
-export default function Acknowledgments() {
+export default function Submit() {
 	const [state, setState] = createSignal<{
 		status: "idle" | "submitting" | "error" | "submitted";
 		context?: string;
@@ -56,7 +61,6 @@ export default function Acknowledgments() {
 			});
 
 			form.reset();
-			setType("boycott");
 		} catch (error) {
 			setState({
 				status: "error",
@@ -69,14 +73,12 @@ export default function Acknowledgments() {
 		const target = ev.currentTarget as HTMLFormElement;
 		const data = new FormData(target);
 
-		console.log(data.get("type"));
 		setType((data.get("type") as Status) || "boycott");
 	};
 
 	const handleSetCustomValidity = (message: string) => (ev: Event) => {
 		const target = ev.currentTarget as HTMLInputElement;
 
-		console.log(ev);
 		target.setCustomValidity(message);
 	};
 
@@ -115,56 +117,53 @@ export default function Acknowledgments() {
 							items={PRODUCT_TYPE_OPTIONS}
 							id="type"
 							checked={type()}
+							required
 						/>
-						<label class={styles.input}>
-							إسم المنتج بالعربية
-							<input
-								name="name"
-								type="text"
-								autocomplete="off"
-								placeholder="مثال: بيبسي"
-								onInvalid={handleSetCustomValidity(
-									"رجاء إدخال اسم مُنتج باللغة العربية بدون تشكيل"
-								)}
-								onInput={handleClearCustomValidity}
-								pattern={arabicLettersRegex.source.toString()}
-								required
-							/>
-						</label>
-						<label class={styles.input}>
-							إسم المنتج بالإنجليزية
-							<input
-								name="english"
-								type="text"
-								autocomplete="off"
-								placeholder="مثال: Pepsi"
-								onInvalid={handleSetCustomValidity(
-									"رجاء إدخال اسم مُنتج باللغة الإنجليزية بدون أحرف غريبة"
-								)}
-								onInput={handleClearCustomValidity}
-								pattern={englishLettersRegex.source.toString()}
-							/>
-						</label>
-						<label class={styles.input}>
-							الشركة المصنعة
-							<input
-								name="manufacturer"
-								type="text"
-								autocomplete="off"
-								placeholder="اسم الشركة المُصنّعة او المالكة"
-								required
-							/>
-						</label>
 
-						<label class={styles.input}>
-							{type() === "boycott" ? "الإثبات/السبب" : "تفاصيل"}
-							<textarea
-								name="details"
-								autocomplete="off"
-								required
-								minLength={5}
-							/>
-						</label>
+						<Input
+							name="name"
+							label="إسم المنتج بالعربية"
+							type="text"
+							autocomplete="off"
+							placeholder="مثال: بيبسي"
+							onInvalid={handleSetCustomValidity(
+								"رجاء إدخال اسم مُنتج باللغة العربية بدون تشكيل"
+							)}
+							onInput={handleClearCustomValidity}
+							pattern={arabicLettersRegex.source.toString()}
+							required
+						/>
+
+						<Input
+							label="إسم المنتج بالإنجليزية"
+							name="english"
+							type="text"
+							autocomplete="off"
+							placeholder="مثال: Pepsi"
+							onInvalid={handleSetCustomValidity(
+								"رجاء إدخال اسم مُنتج باللغة الإنجليزية بدون أحرف غريبة"
+							)}
+							onInput={handleClearCustomValidity}
+							pattern={englishLettersRegex.source.toString()}
+						/>
+
+						<Input
+							label="الشركة المصنعة"
+							name="manufacturer"
+							type="text"
+							autocomplete="off"
+							placeholder="اسم الشركة المُصنّعة او المالكة"
+							required
+						/>
+
+						<Input
+							as="textarea"
+							label={type() === "boycott" ? "الإثبات/السبب" : "تفاصيل"}
+							name="details"
+							autocomplete="off"
+							required
+							minLength={5}
+						/>
 
 						<Button
 							type="submit"
@@ -189,7 +188,7 @@ export default function Acknowledgments() {
 						<p class="error" role="alert">
 							حدث خطأ أثناء تسجيل المُنتج. أعد المحاولة. إذا فشل التسجيل مجدداً
 							برجاء التوجه الى{" "}
-							<a href={FEEDBACK_FORM} target="_blank">
+							<a href={SUBMIT_PRODUCT_FORM} target="_blank">
 								إستبيان جووجل فورم
 							</a>{" "}
 							الخاص بنا وملء التفاصيل هناك. نعتذر لكم على هذا الإزعاج.
