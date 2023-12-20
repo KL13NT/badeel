@@ -74,4 +74,7 @@ export const MESSAGES = {
 	"submit.alternative": "بديل",
 	"submit.unsure": "غير متأكد",
 	"submit.type": "حالة المُنتَج",
+
+	"productModal.share": "شارِك المُنتَج",
+	"productModal.copied": "تم نسخ رابط المُنتَج بنجاح",
 } as const;

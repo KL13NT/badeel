@@ -17,6 +17,18 @@
 .header {
 	padding-bottom: var(--s-4);
 	border-bottom: 1px solid var(--c-stroke-gray, #403f36);
+	display: flex;
+	justify-content: space-between;
+}
+
+.close {
+	padding: var(--s-1);
+	height: fit-content;
+
+	> svg {
+		height: 20px;
+		width: 20px;
+	}
 }
 
 .name {
@@ -42,6 +54,12 @@
 	align-items: center;
 	gap: var(--s-3);
 	flex-wrap: wrap;
+}
+
+.share {
+	> svg {
+		height: 20px;
+	}
 }
 
 @media screen and (max-width: 700px) {

@@ -15,6 +15,7 @@ export interface BaseProduct {
 	"English Name": string;
 	Manufacturer: string;
 	Category: string;
+	id: string;
 }
 
 export interface BoycottProduct extends BaseProduct {

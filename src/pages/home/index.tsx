@@ -1,4 +1,4 @@
-import { Show, createSignal } from "solid-js";
+import { Show, createEffect, createSignal } from "solid-js";
 import { A } from "@solidjs/router";
 import { Transition } from "solid-transition-group";
 
@@ -33,12 +33,13 @@ let searchThrottleTimeout: number | number = 0;
 let searchInputContainerRef: HTMLDivElement;
 
 function App() {
-	const { major, sub, status, query, sort, view, updateParams } =
+	const { major, sub, status, query, sort, productId, view, updateParams } =
 		useSearchQuery();
 	const {
 		search,
 		getSuggestions,
 		results,
+		all,
 		categories,
 		error,
 		loading,
@@ -78,6 +79,11 @@ function App() {
 
 	const closeProductModal = () => {
 		setFocusedProduct(null);
+
+		updateParams({
+			productId:
+				undefined /* To make sure productId is cleared after sharing */,
+		});
 	};
 
 	const clearFilters = () => {
@@ -128,6 +134,15 @@ function App() {
 			view,
 		});
 	};
+
+	createEffect(() => {
+		if (!productId()) return;
+
+		const product = all().find((product) => product.id === productId());
+		if (!product) return;
+
+		setFocusedProduct(product);
+	});
 
 	return (
 		<main class={styles.container}>

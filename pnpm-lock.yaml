@@ -23,6 +23,9 @@ dependencies:
   solid-js:
     specifier: ^1.8.5
     version: 1.8.5
+  solid-toast:
+    specifier: ^0.5.0
+    version: 0.5.0(solid-js@1.8.5)
   solid-transition-group:
     specifier: ^0.2.3
     version: 0.2.3(solid-js@1.8.5)
@@ -5335,6 +5338,14 @@ packages:
       '@babel/types': 7.23.0
       solid-js: 1.8.5
     dev: true
+
+  /solid-toast@0.5.0(solid-js@1.8.5):
+    resolution: {integrity: sha512-t770JakjyS2P9b8Qa1zMLOD51KYKWXbTAyJePVUoYex5c5FH5S/HtUBUbZAWFcqRCKmAE8KhyIiCvDZA8bOnxQ==}
+    peerDependencies:
+      solid-js: ^1.5.4
+    dependencies:
+      solid-js: 1.8.5
+    dev: false
 
   /solid-transition-group@0.2.3(solid-js@1.8.5):
     resolution: {integrity: sha512-iB72c9N5Kz9ykRqIXl0lQohOau4t0dhel9kjwFvx81UZJbVwaChMuBuyhiZmK24b8aKEK0w3uFM96ZxzcyZGdg==}

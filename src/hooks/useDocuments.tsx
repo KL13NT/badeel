@@ -41,6 +41,22 @@ const sortProducts = (products: Product[], sort: SortOption) => {
 	);
 };
 
+const generateProductHash = (product: Product) => {
+	const string = Object.values(product).join("");
+
+	let hash = 0;
+	let i;
+	let chr;
+
+	for (i = 0; i < string.length; i++) {
+		chr = string.charCodeAt(i);
+		hash = (hash << 5) - hash + chr;
+		hash |= 0; // Convert to 32bit integer
+	}
+
+	return String(hash);
+};
+
 export const useDocuments = () => {
 	const { params, major, status, sub, page, sort, updateParams } =
 		useSearchQuery();
@@ -116,11 +132,13 @@ export const useDocuments = () => {
 				.map((product) => ({
 					...product,
 					status: "alternative" as Status,
+					id: generateProductHash(product as Product),
 				}))
 				.concat(
 					boycotted.map((product) => ({
 						...product,
 						status: "boycott" as Status,
+						id: generateProductHash(product as Product),
 					}))
 				)
 				.concat(
@@ -128,6 +146,7 @@ export const useDocuments = () => {
 						...product,
 						status: "unsure" as Status,
 						ref: index + 2,
+						id: generateProductHash(product as Product),
 					}))
 				);
 
@@ -183,8 +202,11 @@ export const useDocuments = () => {
 	const paginated = () => filtered().slice(0, page() * itemsPerPage);
 	const total = () => filtered().length;
 
+	const all = (): Product[] =>
+		(fuseRef()?.getIndex() as unknown as FuseIndex)?.docs ?? [];
+
 	return {
-		fuse: fuseRef,
+		all,
 		results: paginated,
 		getSuggestions,
 		search,

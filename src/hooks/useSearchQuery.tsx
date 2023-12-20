@@ -43,6 +43,8 @@ export const useSearchQuery = () => {
 
 	const view = () => (params.view ?? "cards") as unknown as View;
 
+	const productId = () => params.productId;
+
 	return {
 		params,
 		major,
@@ -52,6 +54,7 @@ export const useSearchQuery = () => {
 		view,
 		query,
 		page,
+		productId,
 		updateParams,
 	};
 };

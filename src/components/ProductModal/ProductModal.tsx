@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { batch } from "solid-js";
+import { toast } from "solid-toast";
 
 import Button from "~components/Button/Button";
 import Badge from "~components/Badge/Badge";
@@ -12,6 +13,9 @@ import { useSearchQuery } from "~hooks/useSearchQuery";
 import { getCategoryMajor } from "~utils/categories";
 
 import styles from "./ProductModal.module.scss";
+
+import ShareIcon from "~assets/icons/share.svg?component-solid";
+import CloseIcon from "~assets/icons/close.svg?component-solid";
 
 const getCellURL = (ref: number) => `${UNSURE_SOURCE_URL}&range=A${ref}`;
 
@@ -140,16 +144,44 @@ export default function ProductModal(props: ProductModalProps) {
 		});
 	};
 
+	const handleShareProduct = async (productId: string) => {
+		try {
+			const url = new URL(location.href);
+			url.searchParams.append("productId", productId);
+
+			await navigator.clipboard.writeText(url.toString());
+
+			toast(t("productModal.copied"), {
+				position: "top-center",
+				icon: "🥳",
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const product = () => props.product;
 
 	return (
 		<Modal close={props.close} id="product-modal">
 			<div class={styles.body}>
 				<div class={styles.header}>
-					<p class={clsx("t-button", styles.name)}>{product().Name}</p>
-					<p class={clsx("t-body", styles.englishName)}>
-						{product()["English Name"]}
-					</p>
+					<div>
+						<p class={clsx("t-button", styles.name)}>{product().Name}</p>
+						<p class={clsx("t-body", styles.englishName)}>
+							{product()["English Name"]}
+						</p>
+					</div>
+
+					<Button
+						id="close"
+						aria-label="close dialog"
+						variant="action-invert"
+						onClick={props.close}
+						class={styles.close}
+					>
+						<CloseIcon />
+					</Button>
 				</div>
 
 				<div class={styles.content}>
@@ -175,13 +207,14 @@ export default function ProductModal(props: ProductModalProps) {
 							product={product()}
 							showAlternatives={showAlternatives}
 						/>
+
 						<Button
-							id="close"
-							aria-label="close dialog"
+							onClick={[handleShareProduct, props.product.id]}
+							class={styles.share}
 							variant="action-invert"
-							onClick={props.close}
 						>
-							أغلق النافذة
+							{t("productModal.share")}
+							<ShareIcon />
 						</Button>
 					</div>
 				</div>
