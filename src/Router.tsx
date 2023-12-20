@@ -1,7 +1,8 @@
 import { Routes, Route, Router } from "@solidjs/router";
-import { lazy } from "solid-js";
+import { Suspense, lazy } from "solid-js";
 
 import Layout from "~components/Layout/Layout";
+import LoadingScreen from "~components/LoadingScreen/LoadingScreen";
 import OfflinePrompt from "~components/OfflinePrompt/OfflinePrompt";
 
 const Acknowledgments = lazy(() => import("./pages/acknowledgments"));
@@ -13,12 +14,14 @@ export default function AppRouter() {
 	return (
 		<Router>
 			<Layout>
-				<Routes>
-					<Route path="/acknowledgments" component={Acknowledgments} />
-					<Route path="/submit" component={Submit} />
-					<Route path="/feedback" component={Feedback} />
-					<Route path="*" component={Home} />
-				</Routes>
+				<Suspense fallback={<LoadingScreen />}>
+					<Routes>
+						<Route path="/acknowledgments" component={Acknowledgments} />
+						<Route path="/submit" component={Submit} />
+						<Route path="/feedback" component={Feedback} />
+						<Route path="*" component={Home} />
+					</Routes>
+				</Suspense>
 
 				<OfflinePrompt />
 			</Layout>
