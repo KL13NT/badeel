@@ -106,7 +106,11 @@
 		cursor: not-allowed;
 	}
 
-	&:not([disabled]):hover {
+	&:disabled:hover {
+		background-color: var(--c-gray-2);
+	}
+
+	&:enabled:hover {
 		background-color: var(--c-offwhite-translucent);
 		cursor: pointer;
 	}

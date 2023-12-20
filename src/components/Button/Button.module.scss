@@ -43,6 +43,12 @@
 	&:hover {
 		background-color: var(--c-action-translucent);
 	}
+
+	&[disabled] {
+		&:hover {
+			background-color: transparent;
+		}
+	}
 }
 
 .action {
@@ -61,6 +67,12 @@
 
 	&:hover {
 		background-position: 0%;
+	}
+
+	&[disabled] {
+		&:hover {
+			background-position: 100%;
+		}
 	}
 }
 
