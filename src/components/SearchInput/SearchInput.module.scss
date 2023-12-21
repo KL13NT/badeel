@@ -46,6 +46,7 @@
 
 .content {
 	background-color: var(--c-gray-2, #313131);
+	opacity: 0.7;
 
 	flex-grow: 1;
 	height: 100%;
@@ -58,7 +59,8 @@
 	color: var(--c-body-2, #efece0);
 	transition:
 		color 0.2s ease-out,
-		border-radius 0.2s ease-out;
+		border-radius 0.2s ease-out,
+		opacity 0.2s ease-out;
 
 	> svg {
 		position: absolute;
@@ -67,6 +69,10 @@
 		height: 24px;
 		width: 24px;
 	}
+}
+
+.search:focus-within .content {
+	opacity: 1;
 }
 
 .search[data-active="true"]:focus-within .content {
