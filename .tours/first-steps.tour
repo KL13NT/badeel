@@ -1,151 +1,166 @@
 {
-	"$schema": "https://aka.ms/codetour-schema",
-	"title": "First Steps",
-	"steps": [
-		{
-			"file": "src/index.tsx",
-			"description": "Here you can find the entry point. Just like any other Web App, we import our main JSX component here (the Router) and render it to #root.",
-			"line": 14
-		},
-		{
-			"file": "src/index.tsx",
-			"description": "We also import solid-devtools to make sure we can debug our app. We dynamically\nand conditionally import it so the devtools bundle doesn't end up in production.\nMake sure to install the Solid Devtools browser extension. \n",
-			"line": 5
-		},
-		{
-			"file": "src/Router.tsx",
-			"description": "Here's our Router. It consists of a few elements, namely:\n- LoadingScreen\n- OfflinePrompt\n- and the pages themselves.\n\nLoadingScreen is as the name suggests. A loading screen. This is displayed as\nfallback for when a page component is lazily loading.\n\nOfflinePrompt is a popup that we display to users once the app has been cached\nfor offline availability.",
-			"line": 5
-		},
-		{
-			"file": "src/Router.tsx",
-			"description": "We lazily import the pages to keep our initial bundle small 😉",
-			"line": 12
-		},
-		{
-			"file": "src/Router.tsx",
-			"description": "We use `solid-toast` which is a toast alert library similar to react-toast. Its\nAPI is straight forward.",
-			"line": 17
-		},
-		{
-			"file": "src/Router.tsx",
-			"description": "We use a number of loading patterns. For page components we use Suspense\nfallback and display a fullscreen loading indicator. For data-based components\nsuch as the product display cards we use Skeletons. ",
-			"line": 33
-		},
-		{
-			"file": "src/Router.tsx",
-			"description": "Acknowledgments page contains the names of those who started and massively\ncontributed to this project.",
-			"line": 35
-		},
-		{
-			"file": "src/Router.tsx",
-			"description": "Product submission page",
-			"line": 36
-		},
-		{
-			"file": "src/Router.tsx",
-			"description": "Website feedback form",
-			"line": 37
-		},
-		{
-			"file": "src/Router.tsx",
-			"description": "And finally the majority of code is available in the Home component",
-			"line": 38
-		},
-		{
-			"file": "src/hooks/useSearchQuery.tsx",
-			"description": "Before we move forward let's go through where the majority of our logic lives.\nWe have two hooks, useSearchQuery is one of them. ",
-			"line": 12
-		},
-		{
-			"file": "src/hooks/useSearchQuery.tsx",
-			"description": "The role of `useSearchQuery` is to abstract the `useSearchParams` hooks provided\nby solid-router. This hook essentially grabs all query parameters in the URL and\nreturns them in an object as a `Record<string, string>`. This makes it a bit\ndifficult to work with certain keys, especially ones that require a default\nvalue. And this is where our abstraction comes into play. ",
-			"line": 13
-		},
-		{
-			"file": "src/hooks/useSearchQuery.tsx",
-			"description": "Each of these properties (sub, status, page) abstract their respective keys in\nthe query parameters, while providing defaults for app logic.",
-			"line": 27
-		},
-		{
-			"file": "src/hooks/useSearchQuery.tsx",
-			"description": "We rely on query parameters to keep track of our states instead of global state\nfor two reasons:\n1. We needed to add share-ability to everything in the app\n2. Maintaining global state + query parameter state + inner-component states is\n   just too much for too little",
-			"line": 13
-		},
-		{
-			"file": "src/hooks/useDocuments.tsx",
-			"description": "The second, most important hook of all is this one. This is where documents\n(Google Spreadsheets) are downloaded and transformed, and where things like\nthe search functionality mostly lives.",
-			"line": 60
-		},
-		{
-			"file": "src/hooks/useDocuments.tsx",
-			"description": "Results is used for Fuzzy Search results ",
-			"line": 63
-		},
-		{
-			"file": "src/hooks/useDocuments.tsx",
-			"description": "Fuse is a JS library that implements really quick and performant fuzzy search",
-			"line": 64
-		},
-		{
-			"file": "src/hooks/useDocuments.tsx",
-			"description": "On mount we fetch the documents and add any extra properties we need to them,\nsuch as `id` and `status`. We also load and map categories to the `categoryMap`\nyou'll encounter further in this tour.",
-			"line": 122
-		},
-		{
-			"file": "src/hooks/useDocuments.tsx",
-			"description": "Products are then filtered and sorted and memoized to avoid expensive\nre-calculations. These products can be `results` that are set as a result of\nusing `search` or the full list of products in case the user haven't searched\nfor anything specific. ",
-			"line": 180
-		},
-		{
-			"file": "src/hooks/useDocuments.tsx",
-			"description": "We paginate these results to avoid rendering too many items at the same time on\nweaker machines. This is only for optimization purposes, we don't actually have\na backend that serves paginated data.",
-			"line": 203
-		},
-		{
-			"file": "src/pages/home/index.tsx",
-			"description": "This takes us to the homepage. Or rather the Main page.",
-			"line": 35
-		},
-		{
-			"file": "src/pages/home/index.tsx",
-			"description": "A focused product is a product on which a user clicks the \"Read More\" on, and\nused to render the product modal.",
-			"line": 50
-		},
-		{
-			"file": "src/pages/home/index.tsx",
-			"description": "This one toggles the filters menu on and off, similar to focusedProduct.",
-			"line": 53
-		},
-		{
-			"file": "src/pages/home/index.tsx",
-			"description": "We scroll the page down to make sure the user is notified of changes in the\nresults. ",
-			"line": 59
-		},
-		{
-			"file": "src/pages/home/index.tsx",
-			"description": "Searching is throttled to 1 search query every 250ms for performance reasons as well. We don't want to fuzzy\nsearch over thousands of products on every search request.",
-			"line": 63
-		},
-		{
-			"file": "src/utils/categories.ts",
-			"description": "This mapping contains all categories, sub and major, to make sure we can operate\non them in a dual-access way. Meaning this allows us to reach all subcategories\nof a certain major category, and vice versa. ",
-			"line": 3
-		},
-		{
-			"file": "src/pages/home/index.tsx",
-			"description": "Upon opening a shared product URL this effect makes sure to focus that product's\nmodal",
-			"line": 138
-		},
-		{
-			"file": "src/components/FiltersModal/FiltersModal.tsx",
-			"description": "The filters modal is the menu through which users can filter and sort products.\nThis is one of the most important pieces in Badeel. ",
-			"line": 30
-		},
-		{
-			"file": "src/components/FiltersModal/FiltersModal.tsx",
-			"description": "We maintain a state here that defaults to values coming from query parameters,\nsince those values will be used to filter products on page load. We maintain\nthis state because (per design) we wish to apply filters only when users press\nthe `Apply` button, not on every input change. ",
-			"line": 32
-		}
-	]
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "First Steps",
+  "steps": [
+    {
+      "file": "src/index.tsx",
+      "description": "Here you can find the entry point. Just like any other Web App, we import our main JSX component here (the Router) and render it to #root.",
+      "line": 14
+    },
+    {
+      "file": "src/index.tsx",
+      "description": "We also import solid-devtools to make sure we can debug our app. We dynamically\nand conditionally import it so the devtools bundle doesn't end up in production.\nMake sure to install the Solid Devtools browser extension. \n",
+      "line": 5
+    },
+    {
+      "file": "src/Router.tsx",
+      "description": "Here's our Router. It consists of a few elements, namely:\n- LoadingScreen\n- OfflinePrompt\n- and the pages themselves.\n\nLoadingScreen is as the name suggests. A loading screen. This is displayed as\nfallback for when a page component is lazily loading.\n\nOfflinePrompt is a popup that we display to users once the app has been cached\nfor offline availability.",
+      "line": 5
+    },
+    {
+      "file": "src/Router.tsx",
+      "description": "We lazily import the pages to keep our initial bundle small 😉",
+      "line": 12
+    },
+    {
+      "file": "src/Router.tsx",
+      "description": "We use `solid-toast` which is a toast alert library similar to react-toast. Its\nAPI is straight forward.",
+      "line": 17
+    },
+    {
+      "file": "src/Router.tsx",
+      "description": "We use a number of loading patterns. For page components we use Suspense\nfallback and display a fullscreen loading indicator. For data-based components\nsuch as the product display cards we use Skeletons. ",
+      "line": 33
+    },
+    {
+      "file": "src/Router.tsx",
+      "description": "Acknowledgments page contains the names of those who started and massively\ncontributed to this project.",
+      "line": 35
+    },
+    {
+      "file": "src/Router.tsx",
+      "description": "Product submission page",
+      "line": 36
+    },
+    {
+      "file": "src/Router.tsx",
+      "description": "Website feedback form",
+      "line": 37
+    },
+    {
+      "file": "src/Router.tsx",
+      "description": "And finally the majority of code is available in the Home component",
+      "line": 38
+    },
+    {
+      "file": "src/hooks/useSearchQuery.tsx",
+      "description": "Before we move forward let's go through where the majority of our logic lives.\nWe have two hooks, useSearchQuery is one of them. ",
+      "line": 12
+    },
+    {
+      "file": "src/hooks/useSearchQuery.tsx",
+      "description": "The role of `useSearchQuery` is to abstract the `useSearchParams` hooks provided\nby solid-router. This hook essentially grabs all query parameters in the URL and\nreturns them in an object as a `Record<string, string>`. This makes it a bit\ndifficult to work with certain keys, especially ones that require a default\nvalue. And this is where our abstraction comes into play. ",
+      "line": 13
+    },
+    {
+      "file": "src/hooks/useSearchQuery.tsx",
+      "description": "Each of these properties (sub, status, page) abstract their respective keys in\nthe query parameters, while providing defaults for app logic.",
+      "line": 27
+    },
+    {
+      "file": "src/hooks/useSearchQuery.tsx",
+      "description": "We rely on query parameters to keep track of our states instead of global state\nfor two reasons:\n1. We needed to add share-ability to everything in the app\n2. Maintaining global state + query parameter state + inner-component states is\n   just too much for too little",
+      "line": 13
+    },
+    {
+      "file": "src/hooks/useDocuments.tsx",
+      "description": "The second, most important hook of all is this one. This is where documents\n(Google Spreadsheets) are downloaded and transformed, and where things like\nthe search functionality mostly lives.",
+      "line": 60
+    },
+    {
+      "file": "src/hooks/useDocuments.tsx",
+      "description": "Results is used for Fuzzy Search results ",
+      "line": 63
+    },
+    {
+      "file": "src/hooks/useDocuments.tsx",
+      "description": "Fuse is a JS library that implements really quick and performant fuzzy search",
+      "line": 64
+    },
+    {
+      "file": "src/hooks/useDocuments.tsx",
+      "description": "On mount we fetch the documents and add any extra properties we need to them,\nsuch as `id` and `status`. We also load and map categories to the `categoryMap`\nyou'll encounter further in this tour.",
+      "line": 122
+    },
+    {
+      "file": "src/hooks/useDocuments.tsx",
+      "description": "Products are then filtered and sorted and memoized to avoid expensive\nre-calculations. These products can be `results` that are set as a result of\nusing `search` or the full list of products in case the user haven't searched\nfor anything specific. ",
+      "line": 180
+    },
+    {
+      "file": "src/hooks/useDocuments.tsx",
+      "description": "We paginate these results to avoid rendering too many items at the same time on\nweaker machines. This is only for optimization purposes, we don't actually have\na backend that serves paginated data.",
+      "line": 203
+    },
+    {
+      "file": "src/pages/home/index.tsx",
+      "description": "This takes us to the homepage. Or rather the Main page.",
+      "line": 35
+    },
+    {
+      "file": "src/pages/home/index.tsx",
+      "description": "A focused product is a product on which a user clicks the \"Read More\" on, and\nused to render the product modal.",
+      "line": 50
+    },
+    {
+      "file": "src/pages/home/index.tsx",
+      "description": "This one toggles the filters menu on and off, similar to focusedProduct.",
+      "line": 53
+    },
+    {
+      "file": "src/pages/home/index.tsx",
+      "description": "We scroll the page down to make sure the user is notified of changes in the\nresults. ",
+      "line": 59
+    },
+    {
+      "file": "src/pages/home/index.tsx",
+      "description": "Searching is throttled to 1 search query every 250ms for performance reasons as well. We don't want to fuzzy\nsearch over thousands of products on every search request.",
+      "line": 63
+    },
+    {
+      "file": "src/utils/categories.ts",
+      "description": "This mapping contains all categories, sub and major, to make sure we can operate\non them in a dual-access way. Meaning this allows us to reach all subcategories\nof a certain major category, and vice versa. ",
+      "line": 3
+    },
+    {
+      "file": "src/pages/home/index.tsx",
+      "description": "Upon opening a shared product URL this effect makes sure to focus that product's\nmodal",
+      "line": 138
+    },
+    {
+      "file": "src/components/FiltersModal/FiltersModal.tsx",
+      "description": "The filters modal is the menu through which users can filter and sort products.\nThis is one of the most important pieces in Badeel. ",
+      "line": 30
+    },
+    {
+      "file": "src/components/FiltersModal/FiltersModal.tsx",
+      "description": "We maintain a state here that defaults to values coming from query parameters,\nsince those values will be used to filter products on page load. We maintain\nthis state because (per design) we wish to apply filters only when users press\nthe `Apply` button, not on every input change. ",
+      "line": 32
+    },
+    {
+      "file": "src/components/TypeWriter/TypeWriter.tsx",
+      "description": "We also have a nice component that displays the quotes you see. We use\na throttled requestAnimationFrame to throttle it to a character every 65ms. \n\nThis\ngrants simi-accurate timing as opposed to using timers such as setTimeout or\nsetInterval since timers can be throttled by the browser when the background or\nwhen switched away.",
+      "line": 32
+    },
+    {
+      "file": "vite.config.ts",
+      "description": "You can find the configuration for the PWA using VitePWA here. We have it set to\ncache all requests to Google Spreadsheets. You probably won't need to do\nanything here.",
+      "line": 36
+    },
+    {
+      "file": "src/index.tsx",
+      "description": "And that's it! Feel free to browse the codebase now however you like. Thank you\nfor contributing to Badeel! 🥳",
+      "line": 14
+    }
+  ]
 }
