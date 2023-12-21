@@ -13,6 +13,7 @@ import styles from "./Layout.module.scss";
 import HandshakeIcon from "~assets/icons/handshake.svg?component-solid";
 
 import logo from "~assets/icons/logo.svg";
+import BackToTopButton from "~components/BackToTopButton/BackToTopButton";
 
 interface Props {
 	children: JSX.Element;
@@ -80,7 +81,7 @@ export default function Layout(props: Props) {
 			<nav class={styles.navbar} ref={headerRef}>
 				<div class={styles.upper}>
 					<div class={styles.right}>
-						<A href="/">
+						<A href="/" id="logo">
 							<img src={logo} class={styles.logo} alt="" role="presentation" />
 						</A>
 					</div>
@@ -110,6 +111,8 @@ export default function Layout(props: Props) {
 			</nav>
 
 			<main class={styles.main}>{props.children}</main>
+
+			<BackToTopButton />
 
 			<footer class={styles.footer}>
 				<p>
