@@ -173,7 +173,7 @@ function App() {
 				)}
 			</div>
 
-			<Transition name="slide-right">
+			<Transition name="filter-slide-right">
 				<Show when={filtersOpen() && !loading()}>
 					<FiltersModal categories={categories()} close={closeFilters} />
 				</Show>

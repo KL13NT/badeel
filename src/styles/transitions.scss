@@ -28,6 +28,7 @@
 	}
 }
 
+.filter-slide-right,
 .slide-right {
 	&-enter-active,
 	&-exit-active {
@@ -40,7 +41,15 @@
 	}
 }
 
+.filter-slide-right {
+	&-enter,
+	&-exit-to {
+		transform: translateX(350px);
+	}
+}
+
 @media screen and (max-width: 700px) {
+	.filter-slide-right,
 	.slide-right {
 		&-enter,
 		&-exit-to {
