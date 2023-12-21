@@ -3,6 +3,7 @@ import { onMount } from "solid-js";
 import { A } from "@solidjs/router";
 
 import Button from "~components/Button/Button";
+import BackToTopButton from "~components/BackToTopButton/BackToTopButton";
 
 import t from "~utils/messages";
 import { FEEDBACK_FORM } from "~constants/documents";
@@ -13,7 +14,6 @@ import styles from "./Layout.module.scss";
 import HandshakeIcon from "~assets/icons/handshake.svg?component-solid";
 
 import logo from "~assets/icons/logo.svg";
-import BackToTopButton from "~components/BackToTopButton/BackToTopButton";
 
 interface Props {
 	children: JSX.Element;

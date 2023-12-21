@@ -1,9 +1,11 @@
+import { Transition } from "solid-transition-group";
+import { Show, createSignal, onCleanup, onMount } from "solid-js";
+
 import Button from "~components/Button/Button";
+
 import styles from "./BackToTopButton.module.scss";
 
 import ArrowDown from "~assets/icons/arrow-down.svg?component-solid";
-import { Show, createSignal, onCleanup, onMount } from "solid-js";
-import { Transition } from "solid-transition-group";
 
 export default function BackToTopButton() {
 	const [isVisible, setVisible] = createSignal(false);
