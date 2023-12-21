@@ -155,7 +155,7 @@ export default function ProductModal(props: ProductModalProps) {
 
 			if (navigator.share) {
 				await navigator.share({
-					text: url.toString(),
+					text: `تصفح ${props.product.Name} على بَدِيل`,
 					url: url.toString(),
 				});
 
