@@ -18,7 +18,15 @@ export default function BackToTopButton() {
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
-	const focusLogo = () => document.getElementById("logo")?.focus();
+	const focusFirstFocusableElement = () => {
+		const focusableElements = document.querySelectorAll<HTMLElement>(
+			'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+		);
+
+		if (focusableElements[0]) {
+			focusableElements[0].focus();
+		}
+	};
 
 	onMount(() => {
 		toggleBackToTopVisibility();
@@ -30,7 +38,10 @@ export default function BackToTopButton() {
 	});
 
 	return (
-		<Transition name="enter-slide-exit-fade" onAfterExit={focusLogo}>
+		<Transition
+			name="enter-slide-exit-fade"
+			onAfterExit={focusFirstFocusableElement}
+		>
 			<Show when={isVisible()}>
 				<Button
 					class={styles.backToTopBtn}

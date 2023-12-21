@@ -81,7 +81,7 @@ export default function Layout(props: Props) {
 			<nav class={styles.navbar} ref={headerRef}>
 				<div class={styles.upper}>
 					<div class={styles.right}>
-						<A href="/" id="logo">
+						<A href="/">
 							<img src={logo} class={styles.logo} alt="" role="presentation" />
 						</A>
 					</div>
