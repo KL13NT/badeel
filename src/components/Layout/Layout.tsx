@@ -3,6 +3,7 @@ import { onMount } from "solid-js";
 import { A } from "@solidjs/router";
 
 import Button from "~components/Button/Button";
+import BackToTopButton from "~components/BackToTopButton/BackToTopButton";
 
 import t from "~utils/messages";
 import { FEEDBACK_FORM } from "~constants/documents";
@@ -110,6 +111,8 @@ export default function Layout(props: Props) {
 			</nav>
 
 			<main class={styles.main}>{props.children}</main>
+
+			<BackToTopButton />
 
 			<footer class={styles.footer}>
 				<p>

@@ -145,7 +145,7 @@ function App() {
 	});
 
 	return (
-		<main class={styles.container}>
+		<section class={styles.container}>
 			<Show when={focusedProduct() || filtersOpen()}>
 				<div class="overlay" />
 			</Show>
@@ -173,7 +173,7 @@ function App() {
 				)}
 			</div>
 
-			<Transition name="slide-right">
+			<Transition name="filter-slide-right">
 				<Show when={filtersOpen() && !loading()}>
 					<FiltersModal categories={categories()} close={closeFilters} />
 				</Show>
@@ -231,7 +231,7 @@ function App() {
 				view={view()}
 			/>
 
-			<section class={styles.table}>
+			<article class={styles.table}>
 				<Transition name="slide-fade">
 					<Show when={view() === "table"}>
 						{results() && !loading() ? (
@@ -278,12 +278,12 @@ function App() {
 						/>
 					</Show>
 				</Transition>
-			</section>
+			</article>
 
-			<section class={styles.ack}>
+			<article class={styles.ack}>
 				<A href="/acknowledgments">{t("footer.ack")}</A>
-			</section>
-		</main>
+			</article>
+		</section>
 	);
 }
 
