@@ -29,7 +29,7 @@ import FilterIcon from "~assets/icons/filter.svg?component-solid";
 import CardsToggleIcon from "~assets/icons/cards-toggle.svg?component-solid";
 import TableToggleIcon from "~assets/icons/table-toggle.svg?component-solid";
 
-let searchThrottleTimeout: number | number = 0;
+let searchThrottleTimeout: number | NodeJS.Timeout = 0;
 let searchInputContainerRef: HTMLDivElement;
 
 function App() {
