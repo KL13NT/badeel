@@ -79,6 +79,13 @@
 		transform: translateY(var(--s-2));
 	}
 
+	&-enter-active,
+	&-exit-active {
+		transition:
+			opacity 0.2s ease-out,
+			transform 0.2s ease-out;
+	}
+
 	&-exit-to,
 	&-enter {
 		opacity: 0;

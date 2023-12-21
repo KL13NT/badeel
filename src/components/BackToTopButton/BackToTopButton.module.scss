@@ -4,11 +4,6 @@
 	bottom: var(--s-2);
 	z-index: var(--z-1);
 	padding: var(--s-2);
-	transition:
-		background-color 0.2s ease-out,
-		color 0.2s ease-out,
-		opacity 0.2s ease-out,
-		transform 0.2s ease-out;
 
 	svg {
 		transform: rotate(180deg);
