@@ -1,0 +1,35 @@
+.backToTopBtn {
+	position: fixed;
+	left: var(--s-2);
+	bottom: var(--s-2);
+	z-index: var(--z-1);
+	padding: var(--s-2);
+	transition:
+		background-color 0.2s ease-out,
+		color 0.2s ease-out,
+		opacity 0.2s ease-out,
+		transform 0.2s ease-out;
+
+	svg {
+		transform: rotate(180deg);
+	}
+
+	@media (max-width: 700px) {
+		span {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border-width: 0;
+		}
+	}
+}
+
+[dir="ltr"] .backToTopBtn {
+	right: var(--s-2);
+	left: auto;
+}

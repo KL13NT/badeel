@@ -73,3 +73,14 @@
 		opacity: 0;
 	}
 }
+
+.enter-slide-exit-fade {
+	&-enter {
+		transform: translateY(var(--s-2));
+	}
+
+	&-exit-to,
+	&-enter {
+		opacity: 0;
+	}
+}
