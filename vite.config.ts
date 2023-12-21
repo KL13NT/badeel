@@ -111,7 +111,7 @@ export default defineConfig({
 							cacheName: "google-documents-cache",
 							expiration: {
 								maxEntries: 10,
-								maxAgeSeconds: 60 * 60 * 24 /* 1 day */,
+								maxAgeSeconds: 60 * 60 * 24 * 7 /* 1 week */,
 							},
 							matchOptions: {
 								ignoreVary: true,
