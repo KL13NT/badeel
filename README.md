@@ -10,6 +10,20 @@ Issues](https://img.shields.io/github/issues/kl13nt/badeel)](https://github.com/
 
 Available at [Badeel.wiki](https://badeel.wiki).
 
+## Getting Started
+
+We have the following requirements for this project:
+
+- [pnpm](https://pnpm.io/installation)
+- Node 18.16.0
+
+To get started:
+
+1. pnpm install
+2. Install the VSCode [Code Tour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour) extension
+3. Start the tour we have documented to onboard yourself on the codebase
+4. Enjoy!
+
 ## Contributing
 
 This codebase and all data sources used as part of it are licensed under the GNU
