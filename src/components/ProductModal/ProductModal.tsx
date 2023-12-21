@@ -147,16 +147,25 @@ export default function ProductModal(props: ProductModalProps) {
 	const handleShareProduct = async (productId: string) => {
 		try {
 			const url = new URL(location.href);
+			const toastOptions = {
+				icon: "🥳",
+			};
+
 			url.searchParams.append("productId", productId);
 
-			await navigator.clipboard.writeText(url.toString());
+			if (navigator.share) {
+				await navigator.share({
+					text: url.toString(),
+				});
 
-			toast(t("productModal.copied"), {
-				position: "top-center",
-				icon: "🥳",
-			});
+				toast(t("productModal.shared"), toastOptions);
+			} else if (navigator.clipboard) {
+				await navigator.clipboard.writeText(url.toString());
+
+				toast(t("productModal.copied"), toastOptions);
+			}
 		} catch (error) {
-			console.log(error);
+			toast.error(t("productModal.shareError"));
 		}
 	};
 

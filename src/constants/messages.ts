@@ -77,4 +77,6 @@ export const MESSAGES = {
 
 	"productModal.share": "شارِك المُنتَج",
 	"productModal.copied": "تم نسخ رابط المُنتَج بنجاح",
+	"productModal.shared": "تم مشاركة رابط المُنتَج بنجاح",
+	"productModal.shareError": "حدث خطأ ما أثناء مشاركة الرابط",
 } as const;
