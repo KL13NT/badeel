@@ -156,6 +156,7 @@ export default function ProductModal(props: ProductModalProps) {
 			if (navigator.share) {
 				await navigator.share({
 					text: url.toString(),
+					url: url.toString(),
 				});
 
 				toast(t("productModal.shared"), toastOptions);
@@ -165,7 +166,9 @@ export default function ProductModal(props: ProductModalProps) {
 				toast(t("productModal.copied"), toastOptions);
 			}
 		} catch (error) {
-			toast.error(t("productModal.shareError"));
+			if (error instanceof Error && error.name !== "AbortError") {
+				toast.error(t("productModal.shareError"));
+			}
 		}
 	};
 
