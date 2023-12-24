@@ -151,7 +151,7 @@ export default defineConfig({
 				description: "موقع مصري هدفه تسهيل الوصول للمنتجات المقاطعة وبدائلها",
 				theme_color: "#b8b7adff",
 				background_color: "#1a1a1a",
-				display: "fullscreen",
+				display: "standalone",
 				orientation: "portrait",
 				icons: [
 					{
