@@ -144,11 +144,37 @@ function App() {
 		setFocusedProduct(product);
 	});
 
+	const overlayEntryKeyframes: Keyframe[] = [
+		{ backdropFilter: "blur(0)", backgroundColor: "#00000000" },
+		{ backdropFilter: "blur(5px)", backgroundColor: "#00000060" },
+	];
+
+	const overlayAnimationConfig: KeyframeAnimationOptions = {
+		duration: 200,
+		easing: "ease-out",
+		fill: "forwards",
+	};
+
 	return (
 		<section class={styles.container}>
-			<Show when={focusedProduct() || filtersOpen()}>
-				<div class="overlay" />
-			</Show>
+			<Transition
+				onEnter={(el, done) => {
+					el.animate(
+						overlayEntryKeyframes,
+						overlayAnimationConfig
+					).finished.then(done);
+				}}
+				onExit={(el, done) => {
+					el.animate(
+						[...overlayEntryKeyframes].reverse(),
+						overlayAnimationConfig
+					).finished.then(done);
+				}}
+			>
+				<Show when={focusedProduct() || filtersOpen()}>
+					<div class="overlay" />
+				</Show>
+			</Transition>
 
 			<div class={styles.intro}>
 				<TypeWriter />
