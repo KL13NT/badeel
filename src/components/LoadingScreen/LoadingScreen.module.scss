@@ -15,6 +15,7 @@
 		font-size: var(--f-size-9);
 		font-weight: 600;
 		font-family: var(--f-title);
+		text-shadow: 5px 3px 3px black;
 	}
 
 	svg {
@@ -22,9 +23,12 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		stroke-dashoffset: 821px;
-		stroke-dasharray: 821px;
-		animation: draw-map 3s infinite linear;
+		stroke-dashoffset: 1450px;
+		stroke-dasharray: 1450px;
+		animation: draw-map 10s infinite linear;
+		animation-delay: 0s;
+		height: 590px;
+		animation-delay: 1s;
 	}
 }
 
@@ -84,10 +88,18 @@
 }
 
 @keyframes draw-map {
-	from {
-		stroke-dashoffset: 821px;
+	10%,
+	90% {
+		stroke-dashoffset: 1450px;
 	}
-	to {
-		stroke-dashoffset: -821px;
+
+	20%,
+	80% {
+		stroke-dashoffset: 1120px;
+	}
+
+	40%,
+	60% {
+		stroke-dashoffset: 0;
 	}
 }
