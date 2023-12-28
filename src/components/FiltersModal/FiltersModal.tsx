@@ -138,7 +138,7 @@ export default function FiltersModal(props: Props) {
 								{t("filters.clear")}
 							</button>
 							<button onClick={() => props.close()} class={styles.close}>
-								<CloseIcon />
+								<CloseIcon role="presentation" />
 							</button>
 						</div>
 					</div>

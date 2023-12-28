@@ -83,7 +83,7 @@ export default function Combobox(props: Props) {
 					value={props.value}
 					alwaysDisplayLabel={props.alwaysDisplayLabel}
 				/>
-				<ArrowDownIcon />
+				<ArrowDownIcon role="presentation" />
 			</button>
 
 			<Transition name="slide-fade-down">

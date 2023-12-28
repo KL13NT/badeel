@@ -42,7 +42,7 @@ export default function Tags(props: TagsProps) {
 				>
 					<span>{t("filters.search")}: </span>
 					{query()}
-					<CloseIcon />
+					<CloseIcon role="presentation" />
 				</Button>
 			</Show>
 
@@ -55,7 +55,7 @@ export default function Tags(props: TagsProps) {
 				>
 					<span>{t("filters.sort")}: </span>
 					{t(`sort.${sort()}` as MessageKey)}
-					<CloseIcon />
+					<CloseIcon role="presentation" />
 				</Button>
 			</Show>
 
@@ -70,7 +70,7 @@ export default function Tags(props: TagsProps) {
 					{status()
 						.map((status) => t(`filters.${status}` as MessageKey))
 						.join(", ")}
-					<CloseIcon />
+					<CloseIcon role="presentation" />
 				</Button>
 			</Show>
 
@@ -82,7 +82,7 @@ export default function Tags(props: TagsProps) {
 					onClick={[handleClearFilter, ["major", "sub"]]}
 				>
 					{getCategoryByKey(major() as string).arabic}
-					<CloseIcon />
+					<CloseIcon role="presentation" />
 				</Button>
 			</Show>
 
@@ -99,7 +99,7 @@ export default function Tags(props: TagsProps) {
 				>
 					<span>{getCategoryMajor(sub()[0]).arabic}: </span>
 					{getCategoryByKey(sub()[0]).arabic}
-					<CloseIcon />
+					<CloseIcon role="presentation" />
 				</Button>
 			</Show>
 

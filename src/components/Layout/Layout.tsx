@@ -94,7 +94,7 @@ export default function Layout(props: Props) {
 						<div class={styles.separator} />
 
 						<Button as={A} href="/submit" class={styles.add} variant="danger">
-							<HandshakeIcon />
+							<HandshakeIcon role="presentation" />
 							{t("navbar.add")}
 						</Button>
 					</div>

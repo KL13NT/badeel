@@ -106,7 +106,7 @@ export default function SearchInput(props: Props) {
 			>
 				<div>
 					<div class={styles.content}>
-						<SearchIcon />
+						<SearchIcon role="presentation" />
 						<input
 							type="text"
 							name="query"

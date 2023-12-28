@@ -16,7 +16,7 @@ export default function LoadingScreen() {
 	return (
 		<div class={styles.loading} role="alert" aria-live="assertive">
 			<div>
-				<PalestineIcon />
+				<PalestineIcon role="presentation" />
 				<h1>جارِ التحميل</h1>
 			</div>
 		</div>

@@ -91,7 +91,7 @@ export default function Feedback() {
 							data-status={status()}
 						>
 							{status() === "submitting" ? "يجري الإرسال" : "إرسال"}
-							<LoadingIcon />
+							<LoadingIcon role="presentation" />
 						</Button>
 					</form>
 

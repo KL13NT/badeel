@@ -212,7 +212,7 @@ function App() {
 					onClick={openFilters}
 					data-active={arrayExists(sub()) || arrayExists(status()) || major}
 				>
-					<FilterIcon />
+					<FilterIcon role="presentation" />
 					{t("filters.activator")}
 					{filtersCount() > 0 ? (
 						<span class={styles.filterCount}>{filtersCount()}</span>
@@ -233,7 +233,7 @@ function App() {
 							onChange={() => switchView("cards")}
 							pressed={view() === "cards"}
 						>
-							<CardsToggleIcon />
+							<CardsToggleIcon role="presentation" />
 						</Toggle>
 						<Toggle
 							class={styles.toggle}
@@ -241,7 +241,7 @@ function App() {
 							onChange={() => switchView("table")}
 							pressed={view() === "table"}
 						>
-							<TableToggleIcon />
+							<TableToggleIcon role="presentation" />
 						</Toggle>
 					</div>
 				</div>
