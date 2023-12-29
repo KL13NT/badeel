@@ -39,7 +39,7 @@
 		"vite-plugin-mkcert": "^1.16.0",
 		"vite-plugin-pwa": "^0.16.7",
 		"vite-plugin-solid": "^2.7.2",
-		"vite-plugin-solid-svg": "^0.7.0",
+		"vite-plugin-solid-svg": "^0.8.0",
 		"vite-tsconfig-paths": "^4.2.1",
 		"workbox-window": "^7.0.0"
 	},

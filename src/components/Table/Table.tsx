@@ -95,7 +95,7 @@ export default function Table(props: Props) {
 												class={styles.details}
 											>
 												<span>{t("table.showDetails")}</span>
-												<ViewIcon />
+												<ViewIcon role="presentation" />
 											</button>
 										</td>
 									</tr>

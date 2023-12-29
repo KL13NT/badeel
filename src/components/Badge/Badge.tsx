@@ -10,11 +10,11 @@ import ForbiddenIcon from "~assets/icons/forbidden.svg?component-solid";
 import OliveIcon from "~assets/icons/olive.svg?component-solid";
 import IncognitoIcon from "~assets/icons/incognito.svg?component-solid";
 
-const statusIconMapping: Record<Status, Component> = {
+const statusIconMapping = {
 	alternative: OliveIcon,
 	boycott: ForbiddenIcon,
 	unsure: IncognitoIcon,
-};
+} satisfies Record<Status, Component>;
 
 interface Props {
 	/**
@@ -34,7 +34,10 @@ export default function Badge(_props: Props) {
 
 	return (
 		<span class={clsx("t-button", styles.badge, styles[props.variant])}>
-			<Dynamic component={statusIconMapping[props.variant]} />
+			<Dynamic
+				component={statusIconMapping[props.variant]}
+				role="presentation"
+			/>
 			{props.children}
 		</span>
 	);

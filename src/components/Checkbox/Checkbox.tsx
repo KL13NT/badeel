@@ -21,7 +21,7 @@ export default function Checkbox(_props: Props) {
 			<input type="checkbox" name={local.name} value={local.value} {...props} />
 
 			<span class={styles.checkmark}>
-				<CheckIcon />
+				<CheckIcon role="presentation" />
 			</span>
 
 			{local.label}

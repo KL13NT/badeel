@@ -192,7 +192,7 @@ export default function ProductModal(props: ProductModalProps) {
 						onClick={props.close}
 						class={styles.close}
 					>
-						<CloseIcon />
+						<CloseIcon role="presentation" />
 					</Button>
 				</div>
 
@@ -226,7 +226,7 @@ export default function ProductModal(props: ProductModalProps) {
 							variant="action-invert"
 						>
 							{t("productModal.share")}
-							<ShareIcon />
+							<ShareIcon role="presentation" />
 						</Button>
 					</div>
 				</div>

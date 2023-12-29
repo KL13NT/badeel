@@ -50,7 +50,7 @@ export default function ResultCards(props: ResultCardsProps) {
 									class={styles.details}
 								>
 									<span>{t("table.showDetails")}</span>
-									<ViewIcon />
+									<ViewIcon role="presentation" />
 								</button>
 							</div>
 						</div>
@@ -69,7 +69,11 @@ export function ResultCardsSkeleton() {
 					{() => {
 						return (
 							<tr>
-								<Skeleton as="div" colspan="10" class={clsx(styles.result, styles.skeleton)} />
+								<Skeleton
+									as="div"
+									colspan="10"
+									class={clsx(styles.result, styles.skeleton)}
+								/>
 							</tr>
 						);
 					}}
