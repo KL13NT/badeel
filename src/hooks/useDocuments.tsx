@@ -155,7 +155,7 @@ export const useDocuments = () => {
 				includeScore: true,
 				findAllMatches: false,
 				includeMatches: true,
-				isCaseSensitive: true,
+				isCaseSensitive: false,
 			});
 
 			generateCategoryMap(categories);
