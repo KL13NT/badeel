@@ -60,7 +60,7 @@ prettify, and run the available tests against your code.
 
 If you know what the Angular commit format is and have used it before then by
 all means feel free to commit as you usually do after running `npm run
-precommit`. Note though that your commit messages will be checked by husky to
+prebuild`. Note though that your commit messages will be checked by husky to
 make sure they're compliant either way.
 
 > Make sure to sign your commits. This guarantees ownership of your contributions.
