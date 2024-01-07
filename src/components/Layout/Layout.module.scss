@@ -102,10 +102,18 @@
 	text-align: center;
 
 	> p {
-		margin-top: var(--s-4);
+		margin-bottom: var(--s-4);
 		padding-inline: var(--s-2);
 		line-height: 1.6;
 	}
+}
+
+.footerSeparator {
+	width: 300px;
+	margin-inline: auto;
+	height: 1px;
+	color: var(--c-button-hovering);
+	margin-block: 75px;
 }
 
 @media screen and (max-width: 700px) {
@@ -162,5 +170,9 @@
 
 	.lower {
 		display: flex;
+	}
+
+	.footerSeparator {
+		width: 50%;
 	}
 }

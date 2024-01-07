@@ -114,6 +114,8 @@ export default function Layout(props: Props) {
 
 			<BackToTopButton />
 
+			<hr class={styles.footerSeparator} />
+
 			<footer class={styles.footer}>
 				<p>
 					تطبيقنا هو أداة تم تصميمها لتسهيل عملية الوصول للمنتجات أو الخدمات
