@@ -162,5 +162,6 @@
       "description": "And that's it! Feel free to browse the codebase now however you like. Thank you\nfor contributing to Badeel! 🥳",
       "line": 14
     }
-  ]
+  ],
+  "isPrimary": true
 }
