@@ -114,9 +114,16 @@ export const useDocuments = () => {
 			return [];
 		}
 
-		return productFuse.search(query, {
+		const results = productFuse.search(query, {
 			limit: 5,
 		});
+
+		return results.filter(
+			(current, index, results) =>
+				results.findIndex(
+					(result) => result.matches![0].value === current.matches![0].value
+				) === index
+		);
 	};
 
 	onMount(async () => {
