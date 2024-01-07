@@ -43,7 +43,7 @@ export const MESSAGES = {
 	of: "من أصل",
 
 	"filters.title": "التصفية",
-	"filters.activator": "التصفية والترتيب",
+	"filters.activator": "الأقسام والترتيب",
 	"filters.clear": "إلغاء التصفية",
 	"filters.close": "إغلاق",
 	"filters.boycott": "داعم",
