@@ -1,7 +1,7 @@
 import t from "~utils/messages";
 
-export const arabicLettersRegex = /[\u0621-\u064A 0-9]+/;
-export const englishLettersRegex = /[a-zA-Z 0-9]+/;
+export const arabicLettersRegex = /[\u0621-\u064A]+/;
+export const englishLettersRegex = /[a-zA-Z]+/;
 
 export const PRODUCT_TYPE_OPTIONS: {
 	value: string;
