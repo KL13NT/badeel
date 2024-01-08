@@ -1,36 +1,53 @@
 {
-	"projectName": "badeel",
-	"projectOwner": "KL13NT",
-	"repoType": "github",
-	"repoHost": "https://github.com",
-	"files": ["README.md"],
-	"imageSize": 100,
-	"commit": false,
-	"commitConvention": "angular",
-	"contributors": [
-		{
-			"login": "KL13NT",
-			"name": "Nabil Tharwat",
-			"avatar_url": "https://avatars.githubusercontent.com/u/20807178?v=4",
-			"profile": "https://github.com/KL13NT",
-			"contributions": ["code"]
-		},
-		{
-			"login": "karimshalapy",
-			"name": "Karim Shalapy",
-			"avatar_url": "https://avatars.githubusercontent.com/u/66819303?v=4",
-			"profile": "https://karimshalapy.github.io/",
-			"contributions": ["code"]
-		},
-		{
-			"login": "ahussein3",
-			"name": "Ahmed Magdy ",
-			"avatar_url": "https://avatars.githubusercontent.com/u/10266009?v=4",
-			"profile": "https://github.com/ahussein3",
-			"contributions": ["code"]
-		}
-	],
-	"contributorsPerLine": 7,
-	"linkToUsage": true
+  "projectName": "badeel",
+  "projectOwner": "KL13NT",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "KL13NT",
+      "name": "Nabil Tharwat",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20807178?v=4",
+      "profile": "https://github.com/KL13NT",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "karimshalapy",
+      "name": "Karim Shalapy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/66819303?v=4",
+      "profile": "https://karimshalapy.github.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ahussein3",
+      "name": "Ahmed Magdy ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10266009?v=4",
+      "profile": "https://github.com/ahussein3",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Ahmedsaed",
+      "name": "Ahmed Saed",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37080003?v=4",
+      "profile": "http://ahmedsaed.me",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": true,
+  "commitType": "docs"
 }
-
