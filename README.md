@@ -82,6 +82,7 @@ feel free to use the form for that, or follow the steps:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/KL13NT"><img src="https://avatars.githubusercontent.com/u/20807178?v=4?s=100" width="100px;" alt="Nabil Tharwat"/><br /><sub><b>Nabil Tharwat</b></sub></a><br /><a href="https://github.com/KL13NT/badeel/commits?author=KL13NT" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://karimshalapy.github.io/"><img src="https://avatars.githubusercontent.com/u/66819303?v=4?s=100" width="100px;" alt="Karim Shalapy"/><br /><sub><b>Karim Shalapy</b></sub></a><br /><a href="https://github.com/KL13NT/badeel/commits?author=karimshalapy" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ahussein3"><img src="https://avatars.githubusercontent.com/u/10266009?v=4?s=100" width="100px;" alt="Ahmed Magdy "/><br /><sub><b>Ahmed Magdy </b></sub></a><br /><a href="https://github.com/KL13NT/badeel/commits?author=ahussein3" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://ahmedsaed.me"><img src="https://avatars.githubusercontent.com/u/37080003?v=4?s=100" width="100px;" alt="Ahmed Saed"/><br /><sub><b>Ahmed Saed</b></sub></a><br /><a href="https://github.com/KL13NT/badeel/commits?author=Ahmedsaed" title="Code">💻</a></td>
     </tr>
   </tbody>
   <tfoot>
