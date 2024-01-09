@@ -157,6 +157,8 @@ export default function Layout(props: Props) {
 					</a>
 					.
 				</p>
+				<p>مُرخَّص بترخيص جنو أفيرو العامة (النسخة الثالثة) (GNU AGPL 3.0).</p>
+				<A href="/faq">اسئلة وأجوبة</A>
 			</footer>
 		</>
 	);
