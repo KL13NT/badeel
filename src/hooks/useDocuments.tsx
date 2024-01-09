@@ -220,6 +220,7 @@ export const useDocuments = () => {
 		showMore,
 		hasMore,
 		total,
+		page,
 		loading,
 		error,
 		state,

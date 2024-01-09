@@ -53,6 +53,7 @@ function App() {
 		loading,
 		error,
 		total,
+		page,
 		hasMore,
 		showMore,
 	} = useDocuments();
@@ -318,7 +319,7 @@ function App() {
 						</Button>
 					)}
 
-					{total() > 0 && !hasMore() && <p>{t("table.end")}</p>}
+					{total() > 0 && !hasMore() && page() > 1 && <p>{t("table.end")}</p>}
 
 					{total() === 0 && <p>{t("table.noMatching")}</p>}
 				</div>
