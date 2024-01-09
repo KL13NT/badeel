@@ -1,0 +1,48 @@
+.container {
+	margin: var(--s-7) auto;
+	width: fit-content;
+	position: relative;
+	padding-top: var(--s-7);
+	font-size: var(--f-size-3);
+	padding-inline: var(--s-3);
+
+	a {
+		text-decoration: none;
+	}
+
+	ul {
+		list-style: inside;
+		width: fit-content;
+		margin-top: var(--s-4);
+	}
+
+	li {
+		margin-top: var(--s-1);
+	}
+
+	p {
+		margin-top: var(--s-4);
+	}
+}
+
+.body {
+	width: fit-content;
+	margin: auto;
+	max-width: 600px;
+}
+
+dt {
+	margin-top: 40px;
+	font-weight: 600;
+}
+
+dd {
+	margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 700px) {
+	.container {
+		padding-inline: var(--s-2);
+		font-size: var(--f-size-2);
+	}
+}
