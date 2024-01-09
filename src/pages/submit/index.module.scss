@@ -55,6 +55,12 @@
 	}
 }
 
+.suggested {
+	margin-top: var(--s-3);
+	display: block;
+	width: fit-content;
+}
+
 @keyframes rotating {
 	from {
 		transform: rotate(0deg);

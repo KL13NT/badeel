@@ -1,40 +1,40 @@
 import { Show, createSignal } from "solid-js";
+import { A } from "@solidjs/router";
+import { FuseResult } from "fuse.js";
 
 import Button from "~components/Button/Button";
 import RadioGroup from "~components/RadioGroup/RadioGroup";
 import Input from "~components/Forms/Input/Input";
 
+import { useDocuments } from "~hooks/useDocuments";
+import { useLoading } from "~hooks/useLoading";
 import t from "~utils/messages";
 import {
 	SUBMIT_PRODUCT_ACTION,
 	SUBMIT_PRODUCT_FORM,
 } from "~constants/documents";
-import {
-	PRODUCT_TYPE_OPTIONS,
-	arabicLettersRegex,
-	englishLettersRegex,
-} from "~constants/submit";
+import { PRODUCT_TYPE_OPTIONS } from "~constants/submit";
 
-import { Status } from "~types";
+import { Product, Status } from "~types";
 
 import styles from "./index.module.scss";
 
 import LoadingIcon from "~assets/icons/loading.svg?component-solid";
 
 export default function Submit() {
-	const [state, setState] = createSignal<{
-		status: "idle" | "submitting" | "error" | "submitted";
-		context?: string;
-	}>({
-		status: "idle",
-	});
+	const { getSuggestions } = useDocuments();
+	const [suggested, setSuggested] = createSignal<FuseResult<Product> | null>(
+		null
+	);
+
+	const { loadingState, setLoadingState } = useLoading();
 
 	const [type, setType] = createSignal<Status>("boycott");
 
 	const handleSubmit = async (ev: SubmitEvent) => {
 		ev.preventDefault();
 
-		setState({
+		setLoadingState({
 			status: "submitting",
 		});
 
@@ -50,19 +50,19 @@ export default function Submit() {
 			const json = await response.json();
 
 			if (json.error) {
-				return setState({
+				return setLoadingState({
 					status: "error",
 					context: json.error,
 				});
 			}
 
-			setState({
+			setLoadingState({
 				status: "submitted",
 			});
 
 			form.reset();
 		} catch (error) {
-			setState({
+			setLoadingState({
 				status: "error",
 				context: "NETWORK_ERROR",
 			});
@@ -74,6 +74,21 @@ export default function Submit() {
 		const data = new FormData(target);
 
 		setType((data.get("type") as Status) || "boycott");
+	};
+
+	const handleNameChange = (ev: Event) => {
+		const target = ev.currentTarget as HTMLInputElement;
+
+		if (!target.value) {
+			setSuggested(null);
+			return;
+		}
+
+		const results = getSuggestions(target.value).slice(0, 1);
+
+		if (results.length > 0) {
+			setSuggested(results[0]);
+		}
 	};
 
 	const handleSetCustomValidity = (message: string) => (ev: Event) => {
@@ -88,8 +103,8 @@ export default function Submit() {
 		target.setCustomValidity("");
 	};
 
-	const status = () => state().status;
-	const context = () => state().context;
+	const status = () => loadingState().status;
+	const context = () => loadingState().context;
 
 	return (
 		<>
@@ -130,7 +145,7 @@ export default function Submit() {
 								"رجاء إدخال اسم مُنتج باللغة العربية بدون تشكيل"
 							)}
 							onInput={handleClearCustomValidity}
-							pattern={arabicLettersRegex.source.toString()}
+							onChange={handleNameChange}
 							required
 						/>
 
@@ -143,8 +158,8 @@ export default function Submit() {
 							onInvalid={handleSetCustomValidity(
 								"رجاء إدخال اسم مُنتج باللغة الإنجليزية بدون أحرف غريبة"
 							)}
+							onChange={handleNameChange}
 							onInput={handleClearCustomValidity}
-							pattern={englishLettersRegex.source.toString()}
 						/>
 
 						<Input
@@ -164,6 +179,15 @@ export default function Submit() {
 							required
 							minLength={5}
 						/>
+
+						{suggested() && (
+							<A
+								href={`/?query=${suggested()!.matches![0].value}`}
+								class={styles.suggested}
+							>
+								هل تعني {suggested()!.matches![0].value}؟
+							</A>
+						)}
 
 						<Button
 							type="submit"
