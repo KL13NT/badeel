@@ -9,8 +9,6 @@ import Modal from "~components/Modal/Modal";
 import t from "~utils/messages";
 import { Product, Status } from "~types";
 import { UNSURE_SOURCE_URL } from "~constants/documents";
-import { useSearchQuery } from "~hooks/useSearchQuery";
-import { getCategoryMajor } from "~utils/categories";
 
 import styles from "./ProductModal.module.scss";
 
@@ -122,24 +120,13 @@ const FooterActions = (props: FooterActionsProps) => {
 interface ProductModalProps {
 	product: Product;
 	close: () => void;
+	showAlternatives: (product: Product) => void;
 }
 
 export default function ProductModal(props: ProductModalProps) {
-	const { params, updateParams } = useSearchQuery();
-
 	const showAlternatives = () => {
-		const major = getCategoryMajor(props.product.Category);
-
 		batch(() => {
-			updateParams({
-				...params,
-				query: undefined,
-				sub: JSON.stringify([props.product.Category]),
-				major: major.english,
-				status: JSON.stringify(["alternative"]),
-				page: 1,
-			});
-
+			props.showAlternatives(props.product);
 			props.close();
 		});
 	};

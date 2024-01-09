@@ -1,4 +1,4 @@
-import { Show, createEffect, createSignal } from "solid-js";
+import { Show, createEffect, createSignal, onMount } from "solid-js";
 import { A } from "@solidjs/router";
 import { Transition } from "solid-transition-group";
 
@@ -33,16 +33,25 @@ let searchThrottleTimeout: number | NodeJS.Timeout = 0;
 let searchInputContainerRef: HTMLDivElement;
 
 function App() {
-	const { major, sub, status, query, sort, productId, view, updateParams } =
-		useSearchQuery();
+	const {
+		major,
+		sub,
+		status,
+		query,
+		sort,
+		productId,
+		view,
+		params,
+		updateParams,
+	} = useSearchQuery();
 	const {
 		search,
 		getSuggestions,
 		results,
 		all,
 		categories,
-		error,
 		loading,
+		error,
 		total,
 		hasMore,
 		showMore,
@@ -155,6 +164,25 @@ function App() {
 		fill: "forwards",
 	};
 
+	const showAlternatives = (product: Product) => {
+		const major = getCategoryMajor(product.Category);
+
+		updateParams({
+			...params,
+			query: undefined,
+			sub: JSON.stringify([product.Category]),
+			major: major.english,
+			status: JSON.stringify(["alternative"]),
+			page: 1,
+		});
+	};
+
+	onMount(async () => {
+		if (query()) {
+			search(query());
+		}
+	});
+
 	return (
 		<section class={styles.container}>
 			<Transition
@@ -192,10 +220,6 @@ function App() {
 						حدث خطأ في تحميل البيانات. تأكد من اتصالك بالإنترنت وأن المتصفح
 						الخاص بك لا يمنع الإتصال بمواقع جووجل.
 					</p>
-				)}
-
-				{total() === 0 && query() && (
-					<p class="error">لم نعثُر على هذا المنتج.</p>
 				)}
 			</div>
 
@@ -278,6 +302,7 @@ function App() {
 							<ResultCards
 								products={results()}
 								showProof={showProof}
+								showAlternatives={showAlternatives}
 								handleSubCategoryChange={handleSubCategoryChange}
 							/>
 						) : (
@@ -287,13 +312,15 @@ function App() {
 				</Transition>
 
 				<div class={styles.footer}>
-					{hasMore() ? (
+					{hasMore() && (
 						<Button onClick={showMore} class={styles.showMore}>
 							{t("table.showMore")}
 						</Button>
-					) : (
-						<p>{t("table.end")}</p>
 					)}
+
+					{total() > 0 && !hasMore() && <p>{t("table.end")}</p>}
+
+					{total() === 0 && <p>{t("table.noMatching")}</p>}
 				</div>
 
 				<Transition name="slide-fade">
@@ -301,6 +328,7 @@ function App() {
 						<ProductModal
 							product={focusedProduct()!}
 							close={closeProductModal}
+							showAlternatives={showAlternatives}
 						/>
 					</Show>
 				</Transition>

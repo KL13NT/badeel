@@ -1,4 +1,4 @@
-import { batch, createMemo, createSignal, onMount } from "solid-js";
+import { batch, createMemo, createResource, createSignal } from "solid-js";
 import {
 	ALTERNATIVES_URL,
 	BOYCOTT_URL,
@@ -57,14 +57,66 @@ const generateProductHash = (product: Product) => {
 	return String(hash);
 };
 
+const [results, setResults] = createSignal<FuseResult<Product>[]>([]);
+const [fuseRef, setFuseRef] = createSignal<Fuse<Product> | null>(null);
+const [categories, setCategories] = createSignal<Category[]>([]);
+
+const fetchDocuments = async () => {
+	const [boycotted, alternatives, unsure, categories] = await Promise.all([
+		mapRequestToParsedCSV<BaseProduct[]>(fetch(BOYCOTT_URL)),
+		mapRequestToParsedCSV<BaseProduct[]>(fetch(ALTERNATIVES_URL)),
+		mapRequestToParsedCSV<BaseProduct[]>(fetch(UNSURE_URL)),
+		mapRequestToParsedCSV<Category[]>(fetch(CATEGORIES_URL)),
+	]);
+
+	const data = alternatives
+		.map((product) => ({
+			...product,
+			status: "alternative" as Status,
+			id: generateProductHash(product as Product),
+		}))
+		.concat(
+			boycotted.map((product) => ({
+				...product,
+				status: "boycott" as Status,
+				id: generateProductHash(product as Product),
+			}))
+		)
+		.concat(
+			unsure.map((product, index) => ({
+				...product,
+				status: "unsure" as Status,
+				ref: index + 2,
+				id: generateProductHash(product as Product),
+			}))
+		);
+
+	generateCategoryMap(categories);
+
+	productFuse = new Fuse<Product>(data as Product[], {
+		keys: ["Name", "English Name", "Manufacturer"],
+		includeScore: true,
+		findAllMatches: false,
+		includeMatches: true,
+		isCaseSensitive: false,
+	});
+
+	batch(() => {
+		setCategories(categories);
+		setFuseRef(productFuse);
+	});
+
+	return data;
+};
+
+const resource = createResource(fetchDocuments, {
+	initialValue: [],
+});
+
 export const useDocuments = () => {
 	const { params, major, status, sub, page, sort, updateParams } =
 		useSearchQuery();
-	const [results, setResults] = createSignal<FuseResult<Product>[]>([]);
-	const [fuseRef, setFuseRef] = createSignal<Fuse<Product> | null>(null);
-	const [categories, setCategories] = createSignal<Category[]>([]);
-	const [error, setError] = createSignal(false);
-	const [loading, setLoading] = createSignal(true);
+	const [data] = resource;
 
 	const search = (query?: string, shouldClearFilters = false) => {
 		const actual = query ?? params.query ?? "";
@@ -126,63 +178,6 @@ export const useDocuments = () => {
 		);
 	};
 
-	onMount(async () => {
-		try {
-			const [boycotted, alternatives, unsure, categories] = await Promise.all([
-				mapRequestToParsedCSV<BaseProduct[]>(fetch(BOYCOTT_URL)),
-				mapRequestToParsedCSV<BaseProduct[]>(fetch(ALTERNATIVES_URL)),
-				mapRequestToParsedCSV<BaseProduct[]>(fetch(UNSURE_URL)),
-				mapRequestToParsedCSV<Category[]>(fetch(CATEGORIES_URL)),
-			]);
-
-			const data = alternatives
-				.map((product) => ({
-					...product,
-					status: "alternative" as Status,
-					id: generateProductHash(product as Product),
-				}))
-				.concat(
-					boycotted.map((product) => ({
-						...product,
-						status: "boycott" as Status,
-						id: generateProductHash(product as Product),
-					}))
-				)
-				.concat(
-					unsure.map((product, index) => ({
-						...product,
-						status: "unsure" as Status,
-						ref: index + 2,
-						id: generateProductHash(product as Product),
-					}))
-				);
-
-			productFuse = new Fuse<Product>(data as Product[], {
-				keys: ["Name", "English Name", "Manufacturer"],
-				includeScore: true,
-				findAllMatches: false,
-				includeMatches: true,
-				isCaseSensitive: false,
-			});
-
-			generateCategoryMap(categories);
-			batch(() => {
-				setCategories(categories);
-				setFuseRef(productFuse);
-				setLoading(false);
-			});
-
-			if (params.query) {
-				search(params.query);
-			}
-		} catch (error) {
-			batch(() => {
-				setError(true);
-				setLoading(false);
-			});
-		}
-	});
-
 	const filtered = createMemo(() => {
 		if (results() && params.query && params.query !== "") {
 			return sortProducts(
@@ -212,16 +207,21 @@ export const useDocuments = () => {
 	const all = (): Product[] =>
 		(fuseRef()?.getIndex() as unknown as FuseIndex)?.docs ?? [];
 
+	const loading = () => data.loading;
+	const error = () => data.error;
+	const state = () => data.state;
+
 	return {
 		all,
 		results: paginated,
 		getSuggestions,
 		search,
 		categories,
-		error,
 		showMore,
 		hasMore,
 		total,
 		loading,
+		error,
+		state,
 	};
 };
