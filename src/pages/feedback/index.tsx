@@ -1,8 +1,9 @@
-import { Show, createSignal } from "solid-js";
+import { Show } from "solid-js";
 
 import Button from "~components/Button/Button";
 import Input from "~components/Forms/Input/Input";
 
+import { useLoading } from "~hooks/useLoading";
 import { FEEDBACK_ACTION, FEEDBACK_FORM } from "~constants/documents";
 
 import styles from "./index.module.scss";
@@ -10,17 +11,12 @@ import styles from "./index.module.scss";
 import LoadingIcon from "~assets/icons/loading.svg?component-solid";
 
 export default function Feedback() {
-	const [state, setState] = createSignal<{
-		status: "idle" | "submitting" | "error" | "submitted";
-		context?: string;
-	}>({
-		status: "idle",
-	});
+	const { loadingState, setLoadingState } = useLoading();
 
 	const handleSubmit = async (ev: SubmitEvent) => {
 		ev.preventDefault();
 
-		setState({
+		setLoadingState({
 			status: "submitting",
 		});
 
@@ -36,27 +32,27 @@ export default function Feedback() {
 			const json = await response.json();
 
 			if (json.error) {
-				return setState({
+				return setLoadingState({
 					status: "error",
 					context: json.error,
 				});
 			}
 
-			setState({
+			setLoadingState({
 				status: "submitted",
 			});
 
 			form.reset();
 		} catch (error) {
-			setState({
+			setLoadingState({
 				status: "error",
 				context: "NETWORK_ERROR",
 			});
 		}
 	};
 
-	const status = () => state().status;
-	const context = () => state().context;
+	const status = () => loadingState().status;
+	const context = () => loadingState().context;
 
 	return (
 		<>
