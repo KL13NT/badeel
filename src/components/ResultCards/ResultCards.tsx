@@ -1,8 +1,10 @@
-import { For } from "solid-js";
+import { For, Show } from "solid-js";
 import { TransitionGroup } from "solid-transition-group";
+import clsx from "clsx";
 
 import Button from "~components/Button/Button";
 import Badge from "~components/Badge/Badge";
+import Skeleton from "~components/Skeleton/Skeleton";
 
 import { getProductCategory } from "~utils/categories";
 import { STATUS_TITLE_MAPPING } from "~constants/filters";
@@ -13,12 +15,12 @@ import { Product } from "~types";
 import styles from "./ResultCards.module.scss";
 
 import ViewIcon from "~assets/icons/view.svg?component-solid";
-import Skeleton from "~components/Skeleton/Skeleton";
-import clsx from "clsx";
+import AlternativesIcon from "~assets/icons/alternatives.svg?component-solid";
 
 interface ResultCardsProps {
 	products: Product[];
 	showProof: (product: Product) => void;
+	showAlternatives: (product: Product) => void;
 	handleSubCategoryChange: (enabled: boolean, ev: MouseEvent) => unknown;
 }
 
@@ -45,13 +47,24 @@ export default function ResultCards(props: ResultCardsProps) {
 									{STATUS_TITLE_MAPPING[product.status]}
 								</Badge>
 
-								<button
-									onClick={[props.showProof, product]}
-									class={styles.details}
-								>
-									<span>{t("table.showDetails")}</span>
-									<ViewIcon role="presentation" />
-								</button>
+								<div>
+									<Show when={product.status === "boycott"}>
+										<button
+											onClick={[props.showAlternatives, product]}
+											class={styles.details}
+										>
+											<span>{t("table.showAlternative")}</span>
+											<AlternativesIcon role="presentation" />
+										</button>
+									</Show>
+									<button
+										onClick={[props.showProof, product]}
+										class={styles.details}
+									>
+										<span>{t("table.showDetails")}</span>
+										<ViewIcon role="presentation" />
+									</button>
+								</div>
 							</div>
 						</div>
 					)}

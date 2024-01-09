@@ -40,6 +40,11 @@
 	justify-content: space-between;
 	margin-top: var(--s-3);
 	flex-wrap: wrap;
+
+	> div {
+		display: flex;
+		gap: var(--s-1);
+	}
 }
 
 .details {
@@ -93,5 +98,9 @@
 
 	.details {
 		background-color: var(--c-gray-2);
+	}
+
+	.footer {
+		gap: var(--s-1);
 	}
 }

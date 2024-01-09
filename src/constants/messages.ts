@@ -35,14 +35,16 @@ export const MESSAGES = {
 	"navbar.feedback": "صندوق الإقتراحات",
 
 	"table.showMore": "عرض المزيد من المنتجات",
-	"table.showDetails": "عرض التفاصيل",
+	"table.showDetails": "تفاصيل",
+	"table.showAlternative": "بدائل",
 	"table.end": "لقد وصلت إلى نهاية القائمة.",
+	"table.noMatching": "لم يتم العثور على نتائج.",
 	"footer.ack": "شكر وتقدير لكل من ساهم في هذا المشروع.",
 	"footer.why": "لماذا نقاطع؟",
 
 	of: "من أصل",
 
-	"filters.title": "التصفية",
+	"filters.title": "الأقسام والترتيب",
 	"filters.activator": "الأقسام والترتيب",
 	"filters.clear": "إلغاء التصفية",
 	"filters.close": "إغلاق",
