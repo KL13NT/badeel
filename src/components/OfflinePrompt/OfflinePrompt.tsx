@@ -1,10 +1,11 @@
 import { useRegisterSW } from "virtual:pwa-register/solid";
-import { Show } from "solid-js";
+import { Show, createEffect } from "solid-js";
 import { Transition } from "solid-transition-group";
 
 import Button from "~components/Button/Button";
 
 import styles from "./OfflinePrompt.module.scss";
+import { toggleOverlay } from "~stores/overlay";
 
 export default function OfflinePrompt() {
 	const {
@@ -15,7 +16,14 @@ export default function OfflinePrompt() {
 
 	const close = () => {
 		setOfflineReady(false);
+		toggleOverlay("offline-prompt", false);
 	};
+
+	createEffect(() => {
+		if (offlineReady()) {
+			toggleOverlay("offline-prompt", true);
+		}
+	});
 
 	return (
 		<Transition name="slide-fade">
