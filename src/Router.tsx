@@ -1,5 +1,5 @@
 import { Routes, Route, Router } from "@solidjs/router";
-import { Show, Suspense, lazy } from "solid-js";
+import { Show, Suspense, createEffect, lazy } from "solid-js";
 import { Toaster } from "solid-toast";
 import { Transition } from "solid-transition-group";
 
@@ -28,6 +28,14 @@ const overlayAnimationConfig: KeyframeAnimationOptions = {
 };
 
 export default function AppRouter() {
+	createEffect(() => {
+		if (hasOverlay()) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "unset";
+		}
+	});
+
 	return (
 		<>
 			<Toaster
