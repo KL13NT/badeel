@@ -9,6 +9,7 @@ import { FEEDBACK_ACTION, FEEDBACK_FORM } from "~constants/documents";
 import styles from "./index.module.scss";
 
 import LoadingIcon from "~assets/icons/loading.svg?component-solid";
+import { A } from "@solidjs/router";
 
 export default function Feedback() {
 	const { loadingState, setLoadingState } = useLoading();
@@ -64,8 +65,13 @@ export default function Feedback() {
 						نشكركم مقدماً على تقديم الدعم لبديل من خلال إرسالكم لهذا الإستبيان!
 						اذا كنت تُقدم طلب إضافة خاصية مُعينة برجاء العِلم أن فريق بديل
 						يقومون بتطوير المشروع في وقت فراغهم ولذلك يُمكن ان تتأخر تلك الخاصية
-						أو لا تُضاف على الإطلاق لأي سبب كان. إذا احببت ان نقوم بإبلاغك برجاء
+						أو لا تُضاف لأي سبب كان. إذا احببت ان نقوم بإبلاغك برجاء
 						ترك الإيميل الالكتروني الخاص بك مع الطلب.
+					</p>
+
+					<p>
+						رجاء إستخدام <A href="/submit">إستبيان المُنتجات</A> لإضافة منتجات
+						لبديل.
 					</p>
 
 					<form onSubmit={handleSubmit} class={styles.form}>

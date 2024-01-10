@@ -88,6 +88,8 @@ export default function Submit() {
 
 		if (results.length > 0) {
 			setSuggested(results[0]);
+		} else {
+			setSuggested(null);
 		}
 	};
 
@@ -103,8 +105,14 @@ export default function Submit() {
 		target.setCustomValidity("");
 	};
 
+	const handleNameInput = (ev: Event) => {
+		handleClearCustomValidity(ev);
+		handleNameChange(ev);
+	};
+
 	const status = () => loadingState().status;
 	const context = () => loadingState().context;
+	const suggestedMatch = () => suggested()?.matches?.[0];
 
 	return (
 		<>
@@ -142,10 +150,9 @@ export default function Submit() {
 							autocomplete="off"
 							placeholder="مثال: بيبسي"
 							onInvalid={handleSetCustomValidity(
-								"رجاء إدخال اسم مُنتج باللغة العربية بدون تشكيل"
+								"رجاء إدخال اسم مُنتج باللغة العربية"
 							)}
-							onInput={handleClearCustomValidity}
-							onChange={handleNameChange}
+							onInput={handleNameInput}
 							required
 						/>
 
@@ -155,11 +162,7 @@ export default function Submit() {
 							type="text"
 							autocomplete="off"
 							placeholder="مثال: Pepsi"
-							onInvalid={handleSetCustomValidity(
-								"رجاء إدخال اسم مُنتج باللغة الإنجليزية بدون أحرف غريبة"
-							)}
-							onChange={handleNameChange}
-							onInput={handleClearCustomValidity}
+							onInput={handleNameInput}
 						/>
 
 						<Input
@@ -168,6 +171,7 @@ export default function Submit() {
 							type="text"
 							autocomplete="off"
 							placeholder="اسم الشركة المُصنّعة او المالكة"
+							onInput={handleNameInput}
 							required
 						/>
 
@@ -180,12 +184,12 @@ export default function Submit() {
 							minLength={5}
 						/>
 
-						{suggested() && (
+						{suggestedMatch() && (
 							<A
-								href={`/?query=${suggested()!.matches![0].value}`}
+								href={`/?query=${suggestedMatch()!.value}`}
 								class={styles.suggested}
 							>
-								هل تعني {suggested()!.matches![0].value}؟
+								هل تعني {suggestedMatch()!.value}؟
 							</A>
 						)}
 
