@@ -6,7 +6,6 @@ import Button from "~components/Button/Button";
 import BackToTopButton from "~components/BackToTopButton/BackToTopButton";
 
 import t from "~utils/messages";
-import { FEEDBACK_FORM } from "~constants/documents";
 import { localizeDate } from "~utils/common";
 
 import styles from "./Layout.module.scss";
@@ -104,7 +103,7 @@ export default function Layout(props: Props) {
 					<p>
 						{t("version")} {localizeDate(import.meta.env.BUILD_TIMESTAMP)}
 					</p>
-					<a class={styles.feedback} href={FEEDBACK_FORM} target="_blank">
+					<a class={styles.feedback} href="/feedback">
 						{t("navbar.feedback")}
 					</a>
 				</div>
