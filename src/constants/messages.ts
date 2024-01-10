@@ -43,6 +43,7 @@ export const MESSAGES = {
 	"footer.why": "لماذا نقاطع؟",
 
 	of: "من أصل",
+	close: "إغلاق",
 
 	"filters.title": "الأقسام والترتيب",
 	"filters.activator": "الأقسام والترتيب",

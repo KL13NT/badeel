@@ -1,0 +1,87 @@
+.body {
+	width: 500px;
+	border-radius: 24px;
+	box-shadow: 0px 4px 64px -32px rgba(0, 0, 0, 0.25);
+	background: var(--c-bg);
+	text-align: right;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: fixed;
+	margin: auto;
+	height: fit-content;
+	max-height: 80vh;
+
+	h2 {
+		font-size: var(--f-size-5);
+		position: sticky;
+		top: 0;
+		right: 0;
+		background: var(--c-bg);
+		width: 100%;
+		padding: var(--s-3);
+		border-radius: 24px;
+	}
+
+	div[data-content] {
+		padding: 0 var(--s-5) var(--s-5) var(--s-5);
+
+		ul {
+			list-style: inside;
+			width: fit-content;
+			margin-top: var(--s-2);
+			padding-inline-start: var(--s-1);
+		}
+
+		li {
+			margin-top: var(--s-1);
+			list-style-position: outside;
+			line-height: 1.6;
+		}
+
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin-top: var(--s-5);
+			font-size: var(--f-size-4);
+		}
+
+		p {
+			margin-top: var(--s-3);
+		}
+	}
+}
+
+.content {
+	border-radius: 24px;
+	overflow: hidden;
+
+	> div {
+		max-height: 80vh;
+		overflow-y: auto;
+	}
+}
+
+.close {
+	position: absolute;
+
+	left: var(--s-3);
+	top: var(--s-3);
+
+	padding: var(--s-1);
+	height: fit-content;
+
+	> svg {
+		height: 20px;
+		width: 20px;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.body {
+		width: 95%;
+	}
+}

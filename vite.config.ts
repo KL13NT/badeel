@@ -10,6 +10,7 @@ export default defineConfig({
 	define: {
 		"import.meta.env.BUILD_TIMESTAMP": new Date(),
 	},
+	assetsInclude: ["./changelogs/*.md"],
 	server: {
 		https: true,
 	},
