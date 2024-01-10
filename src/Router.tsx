@@ -1,16 +1,31 @@
 import { Routes, Route, Router } from "@solidjs/router";
-import { Suspense, lazy } from "solid-js";
+import { Show, Suspense, lazy } from "solid-js";
 import { Toaster } from "solid-toast";
+import { Transition } from "solid-transition-group";
 
+import Changelog from "~components/Changelog/Changelog";
 import Layout from "~components/Layout/Layout";
 import LoadingScreen from "~components/LoadingScreen/LoadingScreen";
 import OfflinePrompt from "~components/OfflinePrompt/OfflinePrompt";
+
+import { hasOverlay } from "~stores/overlay";
 
 const Acknowledgments = lazy(() => import("./pages/acknowledgments"));
 const Home = lazy(() => import("./pages/home/index"));
 const Submit = lazy(() => import("./pages/submit/index"));
 const Feedback = lazy(() => import("./pages/feedback/index"));
 const FAQ = lazy(() => import("./pages/faq/index"));
+
+const overlayEntryKeyframes: Keyframe[] = [
+	{ backdropFilter: "blur(0)", backgroundColor: "#00000000" },
+	{ backdropFilter: "blur(5px)", backgroundColor: "#00000060" },
+];
+
+const overlayAnimationConfig: KeyframeAnimationOptions = {
+	duration: 200,
+	easing: "ease-out",
+	fill: "forwards",
+};
 
 export default function AppRouter() {
 	return (
@@ -28,6 +43,28 @@ export default function AppRouter() {
 					},
 				}}
 			/>
+
+			<Changelog />
+
+			<Transition
+				onEnter={(el, done) => {
+					el.animate(
+						overlayEntryKeyframes,
+						overlayAnimationConfig
+					).finished.then(done);
+				}}
+				onExit={(el, done) => {
+					el.animate(
+						[...overlayEntryKeyframes].reverse(),
+						overlayAnimationConfig
+					).finished.then(done);
+				}}
+			>
+				<Show when={hasOverlay()}>
+					<div class="overlay" />
+				</Show>
+			</Transition>
+
 			<Router>
 				<Layout>
 					<Suspense fallback={<LoadingScreen />}>

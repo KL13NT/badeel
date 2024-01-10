@@ -28,6 +28,7 @@ import FilterIcon from "~assets/icons/filter.svg?component-solid";
 
 import CardsToggleIcon from "~assets/icons/cards-toggle.svg?component-solid";
 import TableToggleIcon from "~assets/icons/table-toggle.svg?component-solid";
+import { toggleOverlay } from "~stores/overlay";
 
 let searchThrottleTimeout: number | NodeJS.Timeout = 0;
 let searchInputContainerRef: HTMLDivElement;
@@ -77,18 +78,22 @@ function App() {
 
 	const showProof = (product: Product) => {
 		setFocusedProduct(product);
+		toggleOverlay("product-modal", true);
 	};
 
 	const openFilters = () => {
 		setFiltersOpen(true);
+		toggleOverlay("filters-modal", true);
 	};
 
 	const closeFilters = () => {
 		setFiltersOpen(false);
+		toggleOverlay("filters-modal", false);
 	};
 
 	const closeProductModal = () => {
 		setFocusedProduct(null);
+		toggleOverlay("product-modal", false);
 
 		updateParams({
 			productId:
@@ -154,17 +159,6 @@ function App() {
 		setFocusedProduct(product);
 	});
 
-	const overlayEntryKeyframes: Keyframe[] = [
-		{ backdropFilter: "blur(0)", backgroundColor: "#00000000" },
-		{ backdropFilter: "blur(5px)", backgroundColor: "#00000060" },
-	];
-
-	const overlayAnimationConfig: KeyframeAnimationOptions = {
-		duration: 200,
-		easing: "ease-out",
-		fill: "forwards",
-	};
-
 	const showAlternatives = (product: Product) => {
 		const major = getCategoryMajor(product.Category);
 
@@ -186,25 +180,6 @@ function App() {
 
 	return (
 		<section class={styles.container}>
-			<Transition
-				onEnter={(el, done) => {
-					el.animate(
-						overlayEntryKeyframes,
-						overlayAnimationConfig
-					).finished.then(done);
-				}}
-				onExit={(el, done) => {
-					el.animate(
-						[...overlayEntryKeyframes].reverse(),
-						overlayAnimationConfig
-					).finished.then(done);
-				}}
-			>
-				<Show when={focusedProduct() || filtersOpen()}>
-					<div class="overlay" />
-				</Show>
-			</Transition>
-
 			<div class={styles.intro}>
 				<TypeWriter />
 				<p>قائمة بالمنتجات الداعمة للكيان الصهيوني والبدائل المحلية.</p>
