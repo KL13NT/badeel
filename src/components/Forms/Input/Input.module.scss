@@ -48,3 +48,15 @@
 		resize: vertical;
 	}
 }
+
+@media screen and (max-width: 700px) {
+	.input {
+		width: 100%;
+
+		> input,
+		> textarea {
+			max-width: 100%;
+			width: 100%;
+		}
+	}
+}

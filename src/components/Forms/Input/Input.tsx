@@ -1,7 +1,7 @@
 import { JSX, mergeProps, splitProps } from "solid-js";
+import { Dynamic } from "solid-js/web";
 
 import styles from "./Input.module.scss";
-import { Dynamic } from "solid-js/web";
 
 interface InputProps extends JSX.InputHTMLAttributes<HTMLInputElement> {
 	label: string;
