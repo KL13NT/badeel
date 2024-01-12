@@ -1,3 +1,5 @@
+import { PWA_INSTALL_GUIDE } from "~constants/documents";
+
 import styles from "./index.module.scss";
 
 export default function FAQ() {
@@ -8,6 +10,20 @@ export default function FAQ() {
 
 				<div class={styles.body}>
 					<dl>
+						<dt>كيفية تثبيت التطبيق؟</dt>
+						<dd>
+							يمكنكم تثبيت بَدِيل عن طريق القائمة الخاصة بالمتصفح. رجاء إتباع
+							التعليمات المذكورة في{" "}
+							<a
+								href={PWA_INSTALL_GUIDE}
+								rel="noopener noreferrer"
+								target="_blank"
+							>
+								التعليمات
+							</a>
+							.
+						</dd>
+
 						<dt>لماذا لا يوجد صور للمنتجات؟</dt>
 						<dd>
 							صور المنتجات قد تعرضنا للمسائل القانونية، وهذا أمر لا نرغب في

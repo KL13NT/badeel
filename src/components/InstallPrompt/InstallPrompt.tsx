@@ -5,6 +5,7 @@ import Button from "~components/Button/Button";
 
 import { installEventSignal, setInstallEventSignal } from "~stores/install";
 import { BeforeInstallPromptEvent } from "~types";
+import { PWA_INSTALL_GUIDE } from "~constants/documents";
 
 import styles from "./InstallPrompt.module.scss";
 
@@ -16,11 +17,12 @@ interface NotificationBodyProps {
 function NotificationBody(props: NotificationBodyProps) {
 	return (
 		<div class={styles.body}>
-			<p>تنزيل البرنامج على هاتفك الجوال</p>
+			<h2>تثبيت التطبيق</h2>
+			<p>التثبيت لا يستخدم أي مساحة تخزين ويوفر طريقة سريعة للعودة لبَدِيل.</p>
 
 			<div class={styles.actions}>
 				<Button variant="action-invert" onClick={props.handleInstall}>
-					تنزيل
+					تثبيت
 				</Button>
 				<Button variant="default" onClick={props.handleDismiss}>
 					ليس الآن
@@ -34,14 +36,10 @@ function RejectionBody() {
 	return (
 		<div class={styles.rejected}>
 			<p>
-				تم إلغاء التنزيل. سنقوم بتذكيركم في المرة القادمة. إذا رغبتم في تنزيل
-				البرنامج يدوياً يمكنكم من خلال{" "}
-				<a
-					href="https://support.google.com/chrome/answer/9658361?hl=en&co=GENIE.Platform%3DAndroid&oco=1"
-					rel="noopener noreferrer"
-					target="_blank"
-				>
-					التعليمات
+				تم إلغاء التثبيت. سنقوم بتذكيركم في المرة القادمة. إذا رغبتم في تثبيت
+				التطبيق يدوياً رجاء اتباع التعليمات المذكورة في{" "}
+				<a href={PWA_INSTALL_GUIDE} rel="noopener noreferrer" target="_blank">
+					دليل التثبيت
 				</a>
 				.
 			</p>
@@ -66,7 +64,7 @@ export default function InstallPrompt() {
 			setInstallEventSignal(null);
 
 			if (outcome === "accepted") {
-				toast.success("يتم تنزيل البرنامج", {
+				toast.success("يتم تثبيت التطبيق", {
 					icon: "🥳",
 				});
 
@@ -78,6 +76,7 @@ export default function InstallPrompt() {
 					},
 					{
 						duration: 5000,
+						unmountDelay: 500,
 					}
 				);
 			}
