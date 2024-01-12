@@ -5,6 +5,7 @@
 Issues](https://img.shields.io/github/issues/kl13nt/badeel)](https://github.com/KL13NT/badeel/issues/)
 [![GitHub License](https://img.shields.io/github/license/kl13nt/badeel)](./LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/kl13nt/badeel)](https://github.com/KL13NT/badeel/stargazers)
+[![StandWithPalestine](https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/StandWithPalestine.svg)](https://techforpalestine.org/learn-more)
 
 | An Egyptian alternatives listing project with UX and community in mind.
 
@@ -58,6 +59,7 @@ guide](./CONTRIBUTING.md) and must be of a technical nature.
 If you'd like to submit a product for listing on Badeel please use the [public
 product submission form](https://forms.gle/HCdPtLxeTg93r75t5).
 
+
 If you'd like to submit a large collection of products in a single submission
 feel free to use the form for that, or follow the steps:
 
@@ -70,6 +72,8 @@ feel free to use the form for that, or follow the steps:
 2. Make any necessary additions you'd like on your copy
 3. Send a link to our feedback form or our product submission form. We check
    both regularly. Make sure to ["Share your file publicly"](https://support.google.com/docs/answer/2494822?hl=en&sjid=4471142965946458526-EU#zippy=%2Cshare-a-file-publicly).
+
+[![ReadMeSupportPalestine](https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/banner-support.svg)](https://techforpalestine.org/learn-more)
 
 ## Contributors
 
