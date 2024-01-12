@@ -9,6 +9,8 @@ interface ModalProps {
 }
 
 let ref: HTMLDivElement | undefined;
+const overlayTargets = [".overlay", `.${styles.modal}`];
+
 export default function Modal(props: ModalProps) {
 	const handleKeyUp = (ev: KeyboardEvent) => {
 		if (ev.key.toLowerCase() === "escape") {
@@ -19,7 +21,10 @@ export default function Modal(props: ModalProps) {
 	const handleClickOutside = (ev: MouseEvent) => {
 		const target = ev.target as HTMLElement;
 
-		if (!target.closest(`.${styles.modal} :first-child`)) {
+		if (
+			!target.closest(`.${styles.modal} :first-child`) &&
+			overlayTargets.some((element) => target.closest(element))
+		) {
 			props.close();
 		}
 	};
