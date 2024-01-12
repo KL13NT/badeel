@@ -207,9 +207,8 @@ export const useDocuments = () => {
 	const all = (): Product[] =>
 		(fuseRef()?.getIndex() as unknown as FuseIndex)?.docs ?? [];
 
-	const loading = () => data.loading;
+	const loading = () => data.loading && categories().length > 0;
 	const error = () => data.error;
-	const state = () => data.state;
 
 	return {
 		all,
@@ -223,6 +222,5 @@ export const useDocuments = () => {
 		page,
 		loading,
 		error,
-		state,
 	};
 };
