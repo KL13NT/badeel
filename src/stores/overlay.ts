@@ -6,7 +6,7 @@ export const toggleOverlay = (name: string, state = true) => {
 	if (!state) {
 		setOverlaySignal(overlaySignal().filter((overlay) => overlay !== name));
 	} else {
-		setOverlaySignal(overlaySignal().concat(name));
+		setOverlaySignal([...overlaySignal(), name]);
 	}
 };
 
