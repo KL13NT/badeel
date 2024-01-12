@@ -1,14 +1,16 @@
 import { Routes, Route, Router } from "@solidjs/router";
-import { Show, Suspense, createEffect, lazy } from "solid-js";
+import { Show, Suspense, lazy } from "solid-js";
 import { Toaster } from "solid-toast";
 import { Transition } from "solid-transition-group";
 
 import Changelog from "~components/Changelog/Changelog";
 import Layout from "~components/Layout/Layout";
 import LoadingScreen from "~components/LoadingScreen/LoadingScreen";
-import OfflinePrompt from "~components/OfflinePrompt/OfflinePrompt";
+import InstallPrompt from "~components/InstallPrompt/InstallPrompt";
 
 import { hasOverlay } from "~stores/overlay";
+import useBodyShouldScroll from "~hooks/useBodyShouldScroll";
+import useOfflineReady from "~hooks/useOfflineReady";
 
 const Acknowledgments = lazy(() => import("./pages/acknowledgments"));
 const Home = lazy(() => import("./pages/home/index"));
@@ -28,13 +30,8 @@ const overlayAnimationConfig: KeyframeAnimationOptions = {
 };
 
 export default function AppRouter() {
-	createEffect(() => {
-		if (hasOverlay()) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "unset";
-		}
-	});
+	useOfflineReady();
+	useBodyShouldScroll();
 
 	return (
 		<>
@@ -51,8 +48,6 @@ export default function AppRouter() {
 					},
 				}}
 			/>
-
-			<Changelog />
 
 			<Transition
 				onEnter={(el, done) => {
@@ -73,6 +68,9 @@ export default function AppRouter() {
 				</Show>
 			</Transition>
 
+			<InstallPrompt />
+			<Changelog />
+
 			<Router>
 				<Layout>
 					<Suspense fallback={<LoadingScreen />}>
@@ -84,8 +82,6 @@ export default function AppRouter() {
 							<Route path="*" component={Home} />
 						</Routes>
 					</Suspense>
-
-					<OfflinePrompt />
 				</Layout>
 			</Router>
 		</>
