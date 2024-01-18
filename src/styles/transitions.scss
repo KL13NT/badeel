@@ -1,9 +1,7 @@
 .slide-fade {
 	&-enter-active,
 	&-exit-active {
-		transition:
-			transform 0.2s ease-out,
-			opacity 0.2s ease-out;
+		transition: all 0.2s ease-out;
 	}
 
 	&-enter,
@@ -72,6 +70,10 @@
 }
 
 .slide-fade-cards {
+	&-move {
+		transition: opacity 0.2s linear;
+	}
+
 	&-enter-active,
 	&-exit-active {
 		transition: opacity 0.2s linear;
@@ -80,6 +82,7 @@
 	&-enter,
 	&-exit-to {
 		opacity: 0;
+		transform: translateX(10px);
 	}
 }
 

@@ -260,30 +260,33 @@ function App() {
 			<article class={styles.table}>
 				<Transition name="slide-fade">
 					<Show when={view() === "table"}>
-						{results() && !loading() ? (
-							<Table
-								products={results()}
-								showProof={showProof}
-								handleSubCategoryChange={handleSubCategoryChange}
-							/>
-						) : (
-							<TableSkeleton />
-						)}
+						<Transition name="enter-slide-exit-fade">
+							<Show when={results() && !loading()} fallback={<TableSkeleton />}>
+								<Table
+									products={results()}
+									showProof={showProof}
+									handleSubCategoryChange={handleSubCategoryChange}
+								/>
+							</Show>
+						</Transition>
 					</Show>
 				</Transition>
 
 				<Transition name="slide-fade">
 					<Show when={view() === "cards"}>
-						{results() && !loading() ? (
-							<ResultCards
-								products={results()}
-								showProof={showProof}
-								showAlternatives={showAlternatives}
-								handleSubCategoryChange={handleSubCategoryChange}
-							/>
-						) : (
-							<ResultCardsSkeleton />
-						)}
+						<Transition name="enter-slide-exit-fade">
+							<Show
+								when={results() && !loading()}
+								fallback={<ResultCardsSkeleton />}
+							>
+								<ResultCards
+									products={results()}
+									showProof={showProof}
+									showAlternatives={showAlternatives}
+									handleSubCategoryChange={handleSubCategoryChange}
+								/>
+							</Show>
+						</Transition>
 					</Show>
 				</Transition>
 
