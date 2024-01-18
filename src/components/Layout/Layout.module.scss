@@ -21,7 +21,11 @@
 }
 
 .logo {
-	height: 50px;
+	outline: none;
+
+	img {
+		height: 50px;
+	}
 }
 
 .right {

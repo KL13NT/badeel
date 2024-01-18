@@ -77,11 +77,11 @@ export default function Layout(props: Props) {
 
 	return (
 		<>
-			<nav class={styles.navbar} ref={headerRef}>
+			<nav class={styles.navbar} ref={headerRef} data-tour-id="header">
 				<div class={styles.upper}>
 					<div class={styles.right}>
-						<A href="/">
-							<img src={logo} class={styles.logo} alt="" role="presentation" />
+						<A href="/" class={styles.logo}>
+							<img src={logo} alt="" role="presentation" />
 						</A>
 					</div>
 

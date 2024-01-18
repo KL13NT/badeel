@@ -13,12 +13,14 @@ import ResultCards, {
 	ResultCardsSkeleton,
 } from "~components/ResultCards/ResultCards";
 import Toggle from "~components/Toggle/Toggle";
+import Tour from "~components/Tour/Tour";
 
 import t from "~utils/messages";
 import { arrayExists } from "~utils/common";
 import { getCategoryMajor } from "~utils/categories";
 import { useDocuments } from "~hooks/useDocuments";
 import { useSearchQuery } from "~hooks/useSearchQuery";
+import { toggleOverlay } from "~stores/overlay";
 
 import { Product, View } from "~types";
 
@@ -28,7 +30,6 @@ import FilterIcon from "~assets/icons/filter.svg?component-solid";
 
 import CardsToggleIcon from "~assets/icons/cards-toggle.svg?component-solid";
 import TableToggleIcon from "~assets/icons/table-toggle.svg?component-solid";
-import { toggleOverlay } from "~stores/overlay";
 
 let searchThrottleTimeout: number | NodeJS.Timeout = 0;
 let searchInputContainerRef: HTMLDivElement;
@@ -182,6 +183,8 @@ function App() {
 		<section class={styles.container}>
 			<div class={styles.intro}>
 				<TypeWriter />
+				<Tour />
+
 				<p>قائمة بالمنتجات الداعمة للكيان الصهيوني والبدائل المحلية.</p>
 				<div ref={searchInputContainerRef} tabIndex={-1}>
 					<SearchInput
@@ -208,6 +211,7 @@ function App() {
 			<div class={styles.filters}>
 				<Button
 					variant="action-invert"
+					data-tour-id="filters"
 					class={styles.filter}
 					onClick={openFilters}
 					data-active={arrayExists(sub()) || arrayExists(status()) || major}

@@ -1,6 +1,7 @@
 /* @refresh reload */
 import { render } from "solid-js/web";
 
+
 if (import.meta.env.DEV) {
 	await import("solid-devtools");
 }

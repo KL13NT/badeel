@@ -97,7 +97,7 @@ export default function SearchInput(props: Props) {
 		query().length > 0 && arabicLettersRegex.test(query()) ? "ar" : "en";
 
 	return (
-		<div class={styles.wrapper}>
+		<div class={styles.wrapper} data-tour-id="search">
 			<form
 				onSubmit={handleSubmit}
 				class={styles.search}
