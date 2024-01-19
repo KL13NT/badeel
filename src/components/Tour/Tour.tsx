@@ -17,8 +17,11 @@ const tour = driver({
 	doneBtnText: "إنهاء",
 
 	onDestroyStarted: () => {
-		if (!tour.hasNextStep() || confirm("هل انت متأكد من إغلاق الرحلة؟")) {
+		if (tour.hasNextStep() && confirm("هل انت متأكد من إغلاق الرحلة؟")) {
 			tour.destroy();
+			localStorage.setItem("tour-done", String(true));
+		} else if (!tour.hasNextStep()) {
+			localStorage.setItem("tour-done", String(true));
 		}
 	},
 
@@ -70,6 +73,10 @@ const tour = driver({
 					"وبذلك تكون رحلتنا انتهت, يمكنكم الوصول لصفحة الأسئلة والأجوبة أسفل الموقع.",
 				side: "bottom",
 				align: "center",
+				onNextClick: () => {
+					localStorage.setItem("tour-done", String(true));
+					tour.destroy();
+				},
 			},
 		},
 	],
@@ -80,8 +87,9 @@ export default function Tour() {
 		const driven = localStorage.getItem("tour-done") && !import.meta.env.DEV;
 
 		if (!hasOverlay() && !driven) {
-			tour.drive(2);
-			localStorage.setItem("tour-done", String(true));
+			tour.drive(0);
+		} else {
+			tour.destroy();
 		}
 	});
 
