@@ -1,4 +1,10 @@
-import { batch, createMemo, createResource, createSignal } from "solid-js";
+import {
+	batch,
+	createEffect,
+	createMemo,
+	createResource,
+	createSignal,
+} from "solid-js";
 import {
 	ALTERNATIVES_URL,
 	BOYCOTT_URL,
@@ -178,6 +184,12 @@ export const useDocuments = () => {
 		);
 	};
 
+	createEffect(() => {
+		if (!data.loading && !data.error && productFuse && params.query) {
+			search(params.query);
+		}
+	});
+
 	const filtered = createMemo(() => {
 		if (results() && params.query && params.query !== "") {
 			return sortProducts(
@@ -207,7 +219,7 @@ export const useDocuments = () => {
 	const all = (): Product[] =>
 		(fuseRef()?.getIndex() as unknown as FuseIndex)?.docs ?? [];
 
-	const loading = () => data.loading && categories().length > 0;
+	const loading = () => data.loading && categories().length === 0;
 	const error = () => data.error;
 
 	return {

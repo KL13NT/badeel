@@ -84,7 +84,7 @@ const tour = driver({
 
 export default function Tour() {
 	createEffect(() => {
-		const driven = localStorage.getItem("tour-done") && !import.meta.env.DEV;
+		const driven = localStorage.getItem("tour-done");
 
 		if (!hasOverlay() && !driven) {
 			tour.drive(0);

@@ -43,5 +43,5 @@ export const shouldDisplayChangelogs = () => {
 		new Date(latestReadChangelogDate).getTime() <=
 			new Date(latestUpdateDate).getTime();
 
-	return shouldDisplay || import.meta.env.DEV;
+	return shouldDisplay;
 };
