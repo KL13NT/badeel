@@ -16,7 +16,6 @@ import Toggle from "~components/Toggle/Toggle";
 import Tour from "~components/Tour/Tour";
 
 import t from "~utils/messages";
-import { arrayExists } from "~utils/common";
 import { getCategoryMajor } from "~utils/categories";
 import { useDocuments } from "~hooks/useDocuments";
 import { useSearchQuery } from "~hooks/useSearchQuery";
@@ -214,7 +213,6 @@ function App() {
 					data-tour-id="filters"
 					class={styles.filter}
 					onClick={openFilters}
-					data-active={arrayExists(sub()) || arrayExists(status()) || major}
 				>
 					<FilterIcon role="presentation" />
 					{t("filters.activator")}
