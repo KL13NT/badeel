@@ -139,6 +139,7 @@ export default function SearchInput(props: Props) {
 											dir="auto"
 											class={styles.result}
 											onClick={[handleResultClick, name]}
+											onTouchEnd={[handleResultClick, name]}
 											type="button"
 										>
 											{arabicLettersRegex.test(name) ? (
